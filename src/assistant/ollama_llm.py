@@ -16,7 +16,7 @@ class OllamaMedicalLLM:
         self,
         model_name: str = "llama3.2:3b",
         temperature: float = 0.0,
-        num_predict: int = 380,
+        num_predict: int = 300,
     ) -> None:
         self.model_name = model_name
 
@@ -24,6 +24,7 @@ class OllamaMedicalLLM:
             model=model_name,
             temperature=temperature,
             num_predict=num_predict,
+            repeat_penalty=1.15,  # evita degeneração/loops do modelo 3B
             validate_model_on_init=True,
         )
 

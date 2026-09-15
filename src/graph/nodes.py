@@ -255,10 +255,13 @@ class MedicalGraphNodes:
             {},
         )
 
-        # Se o paciente não existe no banco,
-        # não permitimos que a LLM invente
-        # exames, alertas ou dados clínicos.
-        if not verified_facts.get(
+        # Se um paciente FOI informado mas não existe no banco,
+        # não permitimos que a LLM invente exames, alertas ou
+        # dados clínicos. (Sem paciente informado, a pergunta é
+        # apenas sobre protocolos — a resposta da LLM é mantida.)
+        paciente_informado = bool(state.get("paciente_id"))
+
+        if paciente_informado and not verified_facts.get(
             "patient_found",
             False,
         ):

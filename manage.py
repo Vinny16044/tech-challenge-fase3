@@ -161,8 +161,9 @@ def cmd_setup(_args) -> None:
             run([sys.executable, "-m", "venv", os.path.join(ROOT, ".venv")])
         py = venv_python()
         run([py, "-m", "pip", "install", "-q", "-r", "requirements-data.txt"])
-        if os.path.exists(os.path.join(ROOT, "requirements-langchain.txt")):
-            run([py, "-m", "pip", "install", "-q", "-r", "requirements-langchain.txt"])
+        for extra in ("requirements-langchain.txt", "requirements-web.txt"):
+            if os.path.exists(os.path.join(ROOT, extra)):
+                run([py, "-m", "pip", "install", "-q", "-r", extra])
         print("[manage] Dependências do Windows ok. Preparando o WSL (treino)...")
         sync_to_wsl()
         in_wsl("python3 -m venv .venv 2>/dev/null; source .venv/bin/activate && "
@@ -256,6 +257,14 @@ def cmd_ask(args) -> None:
     run(cmd)
 
 
+def cmd_web(_args) -> None:
+    """Sobe o chat web local do assistente em http://localhost:8000"""
+    os.environ["OLLAMA_MODEL"] = OLLAMA_MODEL
+    print("\n[manage] Chat do assistente: http://localhost:8000  (Ctrl+C para parar)")
+    run([venv_python(), "-m", "uvicorn", "src.api.server:app",
+         "--host", "127.0.0.1", "--port", "8000"])
+
+
 def cmd_validate(_args) -> None:
     # garante que a suíte use o mesmo modelo do comando `ask`
     os.environ["OLLAMA_MODEL"] = OLLAMA_MODEL
@@ -266,7 +275,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Comando único do Tech Challenge Fase 3")
     sub = parser.add_subparsers(dest="cmd", required=True)
     for name in ("doctor", "setup", "db", "dataset", "train",
-                 "evaluate", "export", "ollama", "validate"):
+                 "evaluate", "export", "ollama", "validate", "web"):
         sub.add_parser(name)
     ask = sub.add_parser("ask")
     ask.add_argument("question")

@@ -58,6 +58,12 @@ no prontuário." — e não acrescente suposições sobre o dado ausente.
 11. Responda todas as partes da pergunta do usuário.
 12. Não cite protocolos irrelevantes apenas porque foram
     recuperados pelo sistema.
+13. Seja CONCISO: no máximo dois parágrafos curtos. Nunca repita
+    a mesma informação e nunca invente exemplos, datas ou nomes.
+14. Se a pergunta for uma saudação ou pedir uma visão geral do
+    paciente, responda em 2-4 frases com um resumo objetivo dos
+    dados do PRONTUÁRIO (idade, estágio, pendências e alertas),
+    sem listar protocolos.
 
 PERGUNTA:
 {question}
