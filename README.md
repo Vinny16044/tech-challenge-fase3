@@ -21,6 +21,29 @@ com os dados próprios da instituição, orquestrado com LangChain/LangGraph.
 | Paola | Relatório técnico, diagrama, validação |
 | Thamy | Vídeo e evidências |
 
+## Início rápido (manage.py)
+
+Não decore em qual shell cada coisa roda — o `manage.py` roteia sozinho
+(comandos de GPU são executados dentro do WSL automaticamente). Tudo a partir
+do **PowerShell**, na raiz do projeto:
+
+```powershell
+python manage.py doctor     # diagnóstico: o que está ok e o que falta
+python manage.py setup      # instala dependências (Windows + WSL)
+python manage.py db         # cria a base de prontuários no MySQL
+python manage.py dataset    # gera o dataset de fine-tuning
+python manage.py train      # treina no WSL (QLoRA na GPU)
+python manage.py evaluate   # compara base vs. fine-tunado
+python manage.py export     # exporta o modelo para GGUF
+python manage.py ollama     # instala o modelo no Ollama (medico-fase3)
+python manage.py ask "Quais exames estão pendentes?" -p P0001
+python manage.py validate   # suíte de validação da Frente 3
+```
+
+Pré-requisitos: WSL2 com Ubuntu + driver NVIDIA (ver `docs/setup_wsl2.md`),
+MySQL (local ou `docker compose up -d`) e [Ollama](https://ollama.com) no Windows.
+Se a sua distro não se chama `Ubuntu-24.04`, defina `WSL_DISTRO` no `.env`.
+
 ## Frente 1 — Pipeline de Fine-tuning
 
 - **Modelo base:** `unsloth/Llama-3.2-3B-Instruct` (4-bit)

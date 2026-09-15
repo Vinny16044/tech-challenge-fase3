@@ -12,7 +12,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[2]
 
-MODEL_NAME = "llama3.2:3b"
+# Modelo configurável: use OLLAMA_MODEL para validar o fine-tunado
+# (ex.: OLLAMA_MODEL=medico-fase3); padrão mantém o modelo base.
+MODEL_NAME = os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
 
 RESULT_DIR = ROOT / "validation_results"
 

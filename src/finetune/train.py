@@ -48,6 +48,15 @@ def main() -> None:
 
     m, l, t, o = cfg["model"], cfg["lora"], cfg["training"], cfg["output"]
 
+    # Auto-ajuste para GPUs pequenas: com menos de 7 GB de VRAM (ex. RTX 4050
+    # 6 GB), reduzimos sequência e batch sem precisar editar o config.
+    vram_gb = torch.cuda.get_device_properties(0).total_memory / 1024**3
+    if vram_gb < 7 and m["max_seq_length"] > 768:
+        print(f"[auto] GPU com {vram_gb:.1f} GB — ajustando: seq 768, batch 1, accum 16")
+        m["max_seq_length"] = 768
+        t["per_device_train_batch_size"] = 1
+        t["gradient_accumulation_steps"] = 16
+
     # 1. Modelo base 4-bit ------------------------------------------------
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name=m["base_model"],

@@ -65,15 +65,20 @@ def main() -> None:
     print(f"Exportando GGUF ({args.quant}) para {args.out_dir} ...")
     model.save_pretrained_gguf(args.out_dir, tokenizer, quantization_method=args.quant)
 
-    ggufs = sorted(glob.glob(os.path.join(args.out_dir, "*.gguf")),
-                   key=os.path.getmtime, reverse=True)
+    # Algumas versões do Unsloth salvam em "<out_dir>_gguf" — procurar nos dois
+    candidates = glob.glob(os.path.join(args.out_dir, "*.gguf")) + \
+        glob.glob(args.out_dir.rstrip("/\\") + "_gguf" + os.sep + "*.gguf")
+    ggufs = sorted(candidates, key=os.path.getmtime, reverse=True)
     if not ggufs:
         raise SystemExit("Nenhum .gguf gerado — veja o log acima.")
+    gguf_dir = os.path.dirname(ggufs[0])
     gguf_name = os.path.basename(ggufs[0])
 
-    modelfile_path = os.path.join(args.out_dir, "Modelfile")
-    with open(modelfile_path, "w", encoding="utf-8") as fh:
-        fh.write(MODELFILE.format(gguf_name=gguf_name))
+    # O Unsloth costuma gerar um Modelfile próprio (com o chat template) — mantê-lo
+    modelfile_path = os.path.join(gguf_dir, "Modelfile")
+    if not os.path.exists(modelfile_path):
+        with open(modelfile_path, "w", encoding="utf-8") as fh:
+            fh.write(MODELFILE.format(gguf_name=gguf_name))
 
     print("\nOK! Próximos passos:")
     print(f"  1. cd {os.path.relpath(args.out_dir, ROOT)}")

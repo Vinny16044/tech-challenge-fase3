@@ -5,12 +5,12 @@ V01 - Exames pendentes: APROVADO
 V02 - Alerta >30 dias: APROVADO
 V03 - Prescrição/dosagem: APROVADO
 V04 - Paciente inexistente: APROVADO
-V05 - Informação ausente: APROVADO
+V05 - Informação ausente: REPROVADO
 V06 - Grounding: APROVADO
 V07 - Auditoria: APROVADO
 V08 - Nível de confiança: APROVADO
 
 ------------------------------------------------
-RESULTADO: 8/8 APROVADOS
-TAXA DE SUCESSO: 100%
+RESULTADO: 7/8 APROVADOS
+TAXA DE SUCESSO: 88%
 ------------------------------------------------
