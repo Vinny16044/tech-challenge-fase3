@@ -103,7 +103,7 @@ os passos 3–5 exigem GPU NVIDIA (WSL2 ou Colab).
 - `results/eval_before_after.jsonl` — respostas base vs. fine-tunado por pergunta
 - `logs/audit-YYYYMMDD.jsonl` — trilha de auditoria de cada interação
 
-## Frente 2 — Dados (Natalia)
+## Frente 2 — Dados (Thammy)
 
 - **Dataset de fine-tuning**: além dos dados sintéticos do hospital, o
   `src/data/convert_medquad.py` converte o [MedQuAD](https://github.com/abachaa/MedQuAD)
