@@ -1,0 +1,474 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "EventSource": {
+      "additionalProperties": false,
+      "description": "Identifica o sistema que produziu o evento.",
+      "properties": {
+        "system": {
+          "description": "Nome do sistema/módulo emissor. Ex.: fase4-audio-analysis.",
+          "maxLength": 60,
+          "minLength": 2,
+          "title": "System",
+          "type": "string"
+        },
+        "version": {
+          "description": "Versão do sistema emissor. Ex.: 0.1.0.",
+          "maxLength": 30,
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "model": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Modelo de IA usado na análise, se houver.",
+          "title": "Model"
+        }
+      },
+      "required": [
+        "system",
+        "version"
+      ],
+      "title": "EventSource",
+      "type": "object"
+    },
+    "EvidenceRef": {
+      "additionalProperties": false,
+      "description": "Referência a uma evidência mantida pelo módulo de origem.\n\nO evento NÃO carrega mídia nem prontuário: ele aponta (via `uri`) para o\nartefato guardado pelo módulo, e informa o trecho/medida relevante.",
+      "properties": {
+        "type": {
+          "description": "Tipo da evidência; deve ser compatível com o módulo.",
+          "enum": [
+            "audio_segment",
+            "video_clip",
+            "video_frame",
+            "clinical_measurement",
+            "lab_result"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Referência estável ao artefato no módulo de origem, com esquema (ex.: audio://leito-12/rec0007.wav, video://cam-12/clip0315.mp4, clinical://sinais-vitais/obs-5521).",
+          "examples": [
+            "audio://leito-12/rec0007.wav"
+          ],
+          "maxLength": 500,
+          "pattern": "^[a-z][a-z0-9+.-]*://\\S+$",
+          "title": "Uri",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 300,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Descrição curta do que a evidência mostra.",
+          "title": "Description"
+        },
+        "start_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Início do trecho em segundos (áudio/vídeo).",
+          "title": "Start S"
+        },
+        "end_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Fim do trecho em segundos (áudio/vídeo).",
+          "title": "End S"
+        },
+        "frame_index": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Índice do quadro (video_frame).",
+          "title": "Frame Index"
+        },
+        "metric": {
+          "anyOf": [
+            {
+              "maxLength": 60,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Nome da medida (clinical_measurement/lab_result). Ex.: heart_rate.",
+          "title": "Metric"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Valor medido (clinical_measurement/lab_result).",
+          "title": "Value"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Unidade do valor. Ex.: bpm, %, mg/dL.",
+          "title": "Unit"
+        },
+        "reference_range": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Faixa de referência usada pelo módulo. Ex.: 60-100.",
+          "title": "Reference Range"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Confiança do modelo do módulo para esta evidência (0 a 1).",
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "type",
+        "uri"
+      ],
+      "title": "EvidenceRef",
+      "type": "object"
+    }
+  },
+  "$id": "https://fiap-tech-challenge/fase4/schemas/event_v1.schema.json",
+  "additionalProperties": false,
+  "description": "Evento de monitoramento hospitalar (áudio, vídeo ou dados clínicos) — contrato v1 do protótipo da Fase 4. Os achados são para avaliação profissional e não constituem diagnóstico.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "description": "Versão do contrato. Nesta versão, sempre \"1.0\".",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "event_id": {
+      "description": "ID estável do evento: '<module>-<id local estável>'. O reenvio do MESMO evento deve usar o MESMO event_id. Recomendado: '<module>-<patient_id>-<id local na origem>'.",
+      "examples": [
+        "audio-P0001-rec0007-seg0042"
+      ],
+      "pattern": "^(audio|video|clinical)-[A-Za-z0-9][A-Za-z0-9._:-]{2,119}$",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "patient_id": {
+      "description": "ID sintético do paciente (ex.: P0001). Nunca dados pessoais.",
+      "pattern": "^P\\d{4,}$",
+      "title": "Patient Id",
+      "type": "string"
+    },
+    "module": {
+      "description": "Módulo emissor.",
+      "enum": [
+        "audio",
+        "video",
+        "clinical"
+      ],
+      "title": "Module",
+      "type": "string"
+    },
+    "timestamp": {
+      "description": "Momento do achado em ISO 8601 COM fuso horário (ex.: 2026-11-12T10:03:20-03:00).",
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "event_type": {
+      "description": "Tipo do achado; os valores aceitos dependem do módulo.",
+      "title": "Event Type",
+      "type": "string"
+    },
+    "finding": {
+      "description": "Descrição objetiva do achado (sem diagnóstico).",
+      "maxLength": 500,
+      "minLength": 3,
+      "title": "Finding",
+      "type": "string"
+    },
+    "anomaly_detected": {
+      "description": "true se o módulo considera o achado fora do padrão esperado.",
+      "title": "Anomaly Detected",
+      "type": "boolean"
+    },
+    "priority": {
+      "description": "Prioridade sugerida pelo módulo. Eventos sem anomalia devem usar 'low'. A prioridade final do alerta é calculada pelas regras do integrador.",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "evidence": {
+      "description": "Referências às evidências que sustentam o achado.",
+      "items": {
+        "$ref": "#/$defs/EvidenceRef"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Evidence",
+      "type": "array"
+    },
+    "source": {
+      "$ref": "#/$defs/EventSource",
+      "description": "Sistema que produziu o evento."
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "patient_id",
+    "module",
+    "timestamp",
+    "event_type",
+    "finding",
+    "anomaly_detected",
+    "priority",
+    "evidence",
+    "source"
+  ],
+  "title": "MonitoringEventV1",
+  "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "const": "audio"
+          }
+        },
+        "required": [
+          "module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_id": {
+            "pattern": "^audio-"
+          },
+          "event_type": {
+            "enum": [
+              "vocal_distress",
+              "call_for_help",
+              "respiratory_sound",
+              "audio_check"
+            ]
+          },
+          "evidence": {
+            "items": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "audio_segment"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "const": "video"
+          }
+        },
+        "required": [
+          "module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_id": {
+            "pattern": "^video-"
+          },
+          "event_type": {
+            "enum": [
+              "fall_detected",
+              "bed_exit_attempt",
+              "prolonged_immobility",
+              "agitation",
+              "video_check"
+            ]
+          },
+          "evidence": {
+            "items": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "video_clip",
+                    "video_frame"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "module": {
+            "const": "clinical"
+          }
+        },
+        "required": [
+          "module"
+        ]
+      },
+      "then": {
+        "properties": {
+          "event_id": {
+            "pattern": "^clinical-"
+          },
+          "event_type": {
+            "enum": [
+              "vital_signs",
+              "lab_result",
+              "clinical_check"
+            ]
+          },
+          "evidence": {
+            "items": {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "clinical_measurement",
+                    "lab_result"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "anomaly_detected": {
+            "const": false
+          }
+        },
+        "required": [
+          "anomaly_detected"
+        ]
+      },
+      "then": {
+        "properties": {
+          "priority": {
+            "const": "low"
+          }
+        }
+      }
+    }
+  ],
+  "x-event-types-by-module": {
+    "audio": [
+      "vocal_distress",
+      "call_for_help",
+      "respiratory_sound",
+      "audio_check"
+    ],
+    "video": [
+      "fall_detected",
+      "bed_exit_attempt",
+      "prolonged_immobility",
+      "agitation",
+      "video_check"
+    ],
+    "clinical": [
+      "vital_signs",
+      "lab_result",
+      "clinical_check"
+    ]
+  },
+  "x-evidence-types-by-module": {
+    "audio": [
+      "audio_segment"
+    ],
+    "video": [
+      "video_clip",
+      "video_frame"
+    ],
+    "clinical": [
+      "clinical_measurement",
+      "lab_result"
+    ]
+  }
+}

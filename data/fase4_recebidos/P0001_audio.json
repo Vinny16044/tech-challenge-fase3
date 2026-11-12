@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "event_id": "audio-P0001-rec0007-seg0042",
+  "patient_id": "P0001",
+  "module": "audio",
+  "timestamp": "2026-11-12T10:03:20-03:00",
+  "event_type": "vocal_distress",
+  "finding": "Vocalizações repetidas compatíveis com desconforto durante cerca de 40 segundos no leito 12 (dado fictício).",
+  "anomaly_detected": true,
+  "priority": "medium",
+  "evidence": [
+    {
+      "type": "audio_segment",
+      "uri": "audio://leito-12/rec0007.wav",
+      "start_s": 120.0,
+      "end_s": 160.0,
+      "confidence": 0.78,
+      "description": "Trecho com gemidos repetidos (gravação fictícia)."
+    }
+  ],
+  "source": {
+    "system": "fase4-audio-analysis",
+    "version": "0.1.0",
+    "model": "modelo-audio-ficticio"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "alert_id": "ALT-8935b56efce5",
+  "reviewer_id": "CRM-FICTICIO-0001",
+  "reviewer_name": "Revisor Fictício",
+  "decision": "confirmed",
+  "decided_at": "2026-11-12T10:20:00-03:00",
+  "notes": "Decisão fictícia para demonstração do registro de revisão humana."
+}

@@ -1,0 +1,294 @@
+{
+  "report_version": "1.0",
+  "contract_version": "1.0",
+  "rules_version": "prototipo-1",
+  "run_id": "RUN-demo-P0001",
+  "generated_at": "2026-11-12T16:09:21.358406+00:00",
+  "config": {
+    "window_minutes": 15,
+    "summary_mode": "offline",
+    "model": null
+  },
+  "disclaimer": "Achados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.",
+  "intake": {
+    "inputs_received": 3,
+    "events_received": 3,
+    "accepted": 3,
+    "rejected": 0,
+    "duplicates": 0,
+    "accepted_events": [
+      {
+        "event_id": "audio-P0001-rec0007-seg0042",
+        "module": "audio",
+        "origin": "data/fase4/P0001_audio.json"
+      },
+      {
+        "event_id": "clinical-P0001-obs5521",
+        "module": "clinical",
+        "origin": "data/fase4/P0001_clinical.json"
+      },
+      {
+        "event_id": "video-P0001-cam12-clip0315",
+        "module": "video",
+        "origin": "data/fase4/P0001_video.json"
+      }
+    ],
+    "rejected_events": [],
+    "duplicate_events": []
+  },
+  "sources_received": [
+    "audio",
+    "video",
+    "clinical"
+  ],
+  "sources_missing": [],
+  "alerts": [
+    {
+      "alert_id": "ALT-8935b56efce5",
+      "patient_id": "P0001",
+      "window_start": "2026-11-12T13:00:00Z",
+      "priority": "critical",
+      "review_status": "pending_medical_review"
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "P0001@2026-11-12T13:00:00Z",
+      "patient_id": "P0001",
+      "window_start": "2026-11-12T13:00:00Z",
+      "window_end": "2026-11-12T13:15:00Z",
+      "status": "alert_pending_review",
+      "sources_received": [
+        "audio",
+        "video",
+        "clinical"
+      ],
+      "sources_missing": [],
+      "events": [
+        {
+          "event_id": "audio-P0001-rec0007-seg0042",
+          "module": "audio",
+          "event_type": "vocal_distress",
+          "timestamp": "2026-11-12T10:03:20-03:00",
+          "timestamp_utc": "2026-11-12T13:03:20Z",
+          "finding": "Vocalizações repetidas compatíveis com desconforto durante cerca de 40 segundos no leito 12 (dado fictício).",
+          "anomaly_detected": true,
+          "priority": "medium",
+          "evidence": [
+            {
+              "type": "audio_segment",
+              "uri": "audio://leito-12/rec0007.wav",
+              "description": "Trecho com gemidos repetidos (gravação fictícia).",
+              "start_s": 120.0,
+              "end_s": 160.0,
+              "confidence": 0.78
+            }
+          ],
+          "source": {
+            "system": "fase4-audio-analysis",
+            "version": "0.1.0",
+            "model": "modelo-audio-ficticio"
+          },
+          "origin": "data/fase4/P0001_audio.json"
+        },
+        {
+          "event_id": "video-P0001-cam12-clip0315",
+          "module": "video",
+          "event_type": "bed_exit_attempt",
+          "timestamp": "2026-11-12T10:05:10-03:00",
+          "timestamp_utc": "2026-11-12T13:05:10Z",
+          "finding": "Movimento de tentativa de sair do leito sem acompanhamento visível da equipe (dado fictício).",
+          "anomaly_detected": true,
+          "priority": "high",
+          "evidence": [
+            {
+              "type": "video_clip",
+              "uri": "video://cam-leito-12/clip0315.mp4",
+              "description": "Paciente senta na borda do leito e apoia os pés no chão (clipe fictício).",
+              "start_s": 30.0,
+              "end_s": 48.0,
+              "confidence": 0.83
+            },
+            {
+              "type": "video_frame",
+              "uri": "video://cam-leito-12/clip0315.mp4",
+              "description": "Quadro de referência do movimento (fictício).",
+              "frame_index": 1260
+            }
+          ],
+          "source": {
+            "system": "fase4-video-analysis",
+            "version": "0.1.0",
+            "model": "modelo-video-ficticio"
+          },
+          "origin": "data/fase4/P0001_video.json"
+        },
+        {
+          "event_id": "clinical-P0001-obs5521",
+          "module": "clinical",
+          "event_type": "vital_signs",
+          "timestamp": "2026-11-12T10:08:00-03:00",
+          "timestamp_utc": "2026-11-12T13:08:00Z",
+          "finding": "Frequência cardíaca e saturação de oxigênio fora da faixa de referência do protótipo (dado fictício).",
+          "anomaly_detected": true,
+          "priority": "medium",
+          "evidence": [
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://sinais-vitais/P0001/obs-5521",
+              "metric": "heart_rate",
+              "value": 118.0,
+              "unit": "bpm",
+              "reference_range": "60-100",
+              "confidence": 0.9
+            },
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://sinais-vitais/P0001/obs-5521",
+              "metric": "spo2",
+              "value": 91.0,
+              "unit": "%",
+              "reference_range": "95-100",
+              "confidence": 0.9
+            }
+          ],
+          "source": {
+            "system": "fase4-clinical-anomaly",
+            "version": "0.1.0",
+            "model": "detector-anomalia-ficticio"
+          },
+          "origin": "data/fase4/P0001_clinical.json"
+        }
+      ],
+      "alert": {
+        "alert_id": "ALT-8935b56efce5",
+        "patient_id": "P0001",
+        "window_start": "2026-11-12T13:00:00Z",
+        "window_end": "2026-11-12T13:15:00Z",
+        "priority": "critical",
+        "rules_version": "prototipo-1",
+        "priority_reasons": [
+          {
+            "rule_id": "R1",
+            "rule": "PRIORIDADE_MODULO",
+            "description": "Maior prioridade sugerida pelos módulos entre os eventos anômalos: high.",
+            "priority_before": null,
+            "priority_after": "high",
+            "event_ids": [
+              "video-P0001-cam12-clip0315"
+            ]
+          },
+          {
+            "rule_id": "R3",
+            "rule": "CORROBORACAO_2",
+            "description": "Anomalias em 2 ou mais modalidades na mesma janela (audio, video, clinical): prioridade sobe um nível.",
+            "priority_before": "high",
+            "priority_after": "critical",
+            "event_ids": [
+              "audio-P0001-rec0007-seg0042",
+              "video-P0001-cam12-clip0315",
+              "clinical-P0001-obs5521"
+            ]
+          },
+          {
+            "rule_id": "R4",
+            "rule": "CORROBORACAO_3",
+            "description": "Anomalias nas 3 modalidades (áudio, vídeo e dados clínicos) na mesma janela: prioridade critical.",
+            "priority_before": "critical",
+            "priority_after": "critical",
+            "event_ids": [
+              "audio-P0001-rec0007-seg0042",
+              "video-P0001-cam12-clip0315",
+              "clinical-P0001-obs5521"
+            ]
+          }
+        ],
+        "anomalous_modalities": [
+          "audio",
+          "video",
+          "clinical"
+        ],
+        "event_ids": [
+          "audio-P0001-rec0007-seg0042",
+          "video-P0001-cam12-clip0315",
+          "clinical-P0001-obs5521"
+        ],
+        "evidence": [
+          {
+            "event_id": "audio-P0001-rec0007-seg0042",
+            "module": "audio",
+            "event_type": "vocal_distress",
+            "type": "audio_segment",
+            "uri": "audio://leito-12/rec0007.wav",
+            "description": "Trecho com gemidos repetidos (gravação fictícia).",
+            "start_s": 120.0,
+            "end_s": 160.0,
+            "confidence": 0.78
+          },
+          {
+            "event_id": "video-P0001-cam12-clip0315",
+            "module": "video",
+            "event_type": "bed_exit_attempt",
+            "type": "video_clip",
+            "uri": "video://cam-leito-12/clip0315.mp4",
+            "description": "Paciente senta na borda do leito e apoia os pés no chão (clipe fictício).",
+            "start_s": 30.0,
+            "end_s": 48.0,
+            "confidence": 0.83
+          },
+          {
+            "event_id": "video-P0001-cam12-clip0315",
+            "module": "video",
+            "event_type": "bed_exit_attempt",
+            "type": "video_frame",
+            "uri": "video://cam-leito-12/clip0315.mp4",
+            "description": "Quadro de referência do movimento (fictício).",
+            "frame_index": 1260
+          },
+          {
+            "event_id": "clinical-P0001-obs5521",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://sinais-vitais/P0001/obs-5521",
+            "metric": "heart_rate",
+            "value": 118.0,
+            "unit": "bpm",
+            "reference_range": "60-100",
+            "confidence": 0.9
+          },
+          {
+            "event_id": "clinical-P0001-obs5521",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://sinais-vitais/P0001/obs-5521",
+            "metric": "spo2",
+            "value": 91.0,
+            "unit": "%",
+            "reference_range": "95-100",
+            "confidence": 0.9
+          }
+        ],
+        "review": {
+          "status": "pending_medical_review",
+          "reviewer_id": null,
+          "reviewer_name": null,
+          "decision": null,
+          "decided_at": null,
+          "notes": null
+        },
+        "disclaimer": "Achados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde."
+      },
+      "summary": {
+        "method": "deterministic",
+        "model": null,
+        "text": "Paciente P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z (UTC).\nFontes recebidas: audio, video, clinical. Fontes ausentes: nenhuma.\n3 evento(s) recebido(s), 3 com anomalia.\n- [audio] vocal_distress (ANOMALIA, prioridade do módulo: medium): Vocalizações repetidas compatíveis com desconforto durante cerca de 40 segundos no leito 12 (dado fictício). [audio-P0001-rec0007-seg0042]\n- [video] bed_exit_attempt (ANOMALIA, prioridade do módulo: high): Movimento de tentativa de sair do leito sem acompanhamento visível da equipe (dado fictício). [video-P0001-cam12-clip0315]\n- [clinical] vital_signs (ANOMALIA, prioridade do módulo: medium): Frequência cardíaca e saturação de oxigênio fora da faixa de referência do protótipo (dado fictício). [clinical-P0001-obs5521]\nAlerta ALT-8935b56efce5: prioridade critical (R1 PRIORIDADE_MODULO; R3 CORROBORACAO_2; R4 CORROBORACAO_3). Status: pending_medical_review.\nAchados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.",
+        "deterministic_text": "Paciente P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z (UTC).\nFontes recebidas: audio, video, clinical. Fontes ausentes: nenhuma.\n3 evento(s) recebido(s), 3 com anomalia.\n- [audio] vocal_distress (ANOMALIA, prioridade do módulo: medium): Vocalizações repetidas compatíveis com desconforto durante cerca de 40 segundos no leito 12 (dado fictício). [audio-P0001-rec0007-seg0042]\n- [video] bed_exit_attempt (ANOMALIA, prioridade do módulo: high): Movimento de tentativa de sair do leito sem acompanhamento visível da equipe (dado fictício). [video-P0001-cam12-clip0315]\n- [clinical] vital_signs (ANOMALIA, prioridade do módulo: medium): Frequência cardíaca e saturação de oxigênio fora da faixa de referência do protótipo (dado fictício). [clinical-P0001-obs5521]\nAlerta ALT-8935b56efce5: prioridade critical (R1 PRIORIDADE_MODULO; R3 CORROBORACAO_2; R4 CORROBORACAO_3). Status: pending_medical_review.\nAchados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.",
+        "fallback_reason": null
+      }
+    }
+  ],
+  "review_decisions": [],
+  "audit_log": "C:\\Users\\cachi\\OneDrive\\Área de Trabalho\\tech-challenge-fase3-main\\tech-challenge-fase3-main\\logs\\audit-fase4-20261112.jsonl"
+}

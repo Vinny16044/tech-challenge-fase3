@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "event_id": "video-P0001-cam12-clip0315",
+  "patient_id": "P0001",
+  "module": "video",
+  "timestamp": "2026-11-12T10:05:10-03:00",
+  "event_type": "bed_exit_attempt",
+  "finding": "Movimento de tentativa de sair do leito sem acompanhamento visível da equipe (dado fictício).",
+  "anomaly_detected": true,
+  "priority": "high",
+  "evidence": [
+    {
+      "type": "video_clip",
+      "uri": "video://cam-leito-12/clip0315.mp4",
+      "start_s": 30.0,
+      "end_s": 48.0,
+      "confidence": 0.83,
+      "description": "Paciente senta na borda do leito e apoia os pés no chão (clipe fictício)."
+    },
+    {
+      "type": "video_frame",
+      "uri": "video://cam-leito-12/clip0315.mp4",
+      "frame_index": 1260,
+      "description": "Quadro de referência do movimento (fictício)."
+    }
+  ],
+  "source": {
+    "system": "fase4-video-analysis",
+    "version": "0.1.0",
+    "model": "modelo-video-ficticio"
+  }
+}

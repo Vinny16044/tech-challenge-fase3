@@ -138,3 +138,194 @@ python -m src.data.convert_medquad --medquad-dir /tmp/MedQuAD --limit 400
 ## Licença
 
 MIT — Projeto acadêmico FIAP POS TECH 2026
+
+---
+
+# Fase 4 — Integração multimodal (áudio, vídeo e dados clínicos)
+
+Protótipo de monitoramento hospitalar que consolida os achados dos módulos de **áudio**
+(Thamy), **vídeo** e **detecção de anomalias em dados clínicos** (Vini). A arquitetura e a
+integração (Paola) recebem os JSONs dos módulos, validam, consolidam por paciente e janela de
+tempo, aplicam regras de alerta determinísticas e produzem um relatório estruturado com
+auditoria e revisão humana.
+
+> ⚠️ Os resultados são **achados para avaliação profissional**. Não são diagnóstico nem
+> conduta. Todo alerta nasce em `pending_medical_review`. Todos os dados aqui são fictícios.
+
+## Estrutura da Fase 4
+
+```
+src/contracts/event_v1.py         # Contrato JSON v1 (Pydantic) — fonte da verdade
+src/contracts/review.py           # Decisão de revisão humana
+src/contracts/generate_schema.py  # Gera schemas/event_v1.schema.json
+src/monitoring/workflow.py        # Grafo LangGraph + CLI
+src/monitoring/nodes.py           # Nós: validar, consolidar, alertar, revisar, resumir, relatório
+src/monitoring/rules.py           # Regras de prioridade do protótipo (R0–R5)
+src/monitoring/summarizer.py      # Resumo determinístico + LLM opcional com fallback
+src/monitoring/audit.py           # Auditoria JSONL
+schemas/event_v1.schema.json      # JSON Schema gerado
+data/fase4/                       # JSONs de referência do P0001 (áudio, vídeo, clínico)
+data/fase4_revisao/               # Exemplo de decisão de revisão humana
+docs/fase4_contrato_eventos_v1.md # Campos, valores aceitos, evidências, IDs estáveis
+docs/fase4_regras_alerta.md       # Regras, revisão, resumo e auditoria
+tests/                            # Testes (pytest) com dados fictícios
+```
+
+O código da Fase 3 (`src/graph/`) não foi alterado; a Fase 4 segue o mesmo padrão
+(`StateGraph` com estado `TypedDict`, nós em classe, auditoria JSONL e modo offline).
+
+## Fluxo LangGraph
+
+```
+validate_events ──(nenhum evento aceito)──────────────────────────────┐
+      │                                                               ▼
+      └─► consolidate ─► evaluate_alerts ─► apply_reviews ─► summarize ─► build_report
+```
+
+1. **validate_events**: lê o JSON bruto, valida contra o contrato v1, rejeita JSON malformado,
+   descarta reenvios idênticos e rejeita conflitos de `event_id`.
+2. **consolidate**: agrupa por `patient_id` + janela (padrão 15 min), registra fontes recebidas
+   e ausentes e preserva `event_id`, `source` e `origin` (arquivo) de cada evento.
+3. **evaluate_alerts**: aplica as regras R0–R5 e registra motivos e evidências.
+4. **apply_reviews**: registra decisões humanas informadas (revisor + horário).
+5. **summarize**: resumo determinístico; LLM (Ollama) só com `--llm`, com fallback.
+6. **build_report**: relatório estruturado + linha final de auditoria.
+
+## Como executar (PowerShell, na raiz do projeto)
+
+Nesta máquina o comando `python` aponta para o atalho da Microsoft Store; use `py`.
+
+```powershell
+py -m pip install -r requirements-fase4.txt          # se ainda não tiver as dependências
+py -m src.monitoring.workflow --input data/fase4 --summary-only
+py -m src.monitoring.workflow --input data/fase4 --output output/relatorio_P0001.json
+py -m src.monitoring.workflow --input data/fase4 --review-file data/fase4_revisao/P0001_decisao_exemplo.json
+py -m src.monitoring.workflow --input data/fase4 --window-minutes 30
+py -m src.monitoring.workflow --input data/fase4 --llm --model llama3.2:3b   # opcional
+py -m src.contracts.generate_schema                  # regenera o JSON Schema
+py -m pytest                                         # testes
+```
+
+Auditoria: `logs/audit-fase4-AAAAMMDD.jsonl` (ou `--audit-log <arquivo>`).
+
+### Saída consolidada (exemplo, `--summary-only`)
+
+```
+Paciente P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z (UTC).
+Fontes recebidas: audio, video, clinical. Fontes ausentes: nenhuma.
+3 evento(s) recebido(s), 3 com anomalia.
+- [audio] vocal_distress (ANOMALIA, prioridade do módulo: medium): Vocalizações repetidas ... [audio-P0001-rec0007-seg0042]
+- [video] bed_exit_attempt (ANOMALIA, prioridade do módulo: high): Movimento de tentativa de sair do leito ... [video-P0001-cam12-clip0315]
+- [clinical] vital_signs (ANOMALIA, prioridade do módulo: medium): Frequência cardíaca e saturação ... [clinical-P0001-obs5521]
+Alerta ALT-8935b56efce5: prioridade critical (R1 PRIORIDADE_MODULO; R3 CORROBORACAO_2; R4 CORROBORACAO_3). Status: pending_medical_review.
+Achados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.
+```
+
+### Saída consolidada (exemplo, JSON — trecho)
+
+Relatório completo: `docs/fase4_exemplo_relatorio_P0001.json`.
+
+```json
+{
+  "report_version": "1.0",
+  "contract_version": "1.0",
+  "rules_version": "prototipo-1",
+  "config": { "window_minutes": 15, "summary_mode": "offline", "model": null },
+  "intake": { "events_received": 3, "accepted": 3, "rejected": 0, "duplicates": 0 },
+  "sources_received": ["audio", "video", "clinical"],
+  "sources_missing": [],
+  "alerts": [
+    {
+      "alert_id": "ALT-8935b56efce5",
+      "patient_id": "P0001",
+      "window_start": "2026-11-12T13:00:00Z",
+      "priority": "critical",
+      "review_status": "pending_medical_review"
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "P0001@2026-11-12T13:00:00Z",
+      "status": "alert_pending_review",
+      "sources_received": ["audio", "video", "clinical"],
+      "sources_missing": [],
+      "events": [
+        { "event_id": "audio-P0001-rec0007-seg0042", "module": "audio", "origin": "data/fase4/P0001_audio.json", "...": "..." }
+      ],
+      "alert": {
+        "alert_id": "ALT-8935b56efce5",
+        "priority": "critical",
+        "priority_reasons": [
+          { "rule_id": "R1", "priority_after": "high", "event_ids": ["video-P0001-cam12-clip0315"] },
+          { "rule_id": "R3", "priority_before": "high", "priority_after": "critical" },
+          { "rule_id": "R4", "priority_before": "critical", "priority_after": "critical" }
+        ],
+        "evidence": [ { "event_id": "audio-P0001-rec0007-seg0042", "type": "audio_segment", "uri": "audio://leito-12/rec0007.wav", "start_s": 120.0, "end_s": 160.0 } ],
+        "review": { "status": "pending_medical_review", "reviewer_id": null, "decided_at": null }
+      },
+      "summary": { "method": "deterministic", "text": "Paciente P0001 | janela ..." }
+    }
+  ]
+}
+```
+
+## Pendências que dependem dos JSONs reais da Thamy e do Vini
+
+- Confirmar os `event_type` e as evidências que cada módulo realmente produz (a lista v1 é
+  uma proposta) e se o detector clínico emite um evento por medida ou por conjunto.
+- Confirmar como cada módulo gera um `event_id` estável entre reenvios.
+- Confirmar fuso e relógio dos timestamps (vídeo e áudio costumam usar horário local do
+  dispositivo) e o tamanho de janela adequado.
+- Calibrar as prioridades sugeridas pelos módulos e as regras R1–R4 com a equipe; hoje são
+  regras de protótipo.
+- Definir os esquemas de `uri` (onde os artefatos ficam guardados e quem pode acessá-los).
+
+## Fase 4 — Guia rápido para a equipe (teste conjunto)
+
+**1. Instale as dependências** (PowerShell, na raiz do projeto; nesta equipe usamos `py`):
+
+```powershell
+py -m pip install -r requirements-fase4.txt
+```
+
+**2. Substitua o seu arquivo** em `data/fase4_recebidos/`. Os arquivos que estão lá são cópias
+dos exemplos fictícios e servem de modelo; mantenha o nome exato:
+
+| Pessoa | Arquivo que vai substituir |
+|---|---|
+| Thamy | `data/fase4_recebidos/P0001_audio.json` |
+| Vini | `data/fase4_recebidos/P0001_video.json` |
+| Vini | `data/fase4_recebidos/P0001_clinical.json` |
+
+A pasta `data/fase4/` é a demonstração de referência e não deve ser alterada.
+
+**3. Siga o contrato v1:**
+
+- Especificação: `docs/fase4_contrato_eventos_v1.md` (campos, `event_type` por módulo,
+  evidências, `event_id` estável e horário com fuso)
+- JSON Schema: `schemas/event_v1.schema.json`
+
+No **primeiro teste conjunto**, as três amostras devem usar o paciente fictício `P0001` e a
+mesma janela fictícia dos exemplos: **12/11/2026, entre 10:00:00 e 10:14:59 `-03:00`**
+(13:00–13:15 UTC). Se o seu módulo precisar de outro campo ou `event_type`, avise junto com
+a amostra.
+
+**4. Rode o fluxo com as amostras recebidas:**
+
+```powershell
+py -m src.monitoring.workflow --input "data\fase4_recebidos" --summary-only
+```
+
+Resultado esperado: **um grupo** (`P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z`)
+com `Fontes recebidas: audio, video, clinical` e `Fontes ausentes: nenhuma`, e a última linha
+com `3 aceitos, 0 rejeitados`. Se algum evento for rejeitado, rode sem `--summary-only` e veja
+`intake.rejected_events` (arquivo de origem, motivo e erros de cada campo).
+
+**5. Rode a suíte de testes:**
+
+```powershell
+py -m pytest
+```
+
+`tests/test_fase4_recebidos.py` confere as amostras da pasta de recebidos: contrato v1, módulo
+compatível com o nome do arquivo, `P0001` e consolidação das três fontes num só grupo.
