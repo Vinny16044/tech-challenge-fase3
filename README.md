@@ -150,16 +150,26 @@ tempo, aplicam regras de alerta determinísticas e produzem um relatório estrut
 auditoria e revisão humana.
 
 > ⚠️ Os resultados são **achados para avaliação profissional**. Não são diagnóstico nem
-> conduta. Todo alerta nasce em `pending_medical_review`. Todos os dados aqui são fictícios.
+> conduta. Todo alerta nasce em `pending_medical_review`. Os dados são fictícios ou vêm de
+> datasets públicos desidentificados (MIMIC-IV Demo e UR Fall Detection).
+
+**Relatório técnico da Fase 4:**
+[docs/Relatorio_Tecnico_Fase4.docx](docs/Relatorio_Tecnico_Fase4.docx) — fluxo multimodal,
+modelos aplicados em cada tipo de dado, resultados, exemplos de anomalias e limitações.
+Diagrama do fluxo: [docs/diagrama_fase4.png](docs/diagrama_fase4.png).
 
 A arquitetura está descrita em [docs/fase4_arquitetura.md](docs/fase4_arquitetura.md):
 diagrama do fluxo, validação e agrupamento, regras de prioridade, resumo offline e com
 Ollama, auditoria em JSONL e evidências dos testes locais.
 
+Os módulos de vídeo e de anomalias clínicas estão em
+[docs/fase4_video_e_anomalias.md](docs/fase4_video_e_anomalias.md): datasets, métodos,
+resultados, exemplos de anomalias e limitações.
+
 ## Estrutura da Fase 4
 
 ```
-src/contracts/event_v1.py         # Contrato JSON v1 (Pydantic) — fonte da verdade
+src/contracts/event_v1.py         # Contrato JSON v1, versão 1.1 (Pydantic) — fonte da verdade
 src/contracts/review.py           # Decisão de revisão humana
 src/contracts/generate_schema.py  # Gera schemas/event_v1.schema.json
 src/monitoring/workflow.py        # Grafo LangGraph + CLI
@@ -169,9 +179,16 @@ src/monitoring/summarizer.py      # Resumo determinístico + LLM opcional com fa
 src/monitoring/audit.py           # Auditoria JSONL
 schemas/event_v1.schema.json      # JSON Schema gerado
 data/fase4/                       # Demonstração de referência do P0001 (áudio, vídeo, clínico)
-data/fase4_recebidos/             # Amostras do teste conjunto (áudio da Thamy; vídeo e clínico ainda exemplos)
+data/fase4_recebidos/             # Amostras do teste conjunto: saídas reais dos três módulos
 data/fase4_revisao/               # Exemplo de decisão de revisão humana
+data/fase4_vini/                  # Saídas de vídeo (70 clipes, com a validação) e de um paciente clínico
 modules/audio_thamy/              # Módulo de áudio da Thamy e conversor para o contrato v1
+src/video_analysis/               # Vídeo (Vini): OpenCV, YOLOv8-pose, YOLOv8, regras de movimento, relatório
+src/anomaly_detection/            # Anomalias clínicas (Vini): sinais vitais, prescrições, movimentação
+src/fase4_samples.py              # Gera as amostras de vídeo e clínico para a integração
+docs/fase4_video_e_anomalias.md   # Vídeo e anomalias: datasets, métodos, resultados, limitações
+docs/fase4_relatorio_video.md     # Relatório automático da análise de vídeo
+docs/fase4_relatorio_clinico.md   # Relatório automático das anomalias clínicas
 docs/fase4_arquitetura.md         # Arquitetura, fluxo e evidências dos testes
 docs/fase4_contrato_eventos_v1.md # Campos, valores aceitos, evidências, IDs estáveis
 docs/fase4_regras_alerta.md       # Regras, revisão, resumo e auditoria
@@ -235,7 +252,7 @@ Relatório completo: `docs/fase4_exemplo_relatorio_P0001.json`.
 ```json
 {
   "report_version": "1.0",
-  "contract_version": "1.0",
+  "contract_version": "1.1",
   "rules_version": "prototipo-1",
   "config": { "window_minutes": 15, "summary_mode": "offline", "model": null },
   "intake": { "events_received": 3, "accepted": 3, "rejected": 0, "duplicates": 0 },
@@ -283,19 +300,29 @@ Relatório completo: `docs/fase4_exemplo_relatorio_P0001.json`.
   `data/fase4_recebidos/P0001_audio.json`, como `audio_check` (busca por palavras-chave, sem
   anomalia). Nos testes, o WAV simulado é processado localmente e os serviços Azure são
   simulados. Detalhes em `modules/audio_thamy/INTEGRAR_COM_FASE4.md`.
-- **Vídeo e dados clínicos (Vini):** pendentes. `data/fase4_recebidos/P0001_video.json` e
-  `P0001_clinical.json` ainda são os exemplos fictícios da demonstração.
+- **Vídeo e dados clínicos (Vini):** integrados. `data/fase4_recebidos/P0001_video.json` e
+  `P0001_clinical.json` são saídas dos módulos, geradas por `py -m src.fase4_samples`: uma
+  queda detectada num clipe do UR Fall Detection Dataset, e sinais vitais críticos mais uma
+  mudança de prescrição de um paciente do MIMIC-IV Demo. O `P0001` do teste conjunto é
+  composto: vídeo e dados clínicos vêm de datasets diferentes, com horários deslocados
+  para a mesma janela. Detalhes em `docs/fase4_video_e_anomalias.md`.
 
-Pontos a confirmar com as saídas do Vini:
+Como as saídas do Vini responderam aos pontos em aberto:
 
-- os `event_type` e as evidências que o módulo produz (a lista v1 é uma proposta) e se o
-  detector clínico emite um evento por medida ou por conjunto;
-- como o módulo gera um `event_id` estável entre reenvios;
-- o fuso e o relógio dos timestamps e o tamanho de janela adequado.
+- **Tipos de evento:** o contrato passou à versão 1.1, com `prescription_change`,
+  `patient_transfer` e a evidência `prescription`. Eventos 1.0 continuam válidos.
+- **Um evento por conjunto:** o detector clínico emite um `vital_signs` por observação, com
+  uma evidência por sinal alterado, e só no início, no agravamento ou na persistência de um
+  episódio.
+- **`event_id` estável:** montado com a origem do dado (internação e horário, ou clipe,
+  pessoa e instante), então o reenvio repete o ID.
+- **Fuso:** os horários do MIMIC-IV são tratados como UTC; o vídeo usa o início da gravação
+  informado em `--recorded-at`.
 
 Para toda a equipe: calibrar as prioridades sugeridas pelos módulos e as regras R1–R4, que
 são regras de protótipo, e definir os esquemas de `uri` (onde os artefatos ficam guardados e
-quem pode acessá-los).
+quem pode acessá-los). Com um evento clínico por hora e um vídeo de segundos, a janela de
+15 minutos só junta as modalidades quando os relógios estão alinhados.
 
 ## Fase 4 — Guia rápido para a equipe (teste conjunto)
 
@@ -310,8 +337,8 @@ py -m pip install -r requirements-fase4.txt
 | Pessoa | Arquivo | Situação |
 |---|---|---|
 | Thamy | `data/fase4_recebidos/P0001_audio.json` | substituído pelo áudio convertido |
-| Vini | `data/fase4_recebidos/P0001_video.json` | exemplo fictício, aguardando a saída do módulo |
-| Vini | `data/fase4_recebidos/P0001_clinical.json` | exemplo fictício, aguardando a saída do módulo |
+| Vini | `data/fase4_recebidos/P0001_video.json` | substituído pela saída do módulo de vídeo |
+| Vini | `data/fase4_recebidos/P0001_clinical.json` | substituído pela saída do módulo clínico |
 
 A pasta `data/fase4/` é a demonstração de referência e não deve ser alterada.
 
@@ -334,7 +361,7 @@ py -m src.monitoring.workflow --input "data\fase4_recebidos" --summary-only
 
 Resultado esperado: **um grupo** (`P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z`)
 com `Fontes recebidas: audio, video, clinical` e `Fontes ausentes: nenhuma`, e a última linha
-com `3 aceitos, 0 rejeitados`. Se algum evento for rejeitado, rode sem `--summary-only` e veja
+com `4 aceitos, 0 rejeitados` (um de áudio, um de vídeo e dois clínicos). Se algum evento for rejeitado, rode sem `--summary-only` e veja
 `intake.rejected_events` (arquivo de origem, motivo e erros de cada campo).
 
 **5. Rode a suíte de testes:**
@@ -345,3 +372,30 @@ py -m pytest
 
 `tests/test_fase4_recebidos.py` confere as amostras da pasta de recebidos: contrato v1, módulo
 compatível com o nome do arquivo, `P0001` e consolidação das três fontes num só grupo.
+
+## Fase 4 — Vídeo e anomalias clínicas (Vini)
+
+```powershell
+py -m pip install -r requirements-fase4.txt -r requirements-fase4-video-clinico.txt
+py -m src.anomaly_detection.data_loader --download   # MIMIC-IV Demo, ≈ 6 MB
+py -m src.video_analysis.preprocessing --download --all  # 70 clipes do URFD, ≈ 93 MB
+py -m src.anomaly_detection.run                      # sinais vitais, prescrições, movimentação
+py -m src.anomaly_detection.run --stream 30057454    # replay de uma internação em tempo real
+py -m src.anomaly_detection.evaluate                 # avaliação com anomalias injetadas
+py -m src.video_analysis.run --crop right --annotate # poses, objetos, eventos, vídeos anotados
+py -m src.fase4_samples                              # amostras para a integração
+```
+
+As saídas ficam em `output/clinical/` e `output/video/` (fora do Git). Resultados na
+execução de 16/11/2026:
+
+- **Vídeo:** limiares ajustados em 8 clipes e validados nos outros 62 do dataset, sem
+  reajuste: 22 de 26 quedas detectadas (84,6%) e 2 falsos alarmes em 36 atividades normais
+  (especificidade de 94,4%), a ≈ 39 quadros/s em CPU. Três das quatro quedas não detectadas
+  partem da posição sentada.
+- **Sinais vitais:** 19.805 observações de 100 pacientes, 16,2% anômalas, 1.871 eventos
+  (3,7 por paciente-dia) no perfil de UTI.
+- **Prescrições e movimentação:** 566 alterações sinalizadas em 136 internações e 9 padrões
+  de movimentação.
+- **Anomalias injetadas:** sensibilidade de 100% com episódios completos e 74% com
+  episódios discretos, com 3,0% de falsos positivos.

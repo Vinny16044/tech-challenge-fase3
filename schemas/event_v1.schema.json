@@ -52,7 +52,8 @@
             "video_clip",
             "video_frame",
             "clinical_measurement",
-            "lab_result"
+            "lab_result",
+            "prescription"
           ],
           "title": "Type",
           "type": "string"
@@ -134,7 +135,7 @@
             }
           ],
           "default": null,
-          "description": "Nome da medida (clinical_measurement/lab_result). Ex.: heart_rate.",
+          "description": "Nome da medida (clinical_measurement/lab_result) ou do medicamento (prescription). Ex.: heart_rate.",
           "title": "Metric"
         },
         "value": {
@@ -207,8 +208,11 @@
   "description": "Evento de monitoramento hospitalar (áudio, vídeo ou dados clínicos) — contrato v1 do protótipo da Fase 4. Os achados são para avaliação profissional e não constituem diagnóstico.",
   "properties": {
     "schema_version": {
-      "const": "1.0",
-      "description": "Versão do contrato. Nesta versão, sempre \"1.0\".",
+      "description": "Versão do contrato: \"1.0\" ou \"1.1\".",
+      "enum": [
+        "1.0",
+        "1.1"
+      ],
       "title": "Schema Version",
       "type": "string"
     },
@@ -400,6 +404,8 @@
             "enum": [
               "vital_signs",
               "lab_result",
+              "prescription_change",
+              "patient_transfer",
               "clinical_check"
             ]
           },
@@ -409,7 +415,8 @@
                 "type": {
                   "enum": [
                     "clinical_measurement",
-                    "lab_result"
+                    "lab_result",
+                    "prescription"
                   ]
                 }
               }
@@ -455,6 +462,8 @@
     "clinical": [
       "vital_signs",
       "lab_result",
+      "prescription_change",
+      "patient_transfer",
       "clinical_check"
     ]
   },
@@ -468,7 +477,8 @@
     ],
     "clinical": [
       "clinical_measurement",
-      "lab_result"
+      "lab_result",
+      "prescription"
     ]
   }
 }

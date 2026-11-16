@@ -1,32 +1,34 @@
-{
-  "schema_version": "1.0",
-  "event_id": "video-P0001-cam12-clip0315",
-  "patient_id": "P0001",
-  "module": "video",
-  "timestamp": "2026-11-12T10:05:10-03:00",
-  "event_type": "bed_exit_attempt",
-  "finding": "Movimento de tentativa de sair do leito sem acompanhamento visível da equipe (dado fictício).",
-  "anomaly_detected": true,
-  "priority": "high",
-  "evidence": [
-    {
-      "type": "video_clip",
-      "uri": "video://cam-leito-12/clip0315.mp4",
-      "start_s": 30.0,
-      "end_s": 48.0,
-      "confidence": 0.83,
-      "description": "Paciente senta na borda do leito e apoia os pés no chão (clipe fictício)."
-    },
-    {
-      "type": "video_frame",
-      "uri": "video://cam-leito-12/clip0315.mp4",
-      "frame_index": 1260,
-      "description": "Quadro de referência do movimento (fictício)."
+[
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+    "patient_id": "P0001",
+    "module": "video",
+    "timestamp": "2026-11-12T10:05:02-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.93 altura de corpo em 1.5 s (pico de 1.3 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-01-cam0.mp4",
+        "start_s": 2.867,
+        "end_s": 5.233,
+        "confidence": 0.694,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-01-cam0.mp4",
+        "frame_index": 105,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
     }
-  ],
-  "source": {
-    "system": "fase4-video-analysis",
-    "version": "0.1.0",
-    "model": "modelo-video-ficticio"
   }
-}
+]

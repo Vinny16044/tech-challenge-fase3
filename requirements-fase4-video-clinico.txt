@@ -1,0 +1,12 @@
+# Fase 4 — análise de vídeo e detecção de anomalias clínicas (parte do Vini)
+# Instalar junto com requirements-fase4.txt (contrato e integração):
+#   py -m pip install -r requirements-fase4.txt -r requirements-fase4-video-clinico.txt
+
+# Dados clínicos e detecção de anomalias
+numpy>=1.26
+pandas>=2.2
+scikit-learn>=1.4
+
+# Análise de vídeo
+opencv-python>=4.9
+ultralytics>=8.3        # YOLOv8 e YOLOv8-pose; instala o PyTorch (CPU basta)

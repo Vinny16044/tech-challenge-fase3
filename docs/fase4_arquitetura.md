@@ -3,7 +3,8 @@
 Responsável: Paola (arquitetura e integração).
 Módulos de origem: áudio (Thamy), vídeo e anomalias em dados clínicos (Vini).
 
-> Protótipo com dados fictícios. Os resultados são **achados para avaliação profissional**,
+> Protótipo com dados fictícios e de datasets públicos desidentificados. Os resultados são
+> **achados para avaliação profissional**,
 > não diagnóstico nem conduta. Todo alerta nasce pendente de revisão médica.
 
 Documentos relacionados:
@@ -57,6 +58,9 @@ flowchart TD
 | Resumo determinístico e Ollama | `src/monitoring/summarizer.py` |
 | Auditoria JSONL | `src/monitoring/audit.py` |
 | Conversor do áudio da Thamy (`audio_analysis` 1.0.0 → evento v1) | `modules/audio_thamy/to_monitoring_event.py` |
+| Módulo de vídeo do Vini (publica direto no contrato) | `src/video_analysis/` |
+| Módulo de anomalias clínicas do Vini (publica direto no contrato) | `src/anomaly_detection/` |
+| Amostras de vídeo e clínico para o teste conjunto | `src/fase4_samples.py` |
 
 O desenho segue o padrão da Fase 3 (`src/graph/`): `StateGraph` com estado `TypedDict`, nós
 em uma classe, aresta condicional, auditoria em JSONL e execução offline.
@@ -287,19 +291,48 @@ Condições do teste:
   e nenhuma credencial foi usada. No teste de ponta a ponta, as chamadas devolvem a
   transcrição e a análise de texto do resultado enviado pela Thamy; nos testes do módulo,
   os serviços são substituídos por `monkeypatch` e `MagicMock`.
-- **Vídeo e dados clínicos:** `P0001_video.json` e `P0001_clinical.json` ainda são os
-  exemplos fictícios da demonstração, não saídas do módulo do Vini.
+- **Vídeo e dados clínicos:** nesta rodada, `P0001_video.json` e `P0001_clinical.json`
+  ainda eram os exemplos fictícios da demonstração (substituídos em 6.3).
 
 **Revalidação:** em 16/11/2026, às 17:20 UTC (`RUN-recebidos-vini-pendente`), ainda sem as
 saídas do Vini, o fluxo foi executado de novo com a mesma pasta e repetiu o resultado acima
 (3 eventos aceitos num único grupo e `ALT-27fb707f651c` `critical` pendente de revisão), e a
 suíte da Fase 4 teve 56 testes aprovados.
 
+### 6.3 Integração com vídeo e dados clínicos do Vini (16/11/2026)
+
+Os exemplos fictícios de vídeo e de dados clínicos em `data/fase4_recebidos/` foram
+substituídos pelas saídas dos módulos do Vini, geradas por `py -m src.fase4_samples`
+(detalhes em [fase4_video_e_anomalias.md](fase4_video_e_anomalias.md)). O contrato passou à
+versão 1.1 para receber `prescription_change`, `patient_transfer` e a evidência
+`prescription`; os eventos 1.0 continuam aceitos.
+
+O paciente `P0001` é composto: o vídeo é o clipe `fall-01` do UR Fall Detection Dataset e
+os dados clínicos são do paciente 10002495 do MIMIC-IV Demo, com os horários deslocados
+para a janela do teste conjunto.
+
+**Execução:** `RUN-recebidos-vini`, às 22:57 UTC, em modo offline. Relatório:
+[fase4_exemplo_relatorio_integrado.json](fase4_exemplo_relatorio_integrado.json).
+
+| Verificação | Resultado |
+|---|---|
+| Eventos aceitos | 4 de 4, do `P0001`: 1 de áudio, 1 de vídeo e 2 clínicos |
+| Rejeitados / duplicados | 0 / 0 |
+| Grupo | um único, `P0001@2026-11-12T13:00:00Z`, com fontes `audio, video, clinical` e nenhuma ausente |
+| Vídeo | `fall_detected`, prioridade `high`, do `yolov8n-pose + yolov8n` |
+| Dados clínicos | `vital_signs` e `prescription_change`, ambos `critical` |
+| Alerta | `ALT-95adc1a4ce34`, prioridade `critical`, status `pending_medical_review` |
+| Regras | R1 (clínico `critical`), R2 (`fall_detected`) e R3 (vídeo e dados clínicos anômalos). Sem R4, porque o áudio não é anômalo. |
+
+**Testes:** `py -m pytest` com 153 aprovados (56 da integração e 97 dos módulos de vídeo e
+de anomalias clínicas).
+
 ### Pendências
 
-- Validar as saídas do módulo do Vini (vídeo e dados clínicos): validar os dois JSONs com
-  `MonitoringEventV1` e com o JSON Schema, testá-los numa pasta separada junto com o áudio
-  da Thamy e só então substituir os arquivos em `data/fase4_recebidos/`, seguindo o roteiro
-  do README (seção "Fase 4 — Guia rápido para a equipe").
+- Fazer o áudio contribuir para o alerta quando houver alteração vocal: hoje o conversor
+  sempre emite `audio_check` sem anomalia, então R4 nunca dispara.
+- Melhorar a detecção de quedas a partir da posição sentada: na validação com 62 clipes
+  fora do ajuste, 22 de 26 quedas foram detectadas, e 3 das 4 perdidas partem da cadeira.
+- Entregar o alerta à equipe por algum canal: hoje ele existe só no relatório JSON.
 - Repetir a conversão do áudio com o horário real e um ID estável de cada gravação: o
   horário usado aqui é fictício, escolhido para coincidir com a janela dos exemplos.

@@ -1,36 +1,101 @@
-{
-  "schema_version": "1.0",
-  "event_id": "clinical-P0001-obs5521",
-  "patient_id": "P0001",
-  "module": "clinical",
-  "timestamp": "2026-11-12T10:08:00-03:00",
-  "event_type": "vital_signs",
-  "finding": "Frequência cardíaca e saturação de oxigênio fora da faixa de referência do protótipo (dado fictício).",
-  "anomaly_detected": true,
-  "priority": "medium",
-  "evidence": [
-    {
-      "type": "clinical_measurement",
-      "uri": "clinical://sinais-vitais/P0001/obs-5521",
-      "metric": "heart_rate",
-      "value": 118,
-      "unit": "bpm",
-      "reference_range": "60-100",
-      "confidence": 0.9
-    },
-    {
-      "type": "clinical_measurement",
-      "uri": "clinical://sinais-vitais/P0001/obs-5521",
-      "metric": "spo2",
-      "value": 91,
-      "unit": "%",
-      "reference_range": "95-100",
-      "confidence": 0.9
+[
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+    "patient_id": "P0001",
+    "module": "clinical",
+    "timestamp": "2026-11-12T10:08:00-03:00",
+    "event_type": "prescription_change",
+    "finding": "Associação de novo vasoativo (PHENYLEPHrine) a esquema que já incluía dopamine. Alteração sinalizada para revisão; pode ser ajuste planejado.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "prescription",
+        "uri": "clinical://mimic-iv-demo/prescriptions/hadm-24982426/21410523T200000/phenylephrine",
+        "metric": "PHENYLEPHrine",
+        "value": 60.0,
+        "unit": "mg",
+        "reference_range": "já em uso: dopamine",
+        "description": "Via IV DRIP. Detector: vasoactive_start."
+      }
+    ],
+    "source": {
+      "system": "fase4-prescription-anomaly",
+      "version": "1.0.0",
+      "model": "regras de razão de dose + z robusto (mediana/MAD)"
     }
-  ],
-  "source": {
-    "system": "fase4-clinical-anomaly",
-    "version": "0.1.0",
-    "model": "detector-anomalia-ficticio"
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+    "patient_id": "P0001",
+    "module": "clinical",
+    "timestamp": "2026-11-12T10:08:00-03:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 133 bpm, FR 27 irpm, SpO2 84 %, PAS 71 mmHg. Escore parcial inspirado no NEWS2: 12. Desvio do padrão individual: SpO2 -13 % em relação à mediana recente (97). Combinação de sinais atípica para a população (Isolation Forest). Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "heart_rate",
+        "value": 133.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "respiratory_rate",
+        "value": 27.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "spo2",
+        "value": 84.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "3 ponto(s) na faixa de referência; z robusto -13.0 contra mediana individual 97.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "systolic_bp",
+        "value": 71.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "news2_partial_score",
+        "value": 12.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "isolation_forest_score",
+        "value": -0.112,
+        "unit": "score",
+        "reference_range": ">= 0",
+        "description": "Escore do Isolation Forest (FC, FR, SpO2, PAS, FC/PAS); negativo = atípico."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
   }
-}
+]

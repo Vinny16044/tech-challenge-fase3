@@ -1,10 +1,14 @@
 """
-Contrato de eventos v1 — Tech Challenge Fase 4.
+Contrato de eventos v1 (versão 1.1) — Tech Challenge Fase 4.
 
 Os módulos de áudio, vídeo e dados clínicos publicam seus achados como
 eventos JSON neste formato. O arquivo `schemas/event_v1.schema.json` é gerado
 a partir deste modelo (`py -m src.contracts.generate_schema`); por isso, este
 módulo é a referência do contrato.
+
+A versão 1.1 acrescenta, para o módulo clínico, os tipos de evento
+`prescription_change` e `patient_transfer` e a evidência `prescription`.
+Eventos "1.0" continuam válidos.
 
 Responsável: Paola (arquitetura e integração)
 """
@@ -25,7 +29,9 @@ from pydantic import (
     model_validator,
 )
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION = "1.1"
+# Versões aceitas na entrada: a 1.1 só acrescenta valores, sem mudar campos.
+ACCEPTED_SCHEMA_VERSIONS: tuple[str, ...] = ("1.0", "1.1")
 
 Module = Literal["audio", "video", "clinical"]
 Priority = Literal["low", "medium", "high", "critical"]
@@ -35,6 +41,7 @@ EvidenceType = Literal[
     "video_frame",
     "clinical_measurement",
     "lab_result",
+    "prescription",
 ]
 
 MODULES: tuple[str, ...] = ("audio", "video", "clinical")
@@ -63,6 +70,8 @@ EVENT_TYPES_BY_MODULE: dict[str, tuple[str, ...]] = {
     "clinical": (
         "vital_signs",  # FC, SpO2, PA, temperatura
         "lab_result",
+        "prescription_change",  # 1.1: alteração inesperada na prescrição
+        "patient_transfer",  # 1.1: movimentação atípica entre unidades
         "clinical_check",
     ),
 }
@@ -70,7 +79,7 @@ EVENT_TYPES_BY_MODULE: dict[str, tuple[str, ...]] = {
 EVIDENCE_TYPES_BY_MODULE: dict[str, tuple[str, ...]] = {
     "audio": ("audio_segment",),
     "video": ("video_clip", "video_frame"),
-    "clinical": ("clinical_measurement", "lab_result"),
+    "clinical": ("clinical_measurement", "lab_result", "prescription"),
 }
 
 PATIENT_ID_PATTERN = r"^P\d{4,}$"
@@ -124,7 +133,10 @@ class EvidenceRef(BaseModel):
     metric: str | None = Field(
         default=None,
         max_length=60,
-        description="Nome da medida (clinical_measurement/lab_result). Ex.: heart_rate.",
+        description=(
+            "Nome da medida (clinical_measurement/lab_result) ou do medicamento "
+            "(prescription). Ex.: heart_rate."
+        ),
     )
     value: float | None = Field(
         default=None,
@@ -157,7 +169,7 @@ class EvidenceRef(BaseModel):
         elif self.type == "video_frame":
             if self.frame_index is None and self.start_s is None:
                 raise ValueError("evidência video_frame exige frame_index ou start_s")
-        else:  # clinical_measurement / lab_result
+        else:  # clinical_measurement / lab_result / prescription
             missing = [
                 name
                 for name in ("metric", "value", "unit")
@@ -208,8 +220,8 @@ class MonitoringEventV1(BaseModel):
         },
     )
 
-    schema_version: Literal["1.0"] = Field(
-        description="Versão do contrato. Nesta versão, sempre \"1.0\"."
+    schema_version: Literal["1.0", "1.1"] = Field(
+        description="Versão do contrato: \"1.0\" ou \"1.1\"."
     )
     event_id: str = Field(
         pattern=EVENT_ID_PATTERN,
