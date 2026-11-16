@@ -1,0 +1,21 @@
+
+# Dataset e processamento de dados
+datasets>=3.0.0,<4.0.0
+soundfile>=0.12.1
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Análise acústica e visualizações
+librosa>=0.10.0
+matplotlib>=3.8.0
+
+# Azure AI Services
+azure-cognitiveservices-speech
+azure-ai-textanalytics
+azure-core
+
+# Configuração
+python-dotenv
+
+# Testes automatizados
+pytest>=8.0.0

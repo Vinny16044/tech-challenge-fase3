@@ -1,11 +1,10 @@
 """
 Contrato de eventos v1 — Tech Challenge Fase 4.
 
-Cada módulo de análise (áudio, vídeo e dados clínicos) publica seus achados
-como eventos JSON que seguem este modelo. O JSON Schema publicado em
-`schemas/event_v1.schema.json` é GERADO a partir daqui
-(`py -m src.contracts.generate_schema`), então este arquivo é a fonte única
-de verdade do contrato.
+Os módulos de áudio, vídeo e dados clínicos publicam seus achados como
+eventos JSON neste formato. O arquivo `schemas/event_v1.schema.json` é gerado
+a partir deste modelo (`py -m src.contracts.generate_schema`); por isso, este
+módulo é a referência do contrato.
 
 Responsável: Paola (arquitetura e integração)
 """
@@ -47,26 +46,27 @@ PRIORITY_ORDER: tuple[str, ...] = ("low", "medium", "high", "critical")
 # os módulos e incremento de versão menor do contrato (ex.: 1.1).
 EVENT_TYPES_BY_MODULE: dict[str, tuple[str, ...]] = {
     "audio": (
-        "vocal_distress",  # padrão vocal compatível com desconforto/dor
+        "vocal_distress",  # padrão vocal compatível com desconforto ou dor
         "call_for_help",  # pedido verbal de ajuda
         "respiratory_sound",  # som respiratório fora do padrão
-        "audio_check",  # verificação de rotina (normalmente sem anomalia)
+        # Verificação sem anomalia; também registra a busca por palavras-chave
+        # do módulo de áudio, que não é um achado clínico.
+        "audio_check",
     ),
     "video": (
-        "fall_detected",  # queda detectada
-        "bed_exit_attempt",  # tentativa de sair do leito sem assistência
+        "fall_detected",
+        "bed_exit_attempt",  # saída do leito sem assistência
         "prolonged_immobility",  # imobilidade acima do esperado
-        "agitation",  # agitação motora
-        "video_check",  # verificação de rotina
+        "agitation",
+        "video_check",
     ),
     "clinical": (
-        "vital_signs",  # sinais vitais (FC, SpO2, PA, temperatura...)
-        "lab_result",  # resultado laboratorial
-        "clinical_check",  # verificação de rotina
+        "vital_signs",  # FC, SpO2, PA, temperatura
+        "lab_result",
+        "clinical_check",
     ),
 }
 
-# Tipos de evidência que cada módulo pode referenciar.
 EVIDENCE_TYPES_BY_MODULE: dict[str, tuple[str, ...]] = {
     "audio": ("audio_segment",),
     "video": ("video_clip", "video_frame"),
@@ -356,7 +356,7 @@ def json_schema() -> dict[str, Any]:
     )
     schema["allOf"] = conditional_rules
 
-    # Também documenta as listas de forma legível.
+    # Extensões x-*: as mesmas listas, legíveis para quem consulta só o schema.
     schema["x-event-types-by-module"] = {
         module: list(values) for module, values in EVENT_TYPES_BY_MODULE.items()
     }

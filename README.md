@@ -152,6 +152,10 @@ auditoria e revisão humana.
 > ⚠️ Os resultados são **achados para avaliação profissional**. Não são diagnóstico nem
 > conduta. Todo alerta nasce em `pending_medical_review`. Todos os dados aqui são fictícios.
 
+A arquitetura está descrita em [docs/fase4_arquitetura.md](docs/fase4_arquitetura.md):
+diagrama do fluxo, validação e agrupamento, regras de prioridade, resumo offline e com
+Ollama, auditoria em JSONL e evidências dos testes locais.
+
 ## Estrutura da Fase 4
 
 ```
@@ -164,15 +168,18 @@ src/monitoring/rules.py           # Regras de prioridade do protótipo (R0–R5)
 src/monitoring/summarizer.py      # Resumo determinístico + LLM opcional com fallback
 src/monitoring/audit.py           # Auditoria JSONL
 schemas/event_v1.schema.json      # JSON Schema gerado
-data/fase4/                       # JSONs de referência do P0001 (áudio, vídeo, clínico)
+data/fase4/                       # Demonstração de referência do P0001 (áudio, vídeo, clínico)
+data/fase4_recebidos/             # Amostras do teste conjunto (áudio da Thamy; vídeo e clínico ainda exemplos)
 data/fase4_revisao/               # Exemplo de decisão de revisão humana
+modules/audio_thamy/              # Módulo de áudio da Thamy e conversor para o contrato v1
+docs/fase4_arquitetura.md         # Arquitetura, fluxo e evidências dos testes
 docs/fase4_contrato_eventos_v1.md # Campos, valores aceitos, evidências, IDs estáveis
 docs/fase4_regras_alerta.md       # Regras, revisão, resumo e auditoria
 tests/                            # Testes (pytest) com dados fictícios
 ```
 
-O código da Fase 3 (`src/graph/`) não foi alterado; a Fase 4 segue o mesmo padrão
-(`StateGraph` com estado `TypedDict`, nós em classe, auditoria JSONL e modo offline).
+A Fase 4 segue o padrão do grafo da Fase 3 (`src/graph/`): `StateGraph` com estado
+`TypedDict`, nós em uma classe, auditoria JSONL e execução offline.
 
 ## Fluxo LangGraph
 
@@ -193,7 +200,7 @@ validate_events ──(nenhum evento aceito)────────────
 
 ## Como executar (PowerShell, na raiz do projeto)
 
-Nesta máquina o comando `python` aponta para o atalho da Microsoft Store; use `py`.
+Os comandos usam o inicializador `py` do Python para Windows.
 
 ```powershell
 py -m pip install -r requirements-fase4.txt          # se ainda não tiver as dependências
@@ -208,7 +215,7 @@ py -m pytest                                         # testes
 
 Auditoria: `logs/audit-fase4-AAAAMMDD.jsonl` (ou `--audit-log <arquivo>`).
 
-### Saída consolidada (exemplo, `--summary-only`)
+### Saída consolidada (demonstração `data/fase4`, `--summary-only`)
 
 ```
 Paciente P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z (UTC).
@@ -221,7 +228,7 @@ Alerta ALT-8935b56efce5: prioridade critical (R1 PRIORIDADE_MODULO; R3 CORROBORA
 Achados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.
 ```
 
-### Saída consolidada (exemplo, JSON — trecho)
+### Saída consolidada (demonstração `data/fase4`, JSON — trecho)
 
 Relatório completo: `docs/fase4_exemplo_relatorio_P0001.json`.
 
@@ -269,33 +276,42 @@ Relatório completo: `docs/fase4_exemplo_relatorio_P0001.json`.
 }
 ```
 
-## Pendências que dependem dos JSONs reais da Thamy e do Vini
+## Situação da integração
 
-- Confirmar os `event_type` e as evidências que cada módulo realmente produz (a lista v1 é
-  uma proposta) e se o detector clínico emite um evento por medida ou por conjunto.
-- Confirmar como cada módulo gera um `event_id` estável entre reenvios.
-- Confirmar fuso e relógio dos timestamps (vídeo e áudio costumam usar horário local do
-  dispositivo) e o tamanho de janela adequado.
-- Calibrar as prioridades sugeridas pelos módulos e as regras R1–R4 com a equipe; hoje são
-  regras de protótipo.
-- Definir os esquemas de `uri` (onde os artefatos ficam guardados e quem pode acessá-los).
+- **Áudio (Thamy):** integrado. O resultado da consulta simulada foi convertido para o
+  contrato v1 por `modules/audio_thamy/to_monitoring_event.py` e está em
+  `data/fase4_recebidos/P0001_audio.json`, como `audio_check` (busca por palavras-chave, sem
+  anomalia). Nos testes, o WAV simulado é processado localmente e os serviços Azure são
+  simulados. Detalhes em `modules/audio_thamy/INTEGRAR_COM_FASE4.md`.
+- **Vídeo e dados clínicos (Vini):** pendentes. `data/fase4_recebidos/P0001_video.json` e
+  `P0001_clinical.json` ainda são os exemplos fictícios da demonstração.
+
+Pontos a confirmar com as saídas do Vini:
+
+- os `event_type` e as evidências que o módulo produz (a lista v1 é uma proposta) e se o
+  detector clínico emite um evento por medida ou por conjunto;
+- como o módulo gera um `event_id` estável entre reenvios;
+- o fuso e o relógio dos timestamps e o tamanho de janela adequado.
+
+Para toda a equipe: calibrar as prioridades sugeridas pelos módulos e as regras R1–R4, que
+são regras de protótipo, e definir os esquemas de `uri` (onde os artefatos ficam guardados e
+quem pode acessá-los).
 
 ## Fase 4 — Guia rápido para a equipe (teste conjunto)
 
-**1. Instale as dependências** (PowerShell, na raiz do projeto; nesta equipe usamos `py`):
+**1. Instale as dependências** (PowerShell, na raiz do projeto):
 
 ```powershell
 py -m pip install -r requirements-fase4.txt
 ```
 
-**2. Substitua o seu arquivo** em `data/fase4_recebidos/`. Os arquivos que estão lá são cópias
-dos exemplos fictícios e servem de modelo; mantenha o nome exato:
+**2. Substitua o seu arquivo** em `data/fase4_recebidos/`, mantendo o nome exato:
 
-| Pessoa | Arquivo que vai substituir |
-|---|---|
-| Thamy | `data/fase4_recebidos/P0001_audio.json` |
-| Vini | `data/fase4_recebidos/P0001_video.json` |
-| Vini | `data/fase4_recebidos/P0001_clinical.json` |
+| Pessoa | Arquivo | Situação |
+|---|---|---|
+| Thamy | `data/fase4_recebidos/P0001_audio.json` | substituído pelo áudio convertido |
+| Vini | `data/fase4_recebidos/P0001_video.json` | exemplo fictício, aguardando a saída do módulo |
+| Vini | `data/fase4_recebidos/P0001_clinical.json` | exemplo fictício, aguardando a saída do módulo |
 
 A pasta `data/fase4/` é a demonstração de referência e não deve ser alterada.
 

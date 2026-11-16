@@ -21,9 +21,7 @@ def etapas(audit_path):
     return [entry["etapa"] for entry in read_audit(audit_path)]
 
 
-# --------------------------------------------------------------------------- #
 # Fluxo completo
-# --------------------------------------------------------------------------- #
 def test_full_flow_with_three_modalities(graph, audit_path):
     report = graph.invoke(load_inputs([EXAMPLES_DIR]), run_id="RUN-teste")
 
@@ -90,9 +88,7 @@ def test_alert_id_is_stable_across_runs_and_input_order(audio_event, video_event
     assert a["run_id"] != b["run_id"]
 
 
-# --------------------------------------------------------------------------- #
 # JSON inválido / evento inválido
-# --------------------------------------------------------------------------- #
 def test_malformed_json_is_rejected_and_flow_continues(graph, audit_path, audio_event):
     report = graph.invoke(
         [
@@ -142,9 +138,7 @@ def test_empty_input_produces_empty_report(graph):
     assert report["sources_missing"] == ["audio", "video", "clinical"]
 
 
-# --------------------------------------------------------------------------- #
 # Duplicados
-# --------------------------------------------------------------------------- #
 def test_identical_resend_is_ignored_as_duplicate(graph, audit_path, audio_event):
     report = graph.invoke(inputs(audio_event, copy.deepcopy(audio_event)))
     assert report["intake"]["accepted"] == 1
@@ -165,9 +159,7 @@ def test_same_event_id_with_different_content_is_conflict(graph, audio_event):
     assert report["groups"][0]["events"][0]["finding"] == audio_event["finding"]
 
 
-# --------------------------------------------------------------------------- #
 # Pacientes e janelas diferentes
-# --------------------------------------------------------------------------- #
 def test_different_patients_are_not_mixed(graph, audio_event, video_event):
     other = copy.deepcopy(video_event)
     other.update(patient_id="P0002", event_id="video-P0002-cam03-clip0001")
@@ -200,9 +192,7 @@ def test_invalid_window_size():
         MonitoringIntegrationGraph(window_minutes=0)
 
 
-# --------------------------------------------------------------------------- #
 # Modalidade ausente / sem anomalia
-# --------------------------------------------------------------------------- #
 def test_missing_modality_is_reported(graph, audio_event, clinical_event):
     report = graph.invoke(inputs(audio_event, clinical_event))
     group = report["groups"][0]
@@ -232,9 +222,7 @@ def test_events_without_anomaly_produce_no_alert(graph, audit_path, make_event):
     assert "alerta_gerado" not in etapas(audit_path)
 
 
-# --------------------------------------------------------------------------- #
 # Revisão humana
-# --------------------------------------------------------------------------- #
 def test_alert_stays_pending_without_decision(graph):
     report = graph.invoke(load_inputs([EXAMPLES_DIR]))
     review = report["groups"][0]["alert"]["review"]
@@ -290,9 +278,7 @@ def test_second_decision_for_same_alert_is_rejected(graph):
     assert report["groups"][0]["alert"]["review"]["decision"] == "confirmed"
 
 
-# --------------------------------------------------------------------------- #
 # Resumo com LLM (simulado) e fallback
-# --------------------------------------------------------------------------- #
 def test_llm_summary_uses_only_structured_findings(audit_path):
     prompts = []
 

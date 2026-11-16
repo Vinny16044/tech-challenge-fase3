@@ -70,10 +70,13 @@ class MonitoringGraphNodes:
     def _audit(self, state: MonitoringState) -> AuditLogger:
         return AuditLogger(self.audit_path, run_id=state.get("run_id", ""))
 
-    # ------------------------------------------------------------------ #
-    # 1. Recebe, valida e deduplica os eventos
-    # ------------------------------------------------------------------ #
     def validate_events(self, state: MonitoringState) -> dict[str, Any]:
+        """
+        Valida cada entrada bruta dentro do grafo, para que JSON malformado ou
+        fora do contrato vire rejeição auditada, e não erro de execução.
+        Reenvio com o mesmo event_id e o mesmo conteúdo é ignorado; com
+        conteúdo diferente é rejeitado, e vale o primeiro recebido.
+        """
         audit = self._audit(state)
         accepted: list[dict[str, Any]] = []
         rejected: list[dict[str, Any]] = []
@@ -183,10 +186,14 @@ class MonitoringGraphNodes:
     def route_after_validation(state: MonitoringState) -> str:
         return "consolidate" if state.get("accepted_events") else "build_report"
 
-    # ------------------------------------------------------------------ #
-    # 2. Consolida por paciente e janela de tempo
-    # ------------------------------------------------------------------ #
     def consolidate(self, state: MonitoringState) -> dict[str, Any]:
+        """
+        Agrupa por paciente e janela fixa alinhada em UTC (início = timestamp
+        arredondado para baixo ao múltiplo de window_minutes). O alinhamento
+        torna o agrupamento independente da ordem de chegada; em troca,
+        eventos próximos em lados opostos de uma borda ficam em janelas
+        diferentes.
+        """
         window_seconds = int(state["window_minutes"]) * 60
         buckets: dict[tuple[str, int], list[dict[str, Any]]] = {}
 
@@ -238,10 +245,8 @@ class MonitoringGraphNodes:
 
         return {"groups": groups, "status": "EVENTS_CONSOLIDATED"}
 
-    # ------------------------------------------------------------------ #
-    # 3. Regras de alerta
-    # ------------------------------------------------------------------ #
     def evaluate_alerts(self, state: MonitoringState) -> dict[str, Any]:
+        """Aplica as regras de src/monitoring/rules.py a cada grupo."""
         audit = self._audit(state)
         groups = copy.deepcopy(state.get("groups", []))
 
@@ -283,10 +288,12 @@ class MonitoringGraphNodes:
 
         return {"groups": groups, "status": "ALERTS_EVALUATED"}
 
-    # ------------------------------------------------------------------ #
-    # 4. Revisão humana (decisões informadas)
-    # ------------------------------------------------------------------ #
     def apply_reviews(self, state: MonitoringState) -> dict[str, Any]:
+        """
+        Registra decisões humanas informadas. Cada alerta aceita uma única
+        decisão; decisões inválidas, para alertas inexistentes ou repetidas
+        são rejeitadas e auditadas.
+        """
         audit = self._audit(state)
         groups = copy.deepcopy(state.get("groups", []))
         results: list[dict[str, Any]] = []
@@ -346,10 +353,8 @@ class MonitoringGraphNodes:
 
         return {"groups": groups, "review_results": results, "status": "REVIEWS_APPLIED"}
 
-    # ------------------------------------------------------------------ #
-    # 5. Resumo (determinístico; LLM opcional)
-    # ------------------------------------------------------------------ #
     def summarize(self, state: MonitoringState) -> dict[str, Any]:
+        """Resumo determinístico sempre; LLM opcional, com fallback."""
         audit = self._audit(state)
         groups = copy.deepcopy(state.get("groups", []))
         for group in groups:
@@ -364,9 +369,6 @@ class MonitoringGraphNodes:
             )
         return {"groups": groups, "status": "SUMMARIZED"}
 
-    # ------------------------------------------------------------------ #
-    # 6. Relatório estruturado
-    # ------------------------------------------------------------------ #
     def build_report(self, state: MonitoringState) -> dict[str, Any]:
         audit = self._audit(state)
         groups = state.get("groups", [])

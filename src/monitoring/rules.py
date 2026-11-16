@@ -1,11 +1,12 @@
 """
-Regras determinísticas de alerta — REGRAS DO PROTÓTIPO (versão prototipo-1).
+Regras determinísticas de alerta do protótipo (versão prototipo-1).
 
-Estas regras servem para demonstrar a integração. Elas NÃO foram validadas
-clinicamente e não substituem protocolos institucionais. O resultado é um
-achado para avaliação profissional; todo alerta nasce pendente de revisão.
+As regras demonstram a integração; não foram validadas clinicamente e não
+substituem protocolos institucionais. O resultado é um achado para avaliação
+profissional, e todo alerta nasce pendente de revisão.
 
-Ordem de aplicação (só eventos com anomaly_detected = true contam):
+Ordem de aplicação (só contam eventos com anomaly_detected = true; por isso
+um audio_check sem anomalia aparece no grupo, mas não altera a prioridade):
 
   R0 SEM_ANOMALIA          nenhum evento anômalo na janela -> sem alerta.
   R1 PRIORIDADE_MODULO     prioridade inicial = maior prioridade sugerida

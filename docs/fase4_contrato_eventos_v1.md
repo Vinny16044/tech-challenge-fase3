@@ -5,7 +5,8 @@ JSON Schema gerado: `schemas/event_v1.schema.json` (`py -m src.contracts.generat
 Exemplos de referência (fictícios): `data/fase4/P0001_audio.json`, `P0001_video.json`, `P0001_clinical.json`.
 
 Cada módulo publica **um objeto JSON por evento** (ou uma lista de eventos no mesmo arquivo).
-Campos extras são rejeitados (`additionalProperties: false`) para pegar erros de digitação cedo.
+Campos extras são rejeitados (`additionalProperties: false`), para que erros de digitação
+apareçam já na validação.
 
 ## Campos (todos obrigatórios)
 
@@ -32,6 +33,8 @@ Campos extras são rejeitados (`additionalProperties: false`) para pegar erros d
 | `clinical` | `vital_signs`, `lab_result`, `clinical_check` |
 
 Os tipos `*_check` são verificações de rotina, normalmente com `anomaly_detected = false`.
+O resultado de busca por palavras-chave do módulo de áudio também entra como `audio_check`,
+porque não é um achado clínico (ver `modules/audio_thamy/INTEGRAR_COM_FASE4.md`).
 Novos tipos exigem acordo entre os módulos e nova versão menor do contrato (`1.1`).
 
 ## Como cada módulo referencia evidências

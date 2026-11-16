@@ -30,6 +30,9 @@ Cada regra disparada vira um item em `priority_reasons` com `rule_id`, descriç�
 `priority_before`, `priority_after` e os `event_ids` que a motivaram. O alerta também lista
 todas as evidências dos eventos anômalos, cada uma com `event_id` e `module`.
 
+Eventos sem anomalia, como o `audio_check` gerado a partir da busca por palavras-chave do
+módulo de áudio, aparecem no grupo e no resumo, mas não contam para R1–R4.
+
 ## Identificação e revisão humana
 
 - `alert_id = "ALT-" + sha256(patient_id | window_start | event_ids ordenados)[:12]`.
