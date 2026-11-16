@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "event_id": "clinical-P0001-obs5521",
+  "patient_id": "P0001",
+  "module": "clinical",
+  "timestamp": "2026-11-12T10:08:00-03:00",
+  "event_type": "vital_signs",
+  "finding": "Frequência cardíaca e saturação de oxigênio fora da faixa de referência do protótipo (dado fictício).",
+  "anomaly_detected": true,
+  "priority": "medium",
+  "evidence": [
+    {
+      "type": "clinical_measurement",
+      "uri": "clinical://sinais-vitais/P0001/obs-5521",
+      "metric": "heart_rate",
+      "value": 118,
+      "unit": "bpm",
+      "reference_range": "60-100",
+      "confidence": 0.9
+    },
+    {
+      "type": "clinical_measurement",
+      "uri": "clinical://sinais-vitais/P0001/obs-5521",
+      "metric": "spo2",
+      "value": 91,
+      "unit": "%",
+      "reference_range": "95-100",
+      "confidence": 0.9
+    }
+  ],
+  "source": {
+    "system": "fase4-clinical-anomaly",
+    "version": "0.1.0",
+    "model": "detector-anomalia-ficticio"
+  }
+}

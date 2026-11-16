@@ -1,0 +1,1676 @@
+[
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T011500",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T01:15:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 92 bpm, FR 26 irpm, SpO2 95 %, PAS 85 mmHg. Escore parcial inspirado no NEWS2: 8. Piora rápida: escore subiu 5 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T011500",
+        "metric": "heart_rate",
+        "value": 92.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T011500",
+        "metric": "respiratory_rate",
+        "value": 26.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T011500",
+        "metric": "spo2",
+        "value": 95.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T011500",
+        "metric": "systolic_bp",
+        "value": 85.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T011500",
+        "metric": "news2_partial_score",
+        "value": 8.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-rx-24982426-21410523T020000-vasoactive_start-dopamine-IV-DRIP",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T02:00:00+00:00",
+    "event_type": "prescription_change",
+    "finding": "Início de droga vasoativa (DOPamine, IV DRIP) nesta internação. Alteração sinalizada para revisão; pode ser ajuste planejado.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "prescription",
+        "uri": "clinical://mimic-iv-demo/prescriptions/hadm-24982426/21410523T020000/dopamine",
+        "metric": "DOPamine",
+        "value": 400.0,
+        "unit": "mg",
+        "reference_range": "sem vasoativo anterior",
+        "description": "Via IV DRIP. Detector: vasoactive_start."
+      }
+    ],
+    "source": {
+      "system": "fase4-prescription-anomaly",
+      "version": "1.0.0",
+      "model": "regras de razão de dose + z robusto (mediana/MAD)"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T140100",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T14:01:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 94 bpm, FR 21 irpm. Escore parcial inspirado no NEWS2: 3. Desvio do padrão individual: PAS +30 mmHg em relação à mediana recente (94). Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T140100",
+        "metric": "heart_rate",
+        "value": 94.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T140100",
+        "metric": "respiratory_rate",
+        "value": 21.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T140100",
+        "metric": "systolic_bp",
+        "value": 124.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "0 ponto(s) na faixa de referência; z robusto +5.1 contra mediana individual 94.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T140100",
+        "metric": "news2_partial_score",
+        "value": 3.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T170000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T17:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 106 bpm, FR 27 irpm, SpO2 93 %, PAS 98 mmHg. Escore parcial inspirado no NEWS2: 8. Desvio do padrão individual: SpO2 -6 % em relação à mediana recente (100). Piora rápida: escore subiu 5 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170000",
+        "metric": "heart_rate",
+        "value": 106.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170000",
+        "metric": "respiratory_rate",
+        "value": 27.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170000",
+        "metric": "spo2",
+        "value": 93.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "2 ponto(s) na faixa de referência; z robusto -6.5 contra mediana individual 99.5."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170000",
+        "metric": "systolic_bp",
+        "value": 98.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170000",
+        "metric": "news2_partial_score",
+        "value": 8.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T170100",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T17:01:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 106 bpm, FR 27 irpm, SpO2 93 %, PAS 88 mmHg. Escore parcial inspirado no NEWS2: 9. Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170100",
+        "metric": "heart_rate",
+        "value": 106.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170100",
+        "metric": "respiratory_rate",
+        "value": 27.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170100",
+        "metric": "spo2",
+        "value": 93.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170100",
+        "metric": "systolic_bp",
+        "value": 88.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T170100",
+        "metric": "news2_partial_score",
+        "value": 9.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T175500",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T17:55:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 113 bpm, FR 25 irpm, SpO2 95 %, PAS 92 mmHg. Escore parcial inspirado no NEWS2: 8. Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T175500",
+        "metric": "heart_rate",
+        "value": 113.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T175500",
+        "metric": "respiratory_rate",
+        "value": 25.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T175500",
+        "metric": "spo2",
+        "value": 95.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T175500",
+        "metric": "systolic_bp",
+        "value": 92.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T175500",
+        "metric": "news2_partial_score",
+        "value": 8.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T184000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T18:40:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 128 bpm, FR 26 irpm, SpO2 95 %, PAS 95 mmHg. Escore parcial inspirado no NEWS2: 8. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "medium",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T184000",
+        "metric": "heart_rate",
+        "value": 128.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T184000",
+        "metric": "respiratory_rate",
+        "value": 26.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T184000",
+        "metric": "spo2",
+        "value": 95.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T184000",
+        "metric": "systolic_bp",
+        "value": 95.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T184000",
+        "metric": "news2_partial_score",
+        "value": 8.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T191100",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T19:11:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 120 bpm, FR 24 irpm, PAS 85 mmHg. Escore parcial inspirado no NEWS2: 7. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "medium",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T191100",
+        "metric": "heart_rate",
+        "value": 120.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T191100",
+        "metric": "respiratory_rate",
+        "value": 24.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T191100",
+        "metric": "systolic_bp",
+        "value": 85.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T191100",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T20:00:00+00:00",
+    "event_type": "prescription_change",
+    "finding": "Associação de novo vasoativo (PHENYLEPHrine) a esquema que já incluía dopamine. Alteração sinalizada para revisão; pode ser ajuste planejado.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "prescription",
+        "uri": "clinical://mimic-iv-demo/prescriptions/hadm-24982426/21410523T200000/phenylephrine",
+        "metric": "PHENYLEPHrine",
+        "value": 60.0,
+        "unit": "mg",
+        "reference_range": "já em uso: dopamine",
+        "description": "Via IV DRIP. Detector: vasoactive_start."
+      }
+    ],
+    "source": {
+      "system": "fase4-prescription-anomaly",
+      "version": "1.0.0",
+      "model": "regras de razão de dose + z robusto (mediana/MAD)"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T200000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T20:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 133 bpm, FR 27 irpm, SpO2 84 %, PAS 71 mmHg. Escore parcial inspirado no NEWS2: 12. Desvio do padrão individual: SpO2 -13 % em relação à mediana recente (97). Combinação de sinais atípica para a população (Isolation Forest). Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "heart_rate",
+        "value": 133.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "respiratory_rate",
+        "value": 27.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "spo2",
+        "value": 84.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "3 ponto(s) na faixa de referência; z robusto -13.0 contra mediana individual 97.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "systolic_bp",
+        "value": 71.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "news2_partial_score",
+        "value": 12.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+        "metric": "isolation_forest_score",
+        "value": -0.112,
+        "unit": "score",
+        "reference_range": ">= 0",
+        "description": "Escore do Isolation Forest (FC, FR, SpO2, PAS, FC/PAS); negativo = atípico."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410523T232700",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-23T23:27:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 93 bpm, PAS 110 mmHg. Escore parcial inspirado no NEWS2: 2. Desvio do padrão individual: FR -11 irpm em relação à mediana recente (24). Motivo do aviso: persistência.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T232700",
+        "metric": "heart_rate",
+        "value": 93.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T232700",
+        "metric": "respiratory_rate",
+        "value": 13.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "0 ponto(s) na faixa de referência; z robusto -3.7 contra mediana individual 24.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T232700",
+        "metric": "systolic_bp",
+        "value": 110.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T232700",
+        "metric": "news2_partial_score",
+        "value": 2.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410524T060000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-24T06:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 101 bpm, FR 26 irpm, PAS 89 mmHg. Escore parcial inspirado no NEWS2: 7. Desvio do padrão individual: FR +10 irpm em relação à mediana recente (16). Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T060000",
+        "metric": "heart_rate",
+        "value": 101.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T060000",
+        "metric": "respiratory_rate",
+        "value": 26.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; z robusto +6.3 contra mediana individual 16.5."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T060000",
+        "metric": "systolic_bp",
+        "value": 89.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T060000",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410524T090000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-24T09:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 102 bpm, FR 26 irpm, PAS 92 mmHg. Escore parcial inspirado no NEWS2: 6. Desvio do padrão individual: FR +10 irpm em relação à mediana recente (16). Motivo do aviso: persistência.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T090000",
+        "metric": "heart_rate",
+        "value": 102.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T090000",
+        "metric": "respiratory_rate",
+        "value": 26.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; z robusto +6.3 contra mediana individual 16.5."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T090000",
+        "metric": "systolic_bp",
+        "value": 92.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T090000",
+        "metric": "news2_partial_score",
+        "value": 6.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410524T110000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-24T11:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 136 bpm, PAS 83 mmHg. Escore parcial inspirado no NEWS2: 6. Desvio do padrão individual: FC +40 bpm em relação à mediana recente (96). Combinação de sinais atípica para a população (Isolation Forest). Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T110000",
+        "metric": "heart_rate",
+        "value": 136.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "3 ponto(s) na faixa de referência; z robusto +13.3 contra mediana individual 96.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T110000",
+        "metric": "respiratory_rate",
+        "value": 18.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "0 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T110000",
+        "metric": "spo2",
+        "value": 100.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "0 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T110000",
+        "metric": "systolic_bp",
+        "value": 83.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T110000",
+        "metric": "news2_partial_score",
+        "value": 6.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T110000",
+        "metric": "isolation_forest_score",
+        "value": -0.0049,
+        "unit": "score",
+        "reference_range": ">= 0",
+        "description": "Escore do Isolation Forest (FC, FR, SpO2, PAS, FC/PAS); negativo = atípico."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410524T190000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-24T19:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 99 bpm, FR 23 irpm, PAS 100 mmHg. Escore parcial inspirado no NEWS2: 5. Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T190000",
+        "metric": "heart_rate",
+        "value": 99.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T190000",
+        "metric": "respiratory_rate",
+        "value": 23.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T190000",
+        "metric": "systolic_bp",
+        "value": 100.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410524T190000",
+        "metric": "news2_partial_score",
+        "value": 5.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T000000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T00:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 98 bpm. Escore parcial inspirado no NEWS2: 1. Desvio do padrão individual: SpO2 -4 % em relação à mediana recente (100). Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T000000",
+        "metric": "heart_rate",
+        "value": 98.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T000000",
+        "metric": "spo2",
+        "value": 96.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "0 ponto(s) na faixa de referência; z robusto -4.0 contra mediana individual 100.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T000000",
+        "metric": "news2_partial_score",
+        "value": 1.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T090000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T09:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 99 bpm, FR 22 irpm, SpO2 93 %. Escore parcial inspirado no NEWS2: 5. Desvio do padrão individual: SpO2 -6 % em relação à mediana recente (99). Piora rápida: escore subiu 5 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T090000",
+        "metric": "heart_rate",
+        "value": 99.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T090000",
+        "metric": "respiratory_rate",
+        "value": 22.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T090000",
+        "metric": "spo2",
+        "value": 93.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "2 ponto(s) na faixa de referência; z robusto -6.0 contra mediana individual 99.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T090000",
+        "metric": "news2_partial_score",
+        "value": 5.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T130000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T13:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 128 bpm, FR 23 irpm, SpO2 94 %. Escore parcial inspirado no NEWS2: 5. Desvio do padrão individual: FC +35 bpm em relação à mediana recente (93). Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T130000",
+        "metric": "heart_rate",
+        "value": 128.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência; z robusto +4.7 contra mediana individual 93.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T130000",
+        "metric": "respiratory_rate",
+        "value": 23.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T130000",
+        "metric": "spo2",
+        "value": 94.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T130000",
+        "metric": "news2_partial_score",
+        "value": 5.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T150000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T15:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 111 bpm, FR 26 irpm, PAS 99 mmHg. Escore parcial inspirado no NEWS2: 7. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "medium",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T150000",
+        "metric": "heart_rate",
+        "value": 111.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T150000",
+        "metric": "respiratory_rate",
+        "value": 26.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T150000",
+        "metric": "systolic_bp",
+        "value": 99.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T150000",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T170100",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T17:01:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 113 bpm, FR 25 irpm, PAS 99 mmHg. Escore parcial inspirado no NEWS2: 7. Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T170100",
+        "metric": "heart_rate",
+        "value": 113.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T170100",
+        "metric": "respiratory_rate",
+        "value": 25.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T170100",
+        "metric": "systolic_bp",
+        "value": 99.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T170100",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T181000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T18:10:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 122 bpm, FR 35 irpm. Escore parcial inspirado no NEWS2: 5. Desvio do padrão individual: FR +11 irpm em relação à mediana recente (24). Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181000",
+        "metric": "heart_rate",
+        "value": 122.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181000",
+        "metric": "respiratory_rate",
+        "value": 35.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; z robusto +7.3 contra mediana individual 24.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181000",
+        "metric": "news2_partial_score",
+        "value": 5.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410525T181900",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-25T18:19:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 130 bpm, FR 27 irpm, SpO2 94 %, PAS 102 mmHg. Escore parcial inspirado no NEWS2: 7. Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181900",
+        "metric": "heart_rate",
+        "value": 130.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181900",
+        "metric": "respiratory_rate",
+        "value": 27.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181900",
+        "metric": "spo2",
+        "value": 94.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181900",
+        "metric": "systolic_bp",
+        "value": 102.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410525T181900",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410526T000100",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-26T00:01:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 100 bpm, FR 21 irpm, PAS 95 mmHg. Escore parcial inspirado no NEWS2: 5. Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T000100",
+        "metric": "heart_rate",
+        "value": 100.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T000100",
+        "metric": "respiratory_rate",
+        "value": 21.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T000100",
+        "metric": "systolic_bp",
+        "value": 95.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T000100",
+        "metric": "news2_partial_score",
+        "value": 5.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410526T010000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-26T01:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 100 bpm, FR 25 irpm, SpO2 95 %, PAS 95 mmHg. Escore parcial inspirado no NEWS2: 7. Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T010000",
+        "metric": "heart_rate",
+        "value": 100.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T010000",
+        "metric": "respiratory_rate",
+        "value": 25.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T010000",
+        "metric": "spo2",
+        "value": 95.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T010000",
+        "metric": "systolic_bp",
+        "value": 95.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T010000",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410526T120000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-26T12:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 99 bpm, FR 25 irpm, PAS 98 mmHg. Escore parcial inspirado no NEWS2: 6. Piora rápida: escore subiu 4 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120000",
+        "metric": "heart_rate",
+        "value": 99.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120000",
+        "metric": "respiratory_rate",
+        "value": 25.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120000",
+        "metric": "systolic_bp",
+        "value": 98.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120000",
+        "metric": "news2_partial_score",
+        "value": 6.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410526T120100",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-26T12:01:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 99 bpm, FR 25 irpm, PAS 88 mmHg. Escore parcial inspirado no NEWS2: 7. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "medium",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120100",
+        "metric": "heart_rate",
+        "value": 99.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120100",
+        "metric": "respiratory_rate",
+        "value": 25.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120100",
+        "metric": "systolic_bp",
+        "value": 88.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120100",
+        "metric": "news2_partial_score",
+        "value": 7.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410526T120300",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-26T12:03:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 99 bpm, FR 25 irpm, SpO2 88 %, PAS 88 mmHg. Escore parcial inspirado no NEWS2: 10. Desvio do padrão individual: SpO2 -10 % em relação à mediana recente (98). Piora rápida: escore subiu 5 pontos nas últimas observações. Motivo do aviso: agravamento.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120300",
+        "metric": "heart_rate",
+        "value": 99.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120300",
+        "metric": "respiratory_rate",
+        "value": 25.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120300",
+        "metric": "spo2",
+        "value": 88.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "3 ponto(s) na faixa de referência; z robusto -6.7 contra mediana individual 98.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120300",
+        "metric": "systolic_bp",
+        "value": 88.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T120300",
+        "metric": "news2_partial_score",
+        "value": 10.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410526T200500",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-26T20:05:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 102 bpm, FR 24 irpm, SpO2 90 %. Escore parcial inspirado no NEWS2: 6. Desvio do padrão individual: SpO2 -8 % em relação à mediana recente (98). Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T200500",
+        "metric": "heart_rate",
+        "value": 102.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T200500",
+        "metric": "respiratory_rate",
+        "value": 24.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência; última medida válida, repetida."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T200500",
+        "metric": "spo2",
+        "value": 90.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "3 ponto(s) na faixa de referência; z robusto -3.8 contra mediana individual 98.5."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410526T200500",
+        "metric": "news2_partial_score",
+        "value": 6.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410527T040000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-27T04:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FC 95 bpm, FR 22 irpm, PAS 86 mmHg. Escore parcial inspirado no NEWS2: 6. Piora rápida: escore subiu 5 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T040000",
+        "metric": "heart_rate",
+        "value": 95.0,
+        "unit": "bpm",
+        "reference_range": "51-90",
+        "description": "1 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T040000",
+        "metric": "respiratory_rate",
+        "value": 22.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T040000",
+        "metric": "systolic_bp",
+        "value": 86.0,
+        "unit": "mmHg",
+        "reference_range": "111-219",
+        "description": "3 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T040000",
+        "metric": "news2_partial_score",
+        "value": 6.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-vs-36753294-21410527T160000",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-27T16:00:00+00:00",
+    "event_type": "vital_signs",
+    "finding": "Sinais vitais fora da faixa de referência: FR 24 irpm, SpO2 91 %. Escore parcial inspirado no NEWS2: 5. Desvio do padrão individual: SpO2 -6 % em relação à mediana recente (97). Piora rápida: escore subiu 5 pontos nas últimas observações. Motivo do aviso: início do episódio.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T160000",
+        "metric": "respiratory_rate",
+        "value": 24.0,
+        "unit": "irpm",
+        "reference_range": "12-20",
+        "description": "2 ponto(s) na faixa de referência."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T160000",
+        "metric": "spo2",
+        "value": 91.0,
+        "unit": "%",
+        "reference_range": "96-100",
+        "description": "3 ponto(s) na faixa de referência; z robusto -4.0 contra mediana individual 97.0."
+      },
+      {
+        "type": "clinical_measurement",
+        "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410527T160000",
+        "metric": "news2_partial_score",
+        "value": 5.0,
+        "unit": "pontos",
+        "reference_range": "0-4",
+        "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2."
+      }
+    ],
+    "source": {
+      "system": "fase4-clinical-anomaly",
+      "version": "1.0.0",
+      "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "clinical-P10002495-rx-24982426-21410528T080000-dose_change-clopidogrel-PO",
+    "patient_id": "P10002495",
+    "module": "clinical",
+    "timestamp": "2141-05-28T08:00:00+00:00",
+    "event_type": "prescription_change",
+    "finding": "Redução abrupta de dose diária de Clopidogrel (PO): 300 para 75 mg (0.2x). Alteração sinalizada para revisão; pode ser ajuste planejado.",
+    "anomaly_detected": true,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "prescription",
+        "uri": "clinical://mimic-iv-demo/prescriptions/hadm-24982426/21410528T080000/clopidogrel",
+        "metric": "Clopidogrel",
+        "value": 75.0,
+        "unit": "mg",
+        "reference_range": "anterior: 300 mg",
+        "description": "Via PO. Detector: dose_change."
+      }
+    ],
+    "source": {
+      "system": "fase4-prescription-anomaly",
+      "version": "1.0.0",
+      "model": "regras de razão de dose + z robusto (mediana/MAD)"
+    }
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "event_id": "audio-P0001-consulta-simulada-01",
+  "patient_id": "P0001",
+  "module": "audio",
+  "timestamp": "2026-11-12T10:03:20-03:00",
+  "event_type": "audio_check",
+  "finding": "Termos sinalizados na transcrição para revisão humana: cansaço, falta de ar, tosse persistente. Busca por palavras-chave, sem validação clínica.",
+  "anomaly_detected": false,
+  "priority": "low",
+  "evidence": [
+    {
+      "type": "audio_segment",
+      "uri": "audio://thamy/consulta-simulada-01/consulta_simulada.wav",
+      "start_s": 0.0,
+      "end_s": 19.817,
+      "description": "Gravação completa: o resultado não informa o instante de cada termo."
+    }
+  ],
+  "source": {
+    "system": "audio_analysis",
+    "version": "1.0.0",
+    "model": "azure_speech + azure_ai_language"
+  }
+}

@@ -1,0 +1,8 @@
+# Fase 4 — integração multimodal (modo offline)
+pydantic>=2.7,<3.0
+langgraph>=1.0,<2.0
+pytest>=8.0
+# Opcional: valida os exemplos também pelo JSON Schema puro (um teste é pulado sem ele)
+jsonschema>=4.0
+# Opcional: resumo com LLM local (--llm). Já listado em requirements-langchain.txt
+# langchain-ollama>=1.1,<2.0

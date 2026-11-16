@@ -1,0 +1,408 @@
+{
+  "report_version": "1.0",
+  "contract_version": "1.1",
+  "rules_version": "prototipo-1",
+  "run_id": "RUN-recebidos-vini",
+  "generated_at": "2026-11-16T22:57:41.527466+00:00",
+  "config": {
+    "window_minutes": 15,
+    "summary_mode": "offline",
+    "model": null
+  },
+  "disclaimer": "Achados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.",
+  "intake": {
+    "inputs_received": 3,
+    "events_received": 4,
+    "accepted": 4,
+    "rejected": 0,
+    "duplicates": 0,
+    "accepted_events": [
+      {
+        "event_id": "audio-P0001-consulta-simulada-01",
+        "module": "audio",
+        "origin": "data/fase4_recebidos/P0001_audio.json"
+      },
+      {
+        "event_id": "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+        "module": "clinical",
+        "origin": "data/fase4_recebidos/P0001_clinical.json#0"
+      },
+      {
+        "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+        "module": "clinical",
+        "origin": "data/fase4_recebidos/P0001_clinical.json#1"
+      },
+      {
+        "event_id": "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+        "module": "video",
+        "origin": "data/fase4_recebidos/P0001_video.json#0"
+      }
+    ],
+    "rejected_events": [],
+    "duplicate_events": []
+  },
+  "sources_received": [
+    "audio",
+    "video",
+    "clinical"
+  ],
+  "sources_missing": [],
+  "alerts": [
+    {
+      "alert_id": "ALT-95adc1a4ce34",
+      "patient_id": "P0001",
+      "window_start": "2026-11-12T13:00:00Z",
+      "priority": "critical",
+      "review_status": "pending_medical_review"
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "P0001@2026-11-12T13:00:00Z",
+      "patient_id": "P0001",
+      "window_start": "2026-11-12T13:00:00Z",
+      "window_end": "2026-11-12T13:15:00Z",
+      "status": "alert_pending_review",
+      "sources_received": [
+        "audio",
+        "video",
+        "clinical"
+      ],
+      "sources_missing": [],
+      "events": [
+        {
+          "event_id": "audio-P0001-consulta-simulada-01",
+          "module": "audio",
+          "event_type": "audio_check",
+          "timestamp": "2026-11-12T10:03:20-03:00",
+          "timestamp_utc": "2026-11-12T13:03:20Z",
+          "finding": "Termos sinalizados na transcrição para revisão humana: cansaço, falta de ar, tosse persistente. Busca por palavras-chave, sem validação clínica.",
+          "anomaly_detected": false,
+          "priority": "low",
+          "evidence": [
+            {
+              "type": "audio_segment",
+              "uri": "audio://thamy/consulta-simulada-01/consulta_simulada.wav",
+              "description": "Gravação completa: o resultado não informa o instante de cada termo.",
+              "start_s": 0.0,
+              "end_s": 19.817
+            }
+          ],
+          "source": {
+            "system": "audio_analysis",
+            "version": "1.0.0",
+            "model": "azure_speech + azure_ai_language"
+          },
+          "origin": "data/fase4_recebidos/P0001_audio.json"
+        },
+        {
+          "event_id": "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+          "module": "video",
+          "event_type": "fall_detected",
+          "timestamp": "2026-11-12T10:05:02-03:00",
+          "timestamp_utc": "2026-11-12T13:05:02Z",
+          "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.93 altura de corpo em 1.5 s (pico de 1.3 alturas/s).",
+          "anomaly_detected": true,
+          "priority": "high",
+          "evidence": [
+            {
+              "type": "video_clip",
+              "uri": "video://urfd/fall-01-cam0.mp4",
+              "description": "Trecho do achado, pessoa 1.",
+              "start_s": 2.867,
+              "end_s": 5.233,
+              "confidence": 0.694
+            },
+            {
+              "type": "video_frame",
+              "uri": "video://urfd/fall-01-cam0.mp4",
+              "description": "Quadro de referência do achado (queda).",
+              "frame_index": 105
+            }
+          ],
+          "source": {
+            "system": "fase4-video-analysis",
+            "version": "1.0.0",
+            "model": "yolov8n-pose + yolov8n"
+          },
+          "origin": "data/fase4_recebidos/P0001_video.json#0"
+        },
+        {
+          "event_id": "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+          "module": "clinical",
+          "event_type": "prescription_change",
+          "timestamp": "2026-11-12T10:08:00-03:00",
+          "timestamp_utc": "2026-11-12T13:08:00Z",
+          "finding": "Associação de novo vasoativo (PHENYLEPHrine) a esquema que já incluía dopamine. Alteração sinalizada para revisão; pode ser ajuste planejado.",
+          "anomaly_detected": true,
+          "priority": "critical",
+          "evidence": [
+            {
+              "type": "prescription",
+              "uri": "clinical://mimic-iv-demo/prescriptions/hadm-24982426/21410523T200000/phenylephrine",
+              "description": "Via IV DRIP. Detector: vasoactive_start.",
+              "metric": "PHENYLEPHrine",
+              "value": 60.0,
+              "unit": "mg",
+              "reference_range": "já em uso: dopamine"
+            }
+          ],
+          "source": {
+            "system": "fase4-prescription-anomaly",
+            "version": "1.0.0",
+            "model": "regras de razão de dose + z robusto (mediana/MAD)"
+          },
+          "origin": "data/fase4_recebidos/P0001_clinical.json#0"
+        },
+        {
+          "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+          "module": "clinical",
+          "event_type": "vital_signs",
+          "timestamp": "2026-11-12T10:08:00-03:00",
+          "timestamp_utc": "2026-11-12T13:08:00Z",
+          "finding": "Sinais vitais fora da faixa de referência: FC 133 bpm, FR 27 irpm, SpO2 84 %, PAS 71 mmHg. Escore parcial inspirado no NEWS2: 12. Desvio do padrão individual: SpO2 -13 % em relação à mediana recente (97). Combinação de sinais atípica para a população (Isolation Forest). Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento.",
+          "anomaly_detected": true,
+          "priority": "critical",
+          "evidence": [
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+              "description": "3 ponto(s) na faixa de referência.",
+              "metric": "heart_rate",
+              "value": 133.0,
+              "unit": "bpm",
+              "reference_range": "51-90"
+            },
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+              "description": "3 ponto(s) na faixa de referência.",
+              "metric": "respiratory_rate",
+              "value": 27.0,
+              "unit": "irpm",
+              "reference_range": "12-20"
+            },
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+              "description": "3 ponto(s) na faixa de referência; z robusto -13.0 contra mediana individual 97.0.",
+              "metric": "spo2",
+              "value": 84.0,
+              "unit": "%",
+              "reference_range": "96-100"
+            },
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+              "description": "3 ponto(s) na faixa de referência; última medida válida, repetida.",
+              "metric": "systolic_bp",
+              "value": 71.0,
+              "unit": "mmHg",
+              "reference_range": "111-219"
+            },
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+              "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2.",
+              "metric": "news2_partial_score",
+              "value": 12.0,
+              "unit": "pontos",
+              "reference_range": "0-4"
+            },
+            {
+              "type": "clinical_measurement",
+              "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+              "description": "Escore do Isolation Forest (FC, FR, SpO2, PAS, FC/PAS); negativo = atípico.",
+              "metric": "isolation_forest_score",
+              "value": -0.112,
+              "unit": "score",
+              "reference_range": ">= 0"
+            }
+          ],
+          "source": {
+            "system": "fase4-clinical-anomaly",
+            "version": "1.0.0",
+            "model": "faixas NEWS2 parcial + z robusto + IsolationForest"
+          },
+          "origin": "data/fase4_recebidos/P0001_clinical.json#1"
+        }
+      ],
+      "alert": {
+        "alert_id": "ALT-95adc1a4ce34",
+        "patient_id": "P0001",
+        "window_start": "2026-11-12T13:00:00Z",
+        "window_end": "2026-11-12T13:15:00Z",
+        "priority": "critical",
+        "rules_version": "prototipo-1",
+        "priority_reasons": [
+          {
+            "rule_id": "R1",
+            "rule": "PRIORIDADE_MODULO",
+            "description": "Maior prioridade sugerida pelos módulos entre os eventos anômalos: critical.",
+            "priority_before": null,
+            "priority_after": "critical",
+            "event_ids": [
+              "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+              "clinical-P0001-vs-36753294-21410523T200000"
+            ]
+          },
+          {
+            "rule_id": "R2",
+            "rule": "EVENTO_SENSIVEL",
+            "description": "Evento sensível detectado (fall_detected): prioridade mínima high.",
+            "priority_before": "critical",
+            "priority_after": "critical",
+            "event_ids": [
+              "video-P0001-fall-01-cam0-p1-fall_detected-002866"
+            ]
+          },
+          {
+            "rule_id": "R3",
+            "rule": "CORROBORACAO_2",
+            "description": "Anomalias em 2 ou mais modalidades na mesma janela (video, clinical): prioridade sobe um nível.",
+            "priority_before": "critical",
+            "priority_after": "critical",
+            "event_ids": [
+              "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+              "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+              "clinical-P0001-vs-36753294-21410523T200000"
+            ]
+          }
+        ],
+        "anomalous_modalities": [
+          "video",
+          "clinical"
+        ],
+        "event_ids": [
+          "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+          "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+          "clinical-P0001-vs-36753294-21410523T200000"
+        ],
+        "evidence": [
+          {
+            "event_id": "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+            "module": "video",
+            "event_type": "fall_detected",
+            "type": "video_clip",
+            "uri": "video://urfd/fall-01-cam0.mp4",
+            "description": "Trecho do achado, pessoa 1.",
+            "start_s": 2.867,
+            "end_s": 5.233,
+            "confidence": 0.694
+          },
+          {
+            "event_id": "video-P0001-fall-01-cam0-p1-fall_detected-002866",
+            "module": "video",
+            "event_type": "fall_detected",
+            "type": "video_frame",
+            "uri": "video://urfd/fall-01-cam0.mp4",
+            "description": "Quadro de referência do achado (queda).",
+            "frame_index": 105
+          },
+          {
+            "event_id": "clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP",
+            "module": "clinical",
+            "event_type": "prescription_change",
+            "type": "prescription",
+            "uri": "clinical://mimic-iv-demo/prescriptions/hadm-24982426/21410523T200000/phenylephrine",
+            "description": "Via IV DRIP. Detector: vasoactive_start.",
+            "metric": "PHENYLEPHrine",
+            "value": 60.0,
+            "unit": "mg",
+            "reference_range": "já em uso: dopamine"
+          },
+          {
+            "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+            "description": "3 ponto(s) na faixa de referência.",
+            "metric": "heart_rate",
+            "value": 133.0,
+            "unit": "bpm",
+            "reference_range": "51-90"
+          },
+          {
+            "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+            "description": "3 ponto(s) na faixa de referência.",
+            "metric": "respiratory_rate",
+            "value": 27.0,
+            "unit": "irpm",
+            "reference_range": "12-20"
+          },
+          {
+            "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+            "description": "3 ponto(s) na faixa de referência; z robusto -13.0 contra mediana individual 97.0.",
+            "metric": "spo2",
+            "value": 84.0,
+            "unit": "%",
+            "reference_range": "96-100"
+          },
+          {
+            "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+            "description": "3 ponto(s) na faixa de referência; última medida válida, repetida.",
+            "metric": "systolic_bp",
+            "value": 71.0,
+            "unit": "mmHg",
+            "reference_range": "111-219"
+          },
+          {
+            "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+            "description": "Soma dos pontos de FR, SpO2, PAS, FC e temperatura; sem consciência e O2.",
+            "metric": "news2_partial_score",
+            "value": 12.0,
+            "unit": "pontos",
+            "reference_range": "0-4"
+          },
+          {
+            "event_id": "clinical-P0001-vs-36753294-21410523T200000",
+            "module": "clinical",
+            "event_type": "vital_signs",
+            "type": "clinical_measurement",
+            "uri": "clinical://mimic-iv-demo/chartevents/stay-36753294/21410523T200000",
+            "description": "Escore do Isolation Forest (FC, FR, SpO2, PAS, FC/PAS); negativo = atípico.",
+            "metric": "isolation_forest_score",
+            "value": -0.112,
+            "unit": "score",
+            "reference_range": ">= 0"
+          }
+        ],
+        "review": {
+          "status": "pending_medical_review",
+          "reviewer_id": null,
+          "reviewer_name": null,
+          "decision": null,
+          "decided_at": null,
+          "notes": null
+        },
+        "disclaimer": "Achados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde."
+      },
+      "summary": {
+        "method": "deterministic",
+        "model": null,
+        "text": "Paciente P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z (UTC).\nFontes recebidas: audio, video, clinical. Fontes ausentes: nenhuma.\n4 evento(s) recebido(s), 3 com anomalia.\n- [audio] audio_check (sem anomalia, prioridade do módulo: low): Termos sinalizados na transcrição para revisão humana: cansaço, falta de ar, tosse persistente. Busca por palavras-chave, sem validação clínica. [audio-P0001-consulta-simulada-01]\n- [video] fall_detected (ANOMALIA, prioridade do módulo: high): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.93 altura de corpo em 1.5 s (pico de 1.3 alturas/s). [video-P0001-fall-01-cam0-p1-fall_detected-002866]\n- [clinical] prescription_change (ANOMALIA, prioridade do módulo: critical): Associação de novo vasoativo (PHENYLEPHrine) a esquema que já incluía dopamine. Alteração sinalizada para revisão; pode ser ajuste planejado. [clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP]\n- [clinical] vital_signs (ANOMALIA, prioridade do módulo: critical): Sinais vitais fora da faixa de referência: FC 133 bpm, FR 27 irpm, SpO2 84 %, PAS 71 mmHg. Escore parcial inspirado no NEWS2: 12. Desvio do padrão individual: SpO2 -13 % em relação à mediana recente (97). Combinação de sinais atípica para a população (Isolation Forest). Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento. [clinical-P0001-vs-36753294-21410523T200000]\nAlerta ALT-95adc1a4ce34: prioridade critical (R1 PRIORIDADE_MODULO; R2 EVENTO_SENSIVEL; R3 CORROBORACAO_2). Status: pending_medical_review.\nAchados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.",
+        "deterministic_text": "Paciente P0001 | janela 2026-11-12T13:00:00Z a 2026-11-12T13:15:00Z (UTC).\nFontes recebidas: audio, video, clinical. Fontes ausentes: nenhuma.\n4 evento(s) recebido(s), 3 com anomalia.\n- [audio] audio_check (sem anomalia, prioridade do módulo: low): Termos sinalizados na transcrição para revisão humana: cansaço, falta de ar, tosse persistente. Busca por palavras-chave, sem validação clínica. [audio-P0001-consulta-simulada-01]\n- [video] fall_detected (ANOMALIA, prioridade do módulo: high): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.93 altura de corpo em 1.5 s (pico de 1.3 alturas/s). [video-P0001-fall-01-cam0-p1-fall_detected-002866]\n- [clinical] prescription_change (ANOMALIA, prioridade do módulo: critical): Associação de novo vasoativo (PHENYLEPHrine) a esquema que já incluía dopamine. Alteração sinalizada para revisão; pode ser ajuste planejado. [clinical-P0001-rx-24982426-21410523T200000-vasoactive_start-phenylephrine-IV-DRIP]\n- [clinical] vital_signs (ANOMALIA, prioridade do módulo: critical): Sinais vitais fora da faixa de referência: FC 133 bpm, FR 27 irpm, SpO2 84 %, PAS 71 mmHg. Escore parcial inspirado no NEWS2: 12. Desvio do padrão individual: SpO2 -13 % em relação à mediana recente (97). Combinação de sinais atípica para a população (Isolation Forest). Piora rápida: escore subiu 6 pontos nas últimas observações. Motivo do aviso: agravamento. [clinical-P0001-vs-36753294-21410523T200000]\nAlerta ALT-95adc1a4ce34: prioridade critical (R1 PRIORIDADE_MODULO; R2 EVENTO_SENSIVEL; R3 CORROBORACAO_2). Status: pending_medical_review.\nAchados automatizados para avaliação profissional. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.",
+        "fallback_reason": null
+      }
+    }
+  ],
+  "review_decisions": [],
+  "audit_log": "output\\audit-recebidos-vini.jsonl"
+}

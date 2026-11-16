@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+.pytest_cache/
+outputs/
+data/raw/*
+!data/raw/consulta_simulada.wav
+data/processed/

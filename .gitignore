@@ -1,9 +1,21 @@
-# Ambientes
+# Ambientes e segredos
 .venv/
 venv/
-__pycache__/
-*.pyc
+env/
 .env
+.env.*
+!.env.example
+
+# Caches de Python e ferramentas
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+*.egg-info/
 
 # Modelos e artefatos pesados
 models/
@@ -12,9 +24,16 @@ models/
 *.bin
 unsloth_compiled_cache/
 
-# Saídas locais
+# Datasets públicos baixados por script (Fase 4): não são redistribuídos aqui
+data/clinical/raw/
+data/video/raw/
+*.pt
+
+# Saídas locais: logs de auditoria e relatórios gerados
 logs/*.jsonl
+logs/*.log
 results/
+output/
 data/prontuarios/*.db
 
 # IDE / SO

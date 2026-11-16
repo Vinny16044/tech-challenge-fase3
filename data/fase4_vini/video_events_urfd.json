@@ -1,0 +1,2242 @@
+[
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9001-adl-01-cam0-p1-video_check-000266",
+    "patient_id": "P9001",
+    "module": "video",
+    "timestamp": "2026-11-12T10:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 63%, sentado/agachado/curvado 37%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-01-cam0.mp4",
+        "start_s": 0.267,
+        "end_s": 4.967,
+        "confidence": 0.885,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-01-cam0.mp4",
+        "frame_index": 79,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9002-adl-02-cam0-p1-video_check-001066",
+    "patient_id": "P9002",
+    "module": "video",
+    "timestamp": "2026-11-12T10:25:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 69%, sentado/agachado/curvado 31%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-02-cam0.mp4",
+        "start_s": 1.067,
+        "end_s": 5.967,
+        "confidence": 0.898,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-02-cam0.mp4",
+        "frame_index": 106,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9003-adl-03-cam0-p1-video_check-000000",
+    "patient_id": "P9003",
+    "module": "video",
+    "timestamp": "2026-11-12T10:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 69%, sentado/agachado/curvado 31%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-03-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 5.967,
+        "confidence": 0.899,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-03-cam0.mp4",
+        "frame_index": 90,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9004-adl-04-cam0-p1-video_check-000000",
+    "patient_id": "P9004",
+    "module": "video",
+    "timestamp": "2026-11-12T11:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 57%, sentado/agachado/curvado 17%, deitado 27%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-04-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 4.967,
+        "confidence": 0.907,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-04-cam0.mp4",
+        "frame_index": 75,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9005-adl-05-cam0-p1-video_check-000000",
+    "patient_id": "P9005",
+    "module": "video",
+    "timestamp": "2026-11-12T11:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 69%, sentado/agachado/curvado 14%, deitado 17%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-05-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 5.967,
+        "confidence": 0.906,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-05-cam0.mp4",
+        "frame_index": 90,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9006-adl-06-cam0-p1-video_check-000400",
+    "patient_id": "P9006",
+    "module": "video",
+    "timestamp": "2026-11-12T11:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 80%, sentado/agachado/curvado 20%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-06-cam0.mp4",
+        "start_s": 0.4,
+        "end_s": 7.633,
+        "confidence": 0.888,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-06-cam0.mp4",
+        "frame_index": 121,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9007-adl-07-cam0-p1-video_check-000000",
+    "patient_id": "P9007",
+    "module": "video",
+    "timestamp": "2026-11-12T12:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-07-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 5.967,
+        "confidence": 0.906,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-07-cam0.mp4",
+        "frame_index": 90,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9008-adl-08-cam0-p1-video_check-000266",
+    "patient_id": "P9008",
+    "module": "video",
+    "timestamp": "2026-11-12T12:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-08-cam0.mp4",
+        "start_s": 0.267,
+        "end_s": 5.967,
+        "confidence": 0.892,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-08-cam0.mp4",
+        "frame_index": 94,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9009-adl-09-cam0-p1-video_check-000000",
+    "patient_id": "P9009",
+    "module": "video",
+    "timestamp": "2026-11-12T12:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 68%, sentado/agachado/curvado 32%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-09-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 4.967,
+        "confidence": 0.913,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-09-cam0.mp4",
+        "frame_index": 75,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9010-adl-10-cam0-p1-video_check-000000",
+    "patient_id": "P9010",
+    "module": "video",
+    "timestamp": "2026-11-12T13:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 48%, sentado/agachado/curvado 23%, deitado 29%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-10-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 9.967,
+        "confidence": 0.837,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-10-cam0.mp4",
+        "frame_index": 150,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9011-adl-11-cam0-p1-video_check-000000",
+    "patient_id": "P9011",
+    "module": "video",
+    "timestamp": "2026-11-12T13:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 43%, sentado/agachado/curvado 25%, deitado 32%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-11-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 9.967,
+        "confidence": 0.859,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-11-cam0.mp4",
+        "frame_index": 146,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9012-adl-12-cam0-p1-video_check-000333",
+    "patient_id": "P9012",
+    "module": "video",
+    "timestamp": "2026-11-12T13:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 80%, sentado/agachado/curvado 20%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-12-cam0.mp4",
+        "start_s": 0.333,
+        "end_s": 8.3,
+        "confidence": 0.737,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-12-cam0.mp4",
+        "frame_index": 139,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9013-adl-13-cam0-p1-video_check-001033",
+    "patient_id": "P9013",
+    "module": "video",
+    "timestamp": "2026-11-12T14:05:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 94%, sentado/agachado/curvado 6%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-13-cam0.mp4",
+        "start_s": 1.033,
+        "end_s": 8.8,
+        "confidence": 0.759,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-13-cam0.mp4",
+        "frame_index": 133,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9014-adl-14-cam0-p1-video_check-000300",
+    "patient_id": "P9014",
+    "module": "video",
+    "timestamp": "2026-11-12T14:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 90%, sentado/agachado/curvado 10%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-14-cam0.mp4",
+        "start_s": 0.3,
+        "end_s": 7.8,
+        "confidence": 0.79,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-14-cam0.mp4",
+        "frame_index": 126,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9015-adl-15-cam0-p1-video_check-000900",
+    "patient_id": "P9015",
+    "module": "video",
+    "timestamp": "2026-11-12T14:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-15-cam0.mp4",
+        "start_s": 0.9,
+        "end_s": 9.133,
+        "confidence": 0.756,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-15-cam0.mp4",
+        "frame_index": 138,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9016-adl-16-cam0-p1-video_check-000966",
+    "patient_id": "P9016",
+    "module": "video",
+    "timestamp": "2026-11-12T15:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 90%, sentado/agachado/curvado 6%, deitado 4%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-16-cam0.mp4",
+        "start_s": 0.967,
+        "end_s": 7.967,
+        "confidence": 0.64,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-16-cam0.mp4",
+        "frame_index": 108,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9017-adl-17-cam0-p1-video_check-001166",
+    "patient_id": "P9017",
+    "module": "video",
+    "timestamp": "2026-11-12T15:25:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 68%, sentado/agachado/curvado 10%, deitado 22%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-17-cam0.mp4",
+        "start_s": 1.167,
+        "end_s": 7.633,
+        "confidence": 0.812,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-17-cam0.mp4",
+        "frame_index": 138,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9018-adl-18-cam0-p1-video_check-001700",
+    "patient_id": "P9018",
+    "module": "video",
+    "timestamp": "2026-11-12T15:45:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 76%, sentado/agachado/curvado 24%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-18-cam0.mp4",
+        "start_s": 1.7,
+        "end_s": 7.867,
+        "confidence": 0.644,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-18-cam0.mp4",
+        "frame_index": 145,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9019-adl-19-cam0-p1-video_check-001033",
+    "patient_id": "P9019",
+    "module": "video",
+    "timestamp": "2026-11-12T16:05:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 85%, sentado/agachado/curvado 15%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-19-cam0.mp4",
+        "start_s": 1.033,
+        "end_s": 8.3,
+        "confidence": 0.696,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-19-cam0.mp4",
+        "frame_index": 128,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9020-adl-20-cam0-p1-video_check-001333",
+    "patient_id": "P9020",
+    "module": "video",
+    "timestamp": "2026-11-12T16:25:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-20-cam0.mp4",
+        "start_s": 1.333,
+        "end_s": 5.867,
+        "confidence": 0.721,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-20-cam0.mp4",
+        "frame_index": 112,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9021-adl-21-cam0-p1-video_check-001000",
+    "patient_id": "P9021",
+    "module": "video",
+    "timestamp": "2026-11-12T16:45:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 78%, sentado/agachado/curvado 22%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-21-cam0.mp4",
+        "start_s": 1.0,
+        "end_s": 7.333,
+        "confidence": 0.654,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-21-cam0.mp4",
+        "frame_index": 124,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9022-adl-22-cam0-p1-video_check-000266",
+    "patient_id": "P9022",
+    "module": "video",
+    "timestamp": "2026-11-12T17:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 82%, sentado/agachado/curvado 18%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-22-cam0.mp4",
+        "start_s": 0.267,
+        "end_s": 5.333,
+        "confidence": 0.636,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-22-cam0.mp4",
+        "frame_index": 79,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9023-adl-23-cam0-p1-video_check-000000",
+    "patient_id": "P9023",
+    "module": "video",
+    "timestamp": "2026-11-12T17:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 86%, sentado/agachado/curvado 14%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-23-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 4.9,
+        "confidence": 0.678,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-23-cam0.mp4",
+        "frame_index": 65,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9024-adl-24-cam0-p1-video_check-000000",
+    "patient_id": "P9024",
+    "module": "video",
+    "timestamp": "2026-11-12T17:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-24-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 2.3,
+        "confidence": 0.898,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-24-cam0.mp4",
+        "frame_index": 35,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9025-adl-25-cam0-p1-video_check-000000",
+    "patient_id": "P9025",
+    "module": "video",
+    "timestamp": "2026-11-12T18:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-25-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 3.633,
+        "confidence": 0.9,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-25-cam0.mp4",
+        "frame_index": 55,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9026-adl-26-cam0-p1-video_check-000000",
+    "patient_id": "P9026",
+    "module": "video",
+    "timestamp": "2026-11-12T18:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 100%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-26-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 3.133,
+        "confidence": 0.911,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-26-cam0.mp4",
+        "frame_index": 47,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9027-adl-27-cam0-p1-video_check-000000",
+    "patient_id": "P9027",
+    "module": "video",
+    "timestamp": "2026-11-12T18:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 93%, sentado/agachado/curvado 7%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-27-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 3.3,
+        "confidence": 0.905,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-27-cam0.mp4",
+        "frame_index": 50,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9028-adl-28-cam0-p1-video_check-000000",
+    "patient_id": "P9028",
+    "module": "video",
+    "timestamp": "2026-11-12T19:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 73%, sentado/agachado/curvado 27%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-28-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 2.8,
+        "confidence": 0.895,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-28-cam0.mp4",
+        "frame_index": 42,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9029-adl-29-cam0-p1-video_check-000000",
+    "patient_id": "P9029",
+    "module": "video",
+    "timestamp": "2026-11-12T19:25:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 96%, sentado/agachado/curvado 4%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-29-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 4.133,
+        "confidence": 0.903,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-29-cam0.mp4",
+        "frame_index": 62,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9030-adl-30-cam0-p1-fall_detected-006466",
+    "patient_id": "P9030",
+    "module": "video",
+    "timestamp": "2026-11-12T19:45:06-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.47 altura de corpo em 1.8 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-30-cam0.mp4",
+        "start_s": 6.467,
+        "end_s": 9.867,
+        "confidence": 0.509,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-30-cam0.mp4",
+        "frame_index": 236,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9031-adl-31-cam0-p1-video_check-000000",
+    "patient_id": "P9031",
+    "module": "video",
+    "timestamp": "2026-11-12T20:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 32%, sentado/agachado/curvado 19%, deitado 49%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-31-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 8.3,
+        "confidence": 0.791,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-31-cam0.mp4",
+        "frame_index": 108,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9032-adl-32-cam0-p1-prolonged_immobility-004166",
+    "patient_id": "P9032",
+    "module": "video",
+    "timestamp": "2026-11-12T20:25:04-03:00",
+    "event_type": "prolonged_immobility",
+    "finding": "Paciente deitado fora do leito e praticamente imóvel por 2.0 s.",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-32-cam0.mp4",
+        "start_s": 4.167,
+        "end_s": 6.167,
+        "confidence": 0.793,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-32-cam0.mp4",
+        "frame_index": 125,
+        "description": "Quadro de referência do achado (imobilidade prolongada)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9033-adl-33-cam0-p1-video_check-000000",
+    "patient_id": "P9033",
+    "module": "video",
+    "timestamp": "2026-11-12T20:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 49%, sentado/agachado/curvado 32%, deitado 18%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-33-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 6.633,
+        "confidence": 0.827,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-33-cam0.mp4",
+        "frame_index": 80,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9034-adl-34-cam0-p1-video_check-000000",
+    "patient_id": "P9034",
+    "module": "video",
+    "timestamp": "2026-11-12T21:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 11%, sentado/agachado/curvado 23%, deitado 66%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-34-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 6.333,
+        "confidence": 0.784,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-34-cam0.mp4",
+        "frame_index": 92,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9035-adl-35-cam0-p2-video_check-004966",
+    "patient_id": "P9035",
+    "module": "video",
+    "timestamp": "2026-11-12T21:25:04-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 31%, sentado/agachado/curvado 30%, deitado 39%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-35-cam0.mp4",
+        "start_s": 4.967,
+        "end_s": 9.3,
+        "confidence": 0.836,
+        "description": "Trecho do achado, pessoa 2."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-35-cam0.mp4",
+        "frame_index": 216,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9036-adl-36-cam0-p1-video_check-000733",
+    "patient_id": "P9036",
+    "module": "video",
+    "timestamp": "2026-11-12T21:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 71%, sentado/agachado/curvado 4%, deitado 26%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-36-cam0.mp4",
+        "start_s": 0.733,
+        "end_s": 10.9,
+        "confidence": 0.775,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-36-cam0.mp4",
+        "frame_index": 166,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9037-adl-37-cam0-p1-video_check-000900",
+    "patient_id": "P9037",
+    "module": "video",
+    "timestamp": "2026-11-12T22:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 77%, sentado/agachado/curvado 21%, deitado 1%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-37-cam0.mp4",
+        "start_s": 0.9,
+        "end_s": 9.2,
+        "confidence": 0.879,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-37-cam0.mp4",
+        "frame_index": 148,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9038-adl-38-cam0-p1-fall_detected-005566",
+    "patient_id": "P9038",
+    "module": "video",
+    "timestamp": "2026-11-12T22:25:05-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.48 altura de corpo em 2.0 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-38-cam0.mp4",
+        "start_s": 5.567,
+        "end_s": 11.467,
+        "confidence": 0.372,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-38-cam0.mp4",
+        "frame_index": 201,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9039-adl-39-cam0-p1-fall_detected-004966",
+    "patient_id": "P9039",
+    "module": "video",
+    "timestamp": "2026-11-12T22:45:04-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.57 altura de corpo em 1.7 s (pico de 0.7 alturas/s). Depois da queda permaneceu praticamente imóvel por 2.2 s até o fim do registro.",
+    "anomaly_detected": true,
+    "priority": "critical",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-39-cam0.mp4",
+        "start_s": 4.967,
+        "end_s": 8.967,
+        "confidence": 0.449,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-39-cam0.mp4",
+        "frame_index": 192,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9040-adl-40-cam0-p1-video_check-001633",
+    "patient_id": "P9040",
+    "module": "video",
+    "timestamp": "2026-11-12T23:05:01-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 68%, sentado/agachado/curvado 20%, deitado 12%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/adl-40-cam0.mp4",
+        "start_s": 1.633,
+        "end_s": 8.8,
+        "confidence": 0.86,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/adl-40-cam0.mp4",
+        "frame_index": 157,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9041-fall-01-cam0-p1-fall_detected-002866",
+    "patient_id": "P9041",
+    "module": "video",
+    "timestamp": "2026-11-12T23:25:02-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.93 altura de corpo em 1.5 s (pico de 1.3 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-01-cam0.mp4",
+        "start_s": 2.867,
+        "end_s": 5.233,
+        "confidence": 0.694,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-01-cam0.mp4",
+        "frame_index": 105,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9042-fall-02-cam0-p1-fall_detected-001333",
+    "patient_id": "P9042",
+    "module": "video",
+    "timestamp": "2026-11-12T23:45:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.79 altura de corpo em 1.7 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-02-cam0.mp4",
+        "start_s": 1.333,
+        "end_s": 3.633,
+        "confidence": 0.54,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-02-cam0.mp4",
+        "frame_index": 60,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9043-fall-03-cam0-p1-fall_detected-004466",
+    "patient_id": "P9043",
+    "module": "video",
+    "timestamp": "2026-11-13T00:05:04-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.72 altura de corpo em 1.8 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-03-cam0.mp4",
+        "start_s": 4.467,
+        "end_s": 7.133,
+        "confidence": 0.542,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-03-cam0.mp4",
+        "frame_index": 175,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9044-fall-04-cam0-p1-fall_detected-000333",
+    "patient_id": "P9044",
+    "module": "video",
+    "timestamp": "2026-11-13T00:25:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.69 altura de corpo em 1.4 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-04-cam0.mp4",
+        "start_s": 0.333,
+        "end_s": 3.0,
+        "confidence": 0.486,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-04-cam0.mp4",
+        "frame_index": 22,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9045-fall-05-cam0-p1-fall_detected-002766",
+    "patient_id": "P9045",
+    "module": "video",
+    "timestamp": "2026-11-13T00:45:02-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 1.03 altura de corpo em 1.4 s (pico de 1.1 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-05-cam0.mp4",
+        "start_s": 2.767,
+        "end_s": 5.0,
+        "confidence": 0.647,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-05-cam0.mp4",
+        "frame_index": 97,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9046-fall-06-cam0-p1-fall_detected-000600",
+    "patient_id": "P9046",
+    "module": "video",
+    "timestamp": "2026-11-13T01:05:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.53 altura de corpo em 1.3 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-06-cam0.mp4",
+        "start_s": 0.6,
+        "end_s": 3.3,
+        "confidence": 0.52,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-06-cam0.mp4",
+        "frame_index": 38,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9047-fall-07-cam0-p1-fall_detected-003000",
+    "patient_id": "P9047",
+    "module": "video",
+    "timestamp": "2026-11-13T01:25:03-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.70 altura de corpo em 1.3 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-07-cam0.mp4",
+        "start_s": 3.0,
+        "end_s": 5.167,
+        "confidence": 0.5,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-07-cam0.mp4",
+        "frame_index": 101,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9048-fall-08-cam0-p1-video_check-000000",
+    "patient_id": "P9048",
+    "module": "video",
+    "timestamp": "2026-11-13T01:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 26%, sentado/agachado/curvado 10%, deitado 64%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-08-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 3.0,
+        "confidence": 0.851,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-08-cam0.mp4",
+        "frame_index": 45,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9049-fall-09-cam0-p1-fall_detected-003833",
+    "patient_id": "P9049",
+    "module": "video",
+    "timestamp": "2026-11-13T02:05:03-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.76 altura de corpo em 1.8 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-09-cam0.mp4",
+        "start_s": 3.833,
+        "end_s": 6.133,
+        "confidence": 0.524,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-09-cam0.mp4",
+        "frame_index": 138,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9050-fall-10-cam0-p1-fall_detected-001100",
+    "patient_id": "P9050",
+    "module": "video",
+    "timestamp": "2026-11-13T02:25:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.65 altura de corpo em 1.2 s (pico de 0.7 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-10-cam0.mp4",
+        "start_s": 1.1,
+        "end_s": 4.3,
+        "confidence": 0.493,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-10-cam0.mp4",
+        "frame_index": 44,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9051-fall-11-cam0-p1-fall_detected-001766",
+    "patient_id": "P9051",
+    "module": "video",
+    "timestamp": "2026-11-13T02:45:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.58 altura de corpo em 1.1 s (pico de 0.9 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-11-cam0.mp4",
+        "start_s": 1.767,
+        "end_s": 4.3,
+        "confidence": 0.575,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-11-cam0.mp4",
+        "frame_index": 65,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9052-fall-12-cam0-p1-video_check-000000",
+    "patient_id": "P9052",
+    "module": "video",
+    "timestamp": "2026-11-13T03:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 8%, sentado/agachado/curvado 24%, deitado 68%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-12-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 3.633,
+        "confidence": 0.879,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-12-cam0.mp4",
+        "frame_index": 55,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9053-fall-13-cam0-p1-fall_detected-001500",
+    "patient_id": "P9053",
+    "module": "video",
+    "timestamp": "2026-11-13T03:25:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.91 altura de corpo em 1.2 s (pico de 1.1 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-13-cam0.mp4",
+        "start_s": 1.5,
+        "end_s": 2.8,
+        "confidence": 0.599,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-13-cam0.mp4",
+        "frame_index": 65,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9054-fall-14-cam0-p1-fall_detected-000333",
+    "patient_id": "P9054",
+    "module": "video",
+    "timestamp": "2026-11-13T03:45:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.55 altura de corpo em 1.3 s (pico de 0.9 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-14-cam0.mp4",
+        "start_s": 0.333,
+        "end_s": 2.0,
+        "confidence": 0.554,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-14-cam0.mp4",
+        "frame_index": 20,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9055-fall-15-cam0-p1-fall_detected-000966",
+    "patient_id": "P9055",
+    "module": "video",
+    "timestamp": "2026-11-13T04:05:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.99 altura de corpo em 1.2 s (pico de 1.5 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-15-cam0.mp4",
+        "start_s": 0.967,
+        "end_s": 2.333,
+        "confidence": 0.72,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-15-cam0.mp4",
+        "frame_index": 46,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9056-fall-16-cam0-p1-fall_detected-000533",
+    "patient_id": "P9056",
+    "module": "video",
+    "timestamp": "2026-11-13T04:25:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.54 altura de corpo em 1.2 s (pico de 0.8 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-16-cam0.mp4",
+        "start_s": 0.533,
+        "end_s": 1.8,
+        "confidence": 0.552,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-16-cam0.mp4",
+        "frame_index": 25,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9057-fall-17-cam0-p1-fall_detected-001933",
+    "patient_id": "P9057",
+    "module": "video",
+    "timestamp": "2026-11-13T04:45:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.95 altura de corpo em 1.0 s (pico de 1.3 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-17-cam0.mp4",
+        "start_s": 1.933,
+        "end_s": 3.133,
+        "confidence": 0.701,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-17-cam0.mp4",
+        "frame_index": 87,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9058-fall-18-cam0-p1-fall_detected-000433",
+    "patient_id": "P9058",
+    "module": "video",
+    "timestamp": "2026-11-13T05:05:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.56 altura de corpo em 0.9 s (pico de 0.9 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-18-cam0.mp4",
+        "start_s": 0.433,
+        "end_s": 1.367,
+        "confidence": 0.559,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-18-cam0.mp4",
+        "frame_index": 22,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9059-fall-19-cam0-p1-fall_detected-001100",
+    "patient_id": "P9059",
+    "module": "video",
+    "timestamp": "2026-11-13T05:25:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.89 altura de corpo em 1.5 s (pico de 1.5 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-19-cam0.mp4",
+        "start_s": 1.1,
+        "end_s": 3.3,
+        "confidence": 0.599,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-19-cam0.mp4",
+        "frame_index": 49,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9060-fall-20-cam0-p1-video_check-000000",
+    "patient_id": "P9060",
+    "module": "video",
+    "timestamp": "2026-11-13T05:45:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 37%, sentado/agachado/curvado 32%, deitado 31%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-20-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 3.633,
+        "confidence": 0.819,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-20-cam0.mp4",
+        "frame_index": 55,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9061-fall-21-cam0-p1-video_check-000000",
+    "patient_id": "P9061",
+    "module": "video",
+    "timestamp": "2026-11-13T06:05:00-03:00",
+    "event_type": "video_check",
+    "finding": "Nenhum movimento fora do padrão. Posturas observadas: em pé 81%, sentado/agachado/curvado 19%.",
+    "anomaly_detected": false,
+    "priority": "low",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-21-cam0.mp4",
+        "start_s": 0.0,
+        "end_s": 1.4,
+        "confidence": 0.862,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-21-cam0.mp4",
+        "frame_index": 21,
+        "description": "Quadro de referência do achado (sem desvio)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9062-fall-22-cam0-p1-fall_detected-000266",
+    "patient_id": "P9062",
+    "module": "video",
+    "timestamp": "2026-11-13T06:25:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.74 altura de corpo em 0.9 s (pico de 1.1 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-22-cam0.mp4",
+        "start_s": 0.267,
+        "end_s": 1.833,
+        "confidence": 0.595,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-22-cam0.mp4",
+        "frame_index": 15,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9063-fall-23-cam0-p1-fall_detected-001033",
+    "patient_id": "P9063",
+    "module": "video",
+    "timestamp": "2026-11-13T06:45:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.91 altura de corpo em 1.4 s (pico de 1.4 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-23-cam0.mp4",
+        "start_s": 1.033,
+        "end_s": 2.467,
+        "confidence": 0.745,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-23-cam0.mp4",
+        "frame_index": 49,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9064-fall-24-cam0-p1-fall_detected-000433",
+    "patient_id": "P9064",
+    "module": "video",
+    "timestamp": "2026-11-13T07:05:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.64 altura de corpo em 1.1 s (pico de 0.9 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-24-cam0.mp4",
+        "start_s": 0.433,
+        "end_s": 1.767,
+        "confidence": 0.573,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-24-cam0.mp4",
+        "frame_index": 19,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9065-fall-25-cam0-p1-fall_detected-001200",
+    "patient_id": "P9065",
+    "module": "video",
+    "timestamp": "2026-11-13T07:25:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.83 altura de corpo em 1.1 s (pico de 1.4 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-25-cam0.mp4",
+        "start_s": 1.2,
+        "end_s": 2.6,
+        "confidence": 0.711,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-25-cam0.mp4",
+        "frame_index": 66,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9066-fall-26-cam0-p1-fall_detected-000300",
+    "patient_id": "P9066",
+    "module": "video",
+    "timestamp": "2026-11-13T07:45:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.65 altura de corpo em 1.3 s (pico de 1.1 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-26-cam0.mp4",
+        "start_s": 0.3,
+        "end_s": 1.7,
+        "confidence": 0.611,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-26-cam0.mp4",
+        "frame_index": 23,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9067-fall-27-cam0-p1-fall_detected-001600",
+    "patient_id": "P9067",
+    "module": "video",
+    "timestamp": "2026-11-13T08:05:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.76 altura de corpo em 0.9 s (pico de 1.3 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-27-cam0.mp4",
+        "start_s": 1.6,
+        "end_s": 2.867,
+        "confidence": 0.673,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-27-cam0.mp4",
+        "frame_index": 71,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9068-fall-28-cam0-p1-fall_detected-000733",
+    "patient_id": "P9068",
+    "module": "video",
+    "timestamp": "2026-11-13T08:25:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.56 altura de corpo em 1.2 s (pico de 0.7 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-28-cam0.mp4",
+        "start_s": 0.733,
+        "end_s": 1.9,
+        "confidence": 0.502,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-28-cam0.mp4",
+        "frame_index": 36,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9069-fall-29-cam0-p1-fall_detected-001566",
+    "patient_id": "P9069",
+    "module": "video",
+    "timestamp": "2026-11-13T08:45:01-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.92 altura de corpo em 1.2 s (pico de 1.1 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-29-cam0.mp4",
+        "start_s": 1.567,
+        "end_s": 3.267,
+        "confidence": 0.617,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-29-cam0.mp4",
+        "frame_index": 69,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  },
+  {
+    "schema_version": "1.1",
+    "event_id": "video-P9070-fall-30-cam0-p1-fall_detected-000633",
+    "patient_id": "P9070",
+    "module": "video",
+    "timestamp": "2026-11-13T09:05:00-03:00",
+    "event_type": "fall_detected",
+    "finding": "Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.66 altura de corpo em 1.3 s (pico de 1.1 alturas/s).",
+    "anomaly_detected": true,
+    "priority": "high",
+    "evidence": [
+      {
+        "type": "video_clip",
+        "uri": "video://urfd/fall-30-cam0.mp4",
+        "start_s": 0.633,
+        "end_s": 2.267,
+        "confidence": 0.617,
+        "description": "Trecho do achado, pessoa 1."
+      },
+      {
+        "type": "video_frame",
+        "uri": "video://urfd/fall-30-cam0.mp4",
+        "frame_index": 39,
+        "description": "Quadro de referência do achado (queda)."
+      }
+    ],
+    "source": {
+      "system": "fase4-video-analysis",
+      "version": "1.0.0",
+      "model": "yolov8n-pose + yolov8n"
+    }
+  }
+]

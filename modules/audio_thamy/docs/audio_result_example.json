@@ -1,0 +1,178 @@
+{
+  "module": "audio_analysis",
+  "schema_version": "1.0.0",
+  "analysis_id": "example-analysis-id",
+  "status": "success",
+  "processed_at": "2026-11-16T12:00:00Z",
+  "audio_metadata": {
+    "file_name": "consulta_exemplo.wav",
+    "duration_seconds": 19.817,
+    "sample_rate_hz": 16000,
+    "language": "pt-BR",
+    "source": "synthetic_consultation"
+  },
+  "transcription": {
+    "text": "Paciente relata cansaço e tosse persistente.",
+    "language": "pt-BR",
+    "provider": "azure_speech",
+    "recognition_mode": "continuous"
+  },
+  "text_analysis": {
+    "provider": "azure_ai_language",
+    "sentiment": {
+      "label": "negative",
+      "confidence": {
+        "positive": 0.01,
+        "neutral": 0.15,
+        "negative": 0.85
+      }
+    },
+    "key_phrases": [
+      "últimos dias",
+      "cansaço",
+      "Doutor",
+      "falta",
+      "ar",
+      "tosse",
+      "sintomas",
+      "corpo",
+      "atividades"
+    ],
+    "entities": [
+      {
+        "text": "Doutor",
+        "category": "PersonType",
+        "subcategory": null,
+        "confidence": 0.83
+      },
+      {
+        "text": "uma",
+        "category": "Quantity",
+        "subcategory": "Number",
+        "confidence": 0.8
+      }
+    ]
+  },
+  "acoustic_features": {
+    "duration_seconds": 19.817,
+    "sample_rate_hz": 16000,
+    "rms_mean": 0.021608,
+    "zcr_mean": 0.158796,
+    "spectral_centroid_mean_hz": 2088.789,
+    "mfcc_mean": [
+      -299.11682,
+      79.33754,
+      13.51715,
+      17.63509,
+      -0.7174,
+      7.15672,
+      -11.25799,
+      -6.34496,
+      -2.93707,
+      -8.97445,
+      -4.82962,
+      -4.63611,
+      -4.05781
+    ],
+    "mfcc_std": [
+      52.03042,
+      41.0388,
+      24.50822,
+      19.74712,
+      16.11033,
+      11.56184,
+      11.90383,
+      11.141,
+      8.92313,
+      7.18353,
+      7.38728,
+      8.11432,
+      7.1945
+    ],
+    "detected_event_count": 12,
+    "detected_events": [
+      {
+        "start_seconds": 1.92,
+        "end_seconds": 3.328,
+        "duration_seconds": 1.408
+      },
+      {
+        "start_seconds": 3.488,
+        "end_seconds": 3.872,
+        "duration_seconds": 0.384
+      },
+      {
+        "start_seconds": 4.064,
+        "end_seconds": 4.592,
+        "duration_seconds": 0.528
+      },
+      {
+        "start_seconds": 5.312,
+        "end_seconds": 5.712,
+        "duration_seconds": 0.4
+      },
+      {
+        "start_seconds": 6.0,
+        "end_seconds": 7.568,
+        "duration_seconds": 1.568
+      },
+      {
+        "start_seconds": 8.0,
+        "end_seconds": 9.952,
+        "duration_seconds": 1.952
+      },
+      {
+        "start_seconds": 10.48,
+        "end_seconds": 11.312,
+        "duration_seconds": 0.832
+      },
+      {
+        "start_seconds": 11.632,
+        "end_seconds": 13.712,
+        "duration_seconds": 2.08
+      },
+      {
+        "start_seconds": 14.416,
+        "end_seconds": 15.056,
+        "duration_seconds": 0.64
+      },
+      {
+        "start_seconds": 15.216,
+        "end_seconds": 16.448,
+        "duration_seconds": 1.232
+      },
+      {
+        "start_seconds": 16.656,
+        "end_seconds": 17.824,
+        "duration_seconds": 1.168
+      },
+      {
+        "start_seconds": 18.0,
+        "end_seconds": 18.432,
+        "duration_seconds": 0.432
+      }
+    ],
+    "event_detection_method": "rms_threshold",
+    "event_interpretation": "sound_activity_not_clinical_events"
+  },
+  "alerts": [
+    {
+      "type": "keyword_review",
+      "status": "review_required",
+      "detected_terms": [
+        "cansaço",
+        "falta de ar",
+        "tosse persistente"
+      ],
+      "requires_human_review": true,
+      "description": "Termos predefinidos identificados na transcrição. Revisão humana recomendada.",
+      "clinical_validation": false
+    }
+  ],
+  "limitations": {
+    "clinical_diagnosis": false,
+    "sentiment_is_clinical_assessment": false,
+    "acoustic_events_are_clinically_validated": false,
+    "transcription_requires_review": true
+  }
+}

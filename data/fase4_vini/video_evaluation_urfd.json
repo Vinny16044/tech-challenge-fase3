@@ -1,0 +1,895 @@
+{
+  "evaluation": {
+    "videos": 70,
+    "true_positive": 26,
+    "false_negative": 4,
+    "false_positive": 3,
+    "true_negative": 37,
+    "sensitivity": 0.867,
+    "specificity": 0.925,
+    "accuracy": 0.9,
+    "errors": [
+      "adl-30-cam0.mp4",
+      "adl-38-cam0.mp4",
+      "adl-39-cam0.mp4",
+      "fall-08-cam0.mp4",
+      "fall-12-cam0.mp4",
+      "fall-20-cam0.mp4",
+      "fall-21-cam0.mp4"
+    ],
+    "by_split": {
+      "ajuste": {
+        "videos": 8,
+        "true_positive": 4,
+        "false_negative": 0,
+        "false_positive": 0,
+        "true_negative": 4,
+        "sensitivity": 1.0,
+        "specificity": 1.0,
+        "accuracy": 1.0,
+        "errors": []
+      },
+      "validacao": {
+        "videos": 62,
+        "true_positive": 22,
+        "false_negative": 4,
+        "false_positive": 3,
+        "true_negative": 33,
+        "sensitivity": 0.846,
+        "specificity": 0.917,
+        "accuracy": 0.887,
+        "errors": [
+          "adl-30-cam0.mp4",
+          "adl-38-cam0.mp4",
+          "adl-39-cam0.mp4",
+          "fall-08-cam0.mp4",
+          "fall-12-cam0.mp4",
+          "fall-20-cam0.mp4",
+          "fall-21-cam0.mp4"
+        ]
+      }
+    }
+  },
+  "videos": [
+    {
+      "name": "adl-01-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-02-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-03-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-04-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-05-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-06-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-07-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-08-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-09-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-10-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-11-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-12-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-13-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-14-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-15-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-16-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-17-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-18-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-19-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-20-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-21-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-22-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-23-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-24-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-25-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-26-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-27-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-28-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-29-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-30-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "adl-31-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-32-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "prolonged_immobility",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "adl-33-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-34-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-35-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-36-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-37-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "adl-38-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "adl-39-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "critical"
+        }
+      ]
+    },
+    {
+      "name": "adl-40-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "adl",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "fall-01-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-02-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-03-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-04-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-05-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-06-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-07-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-08-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "fall-09-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-10-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-11-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-12-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "fall-13-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-14-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-15-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-16-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-17-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-18-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-19-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-20-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "fall-21-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "adl",
+      "events": [
+        {
+          "kind": "video_check",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "name": "fall-22-cam0.mp4",
+      "split": "ajuste",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-23-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-24-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-25-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-26-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-27-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-28-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-29-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "name": "fall-30-cam0.mp4",
+      "split": "validacao",
+      "dataset_label": "fall",
+      "predicted_label": "fall",
+      "events": [
+        {
+          "kind": "fall_detected",
+          "priority": "high"
+        }
+      ]
+    }
+  ]
+}
