@@ -1,3 +1,5 @@
 # Front-end web do assistente (chat local)
 fastapi>=0.110
 uvicorn[standard]>=0.29
+# Só para os testes da API (tests/test_painel_fase4.py)
+httpx>=0.27

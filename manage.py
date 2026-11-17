@@ -261,6 +261,7 @@ def cmd_web(_args) -> None:
     """Sobe o chat web local do assistente em http://localhost:8000"""
     os.environ["OLLAMA_MODEL"] = OLLAMA_MODEL
     print("\n[manage] Chat do assistente: http://localhost:8000  (Ctrl+C para parar)")
+    print("[manage] Painel da Fase 4:   http://localhost:8000/fase4")
     run([venv_python(), "-m", "uvicorn", "src.api.server:app",
          "--host", "127.0.0.1", "--port", "8000"])
 

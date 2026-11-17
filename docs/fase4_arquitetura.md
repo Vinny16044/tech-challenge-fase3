@@ -61,6 +61,7 @@ flowchart TD
 | Módulo de vídeo do Vini (publica direto no contrato) | `src/video_analysis/` |
 | Módulo de anomalias clínicas do Vini (publica direto no contrato) | `src/anomaly_detection/` |
 | Amostras de vídeo e clínico para o teste conjunto | `src/fase4_samples.py` |
+| Painel web: alerta, revisão humana, vídeos, sinais vitais e áudio | `src/api/fase4.py`, `src/api/static/fase4.html` |
 
 O desenho segue o padrão da Fase 3 (`src/graph/`): `StateGraph` com estado `TypedDict`, nós
 em uma classe, aresta condicional, auditoria em JSONL e execução offline.
@@ -324,8 +325,8 @@ para a janela do teste conjunto.
 | Alerta | `ALT-95adc1a4ce34`, prioridade `critical`, status `pending_medical_review` |
 | Regras | R1 (clínico `critical`), R2 (`fall_detected`) e R3 (vídeo e dados clínicos anômalos). Sem R4, porque o áudio não é anômalo. |
 
-**Testes:** `py -m pytest` com 153 aprovados (56 da integração e 97 dos módulos de vídeo e
-de anomalias clínicas).
+**Testes:** `py -m pytest` com 167 aprovados (56 da integração, 97 dos módulos de vídeo e
+de anomalias clínicas e 14 do painel web).
 
 ### Pendências
 
@@ -333,6 +334,7 @@ de anomalias clínicas).
   sempre emite `audio_check` sem anomalia, então R4 nunca dispara.
 - Melhorar a detecção de quedas a partir da posição sentada: na validação com 62 clipes
   fora do ajuste, 22 de 26 quedas foram detectadas, e 3 das 4 perdidas partem da cadeira.
-- Entregar o alerta à equipe por algum canal: hoje ele existe só no relatório JSON.
+- Notificar a equipe de forma ativa: o painel web (`/fase4`) mostra o alerta e registra a
+  revisão, mas não envia mensagem nem chamada.
 - Repetir a conversão do áudio com o horário real e um ID estável de cada gravação: o
   horário usado aqui é fictício, escolhido para coincidir com a janela dos exemplos.

@@ -10,10 +10,11 @@ e expõe o grafo completo da Frente 3 (MySQL + protocolos + LLM fine-tunada):
   GET  /api/faq             -> perguntas frequentes + casos de teste
   GET  /api/pacientes       -> amostra de pacientes (com nº de pendências)
   POST /api/ask             -> {question, paciente_id} -> resposta do grafo
+  GET  /fase4               -> painel da Fase 4 (rotas em src/api/fase4.py)
 
 Uso:
   python manage.py web          (ou: python -m uvicorn src.api.server:app --port 8000)
-  Abra http://localhost:8000
+  Abra http://localhost:8000 (chat da Fase 3) ou http://localhost:8000/fase4 (painel da Fase 4)
 """
 
 from __future__ import annotations
@@ -34,7 +35,12 @@ SYNTHETIC = ROOT / "data" / "synthetic" / "protocolos_hospital.json"
 
 MODEL_NAME = os.environ.get("OLLAMA_MODEL", "medico-fase3")
 
-app = FastAPI(title="Assistente Médico — Tech Challenge Fase 3")
+app = FastAPI(title="Assistente Médico — Tech Challenge Fases 3 e 4")
+
+# Painel da Fase 4 (monitoramento multimodal): /fase4 e /api/fase4/*
+from src.api.fase4 import router as fase4_router  # noqa: E402
+
+app.include_router(fase4_router)
 
 _graph = None
 _graph_error: str | None = None

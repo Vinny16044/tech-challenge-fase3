@@ -33,7 +33,7 @@
 | `adl-27-cam0.mp4` | 3.3 s | 1 | — | 0 | Sem desvio |
 | `adl-28-cam0.mp4` | 2.8 s | 1 | — | 0 | Sem desvio |
 | `adl-29-cam0.mp4` | 4.2 s | 1 | — | 0 | Sem desvio |
-| `adl-30-cam0.mp4` | 13.3 s | 2 | cama | 0 | Sem desvio |
+| `adl-30-cam0.mp4` | 13.3 s | 2 | cama | 1 | Queda |
 | `adl-31-cam0.mp4` | 8.3 s | 1 | cadeira | 0 | Sem desvio |
 | `adl-32-cam0.mp4` | 6.7 s | 1 | cadeira | 1 | Imobilidade prolongada |
 | `adl-33-cam0.mp4` | 6.7 s | 1 | cadeira | 0 | Sem desvio |
@@ -82,16 +82,16 @@
 | | Detectou queda | Não detectou |
 |---|---|---|
 | **Queda** | 26 | 4 |
-| **Atividade normal** | 2 | 38 |
+| **Atividade normal** | 3 | 37 |
 
-Sensibilidade 0.867, especificidade 0.95, acurácia 0.914. Erros: adl-38-cam0.mp4, adl-39-cam0.mp4, fall-08-cam0.mp4, fall-12-cam0.mp4, fall-20-cam0.mp4, fall-21-cam0.mp4.
+Sensibilidade 0.867, especificidade 0.925, acurácia 0.9. Erros: adl-30-cam0.mp4, adl-38-cam0.mp4, adl-39-cam0.mp4, fall-08-cam0.mp4, fall-12-cam0.mp4, fall-20-cam0.mp4, fall-21-cam0.mp4.
 
 Por conjunto — só a validação é uma medida independente:
 
 | Conjunto | Vídeos | Quedas detectadas | Falsos alarmes | Sensibilidade | Especificidade |
 |---|---|---|---|---|---|
 | Ajuste (limiares calibrados nestes clipes) | 8 | 4 de 4 | 0 de 4 | 1.0 | 1.0 |
-| Validação (clipes fora do ajuste) | 62 | 22 de 26 | 2 de 36 | 0.846 | 0.944 |
+| Validação (clipes fora do ajuste) | 62 | 22 de 26 | 3 de 36 | 0.846 | 0.917 |
 
 ## adl-01-cam0.mp4
 
@@ -99,14 +99,14 @@ Conteúdo segundo o dataset: agachar.
 150 quadros processados a 30 fps; pessoa visível em 95% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
 - Pessoa 1 (0.3–5.0 s): em pé 63%, sentado/agachado/curvado 37%.
 
-- Verificação — Sem desvio (0.3–5.0 s, prioridade sugerida low, confiança 0.88): Nenhum movimento fora do padrão. Posturas observadas: em pé 63%, sentado/agachado/curvado 37%.
+- Verificação — Sem desvio (0.3–5.0 s, prioridade sugerida low, confiança 0.89): Nenhum movimento fora do padrão. Posturas observadas: em pé 63%, sentado/agachado/curvado 37%.
 
 ## adl-02-cam0.mp4
 
 180 quadros processados a 30 fps; pessoa visível em 82% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
-- Pessoa 1 (1.1–6.0 s): em pé 70%, sentado/agachado/curvado 30%.
+- Pessoa 1 (1.1–6.0 s): em pé 69%, sentado/agachado/curvado 31%.
 
-- Verificação — Sem desvio (1.1–6.0 s, prioridade sugerida low, confiança 0.90): Nenhum movimento fora do padrão. Posturas observadas: em pé 70%, sentado/agachado/curvado 30%.
+- Verificação — Sem desvio (1.1–6.0 s, prioridade sugerida low, confiança 0.90): Nenhum movimento fora do padrão. Posturas observadas: em pé 69%, sentado/agachado/curvado 31%.
 
 ## adl-03-cam0.mp4
 
@@ -218,9 +218,9 @@ Conteúdo segundo o dataset: curvar-se para pegar objeto.
 ## adl-18-cam0.mp4
 
 265 quadros processados a 30 fps; pessoa visível em 67% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
-- Pessoa 1 (1.7–7.9 s): em pé 77%, sentado/agachado/curvado 23%.
+- Pessoa 1 (1.7–7.9 s): em pé 76%, sentado/agachado/curvado 24%.
 
-- Verificação — Sem desvio (1.7–7.9 s, prioridade sugerida low, confiança 0.64): Nenhum movimento fora do padrão. Posturas observadas: em pé 77%, sentado/agachado/curvado 23%.
+- Verificação — Sem desvio (1.7–7.9 s, prioridade sugerida low, confiança 0.64): Nenhum movimento fora do padrão. Posturas observadas: em pé 76%, sentado/agachado/curvado 24%.
 
 ## adl-19-cam0.mp4
 
@@ -308,7 +308,7 @@ Conteúdo segundo o dataset: curvar-se para pegar objeto.
 - Pessoa 1 (1.1–9.9 s): em pé 63%, sentado/agachado/curvado 21%, deitado 16%.
 - Pessoa 3 (12.5–13.3 s): deitado 100%.
 
-- Verificação — Sem desvio (1.1–9.9 s, prioridade sugerida low, confiança 0.84): Nenhum movimento fora do padrão. Posturas observadas: em pé 63%, sentado/agachado/curvado 21%, deitado 16%.
+- **Desvio** — Queda (6.5–9.9 s, prioridade sugerida high, confiança 0.51): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.47 altura de corpo em 1.8 s (pico de 0.8 alturas/s).
 
 ## adl-31-cam0.mp4
 
@@ -342,9 +342,9 @@ Conteúdo segundo o dataset: curvar-se para pegar objeto.
 
 280 quadros processados a 30 fps; pessoa visível em 79% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
 - Pessoa 1 (0.0–3.1 s): em pé 36%, sentado/agachado/curvado 37%, deitado 27%.
-- Pessoa 2 (5.0–9.3 s): em pé 32%, sentado/agachado/curvado 29%, deitado 39%.
+- Pessoa 2 (5.0–9.3 s): em pé 31%, sentado/agachado/curvado 30%, deitado 39%.
 
-- Verificação — Sem desvio (5.0–9.3 s, prioridade sugerida low, confiança 0.84): Nenhum movimento fora do padrão. Posturas observadas: em pé 32%, sentado/agachado/curvado 29%, deitado 39%.
+- Verificação — Sem desvio (5.0–9.3 s, prioridade sugerida low, confiança 0.84): Nenhum movimento fora do padrão. Posturas observadas: em pé 31%, sentado/agachado/curvado 30%, deitado 39%.
 
 ## adl-36-cam0.mp4
 
@@ -366,7 +366,7 @@ Conteúdo segundo o dataset: sentar e deitar na cama.
 345 quadros processados a 30 fps; pessoa visível em 64% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
 - Pessoa 1 (0.8–11.5 s): em pé 52%, sentado/agachado/curvado 21%, deitado 27%.
 
-- **Desvio** — Queda (5.6–11.5 s, prioridade sugerida critical, confiança 0.37): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.48 altura de corpo em 2.0 s (pico de 0.8 alturas/s). Depois da queda permaneceu praticamente imóvel por 2.6 s.
+- **Desvio** — Queda (5.6–11.5 s, prioridade sugerida high, confiança 0.37): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.48 altura de corpo em 2.0 s (pico de 0.8 alturas/s).
 
 ## adl-39-cam0.mp4
 
@@ -409,7 +409,7 @@ Conteúdo segundo o dataset: queda a partir de pé.
 96 quadros processados a 30 fps; pessoa visível em 94% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
 - Pessoa 1 (0.0–3.0 s): em pé 12%, sentado/agachado/curvado 12%, deitado 76%.
 
-- **Desvio** — Queda (0.3–3.0 s, prioridade sugerida high, confiança 0.48): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.69 altura de corpo em 1.4 s (pico de 0.8 alturas/s).
+- **Desvio** — Queda (0.3–3.0 s, prioridade sugerida high, confiança 0.49): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.69 altura de corpo em 1.4 s (pico de 0.8 alturas/s).
 
 ## fall-05-cam0.mp4
 
@@ -474,7 +474,7 @@ Conteúdo segundo o dataset: queda a partir de pé, com outra pessoa sentada na 
 85 quadros processados a 30 fps; pessoa visível em 100% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
 - Pessoa 1 (0.0–2.8 s): em pé 74%, sentado/agachado/curvado 15%, deitado 11%.
 - Pessoa 2 (0.0–2.8 s): em pé 100%.
-- Pessoa 3 (0.4–2.7 s): em pé 29%, sentado/agachado/curvado 71%.
+- Pessoa 3 (0.4–2.7 s): em pé 36%, sentado/agachado/curvado 64%.
 
 - **Desvio** — Queda (1.5–2.8 s, prioridade sugerida high, confiança 0.60): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.91 altura de corpo em 1.2 s (pico de 1.1 alturas/s).
 
@@ -485,7 +485,7 @@ Conteúdo segundo o dataset: queda a partir de pé, com outra pessoa sentada na 
 - Pessoa 2 (0.0–2.0 s): em pé 100%.
 - Pessoa 3 (0.0–2.0 s): sentado/agachado/curvado 74%, deitado 26%.
 
-- **Desvio** — Queda (0.3–2.0 s, prioridade sugerida high, confiança 0.55): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.54 altura de corpo em 1.3 s (pico de 0.9 alturas/s).
+- **Desvio** — Queda (0.3–2.0 s, prioridade sugerida high, confiança 0.55): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.55 altura de corpo em 1.3 s (pico de 0.9 alturas/s).
 
 ## fall-15-cam0.mp4
 
@@ -568,7 +568,7 @@ Conteúdo segundo o dataset: queda a partir da cadeira.
 ## fall-26-cam0.mp4
 
 61 quadros processados a 30 fps; pessoa visível em 72% deles. Modelos: yolov8n-pose (postura) e yolov8n (objetos).
-- Pessoa 1 (0.0–1.7 s): em pé 18%, sentado/agachado/curvado 32%, deitado 50%.
+- Pessoa 1 (0.0–1.7 s): em pé 18%, sentado/agachado/curvado 34%, deitado 48%.
 
 - **Desvio** — Queda (0.3–1.7 s, prioridade sugerida high, confiança 0.61): Descida rápida seguida de postura deitada fora de cama ou sofá: parte superior do corpo desceu 0.65 altura de corpo em 1.3 s (pico de 1.1 alturas/s).
 

@@ -186,6 +186,7 @@ modules/audio_thamy/              # Módulo de áudio da Thamy e conversor para 
 src/video_analysis/               # Vídeo (Vini): OpenCV, YOLOv8-pose, YOLOv8, regras de movimento, relatório
 src/anomaly_detection/            # Anomalias clínicas (Vini): sinais vitais, prescrições, movimentação
 src/fase4_samples.py              # Gera as amostras de vídeo e clínico para a integração
+src/api/fase4.py                  # Painel web da Fase 4 (rotas); página em src/api/static/fase4.html
 docs/fase4_video_e_anomalias.md   # Vídeo e anomalias: datasets, métodos, resultados, limitações
 docs/fase4_relatorio_video.md     # Relatório automático da análise de vídeo
 docs/fase4_relatorio_clinico.md   # Relatório automático das anomalias clínicas
@@ -373,6 +374,29 @@ py -m pytest
 `tests/test_fase4_recebidos.py` confere as amostras da pasta de recebidos: contrato v1, módulo
 compatível com o nome do arquivo, `P0001` e consolidação das três fontes num só grupo.
 
+## Fase 4 — Painel web
+
+O mesmo servidor do chat da Fase 3 serve um painel da Fase 4, com quatro abas:
+
+- **Alerta integrado:** roda o fluxo sobre `data/fase4_recebidos/`, mostra os eventos das
+  três modalidades, as regras que definiram a prioridade e o resumo, e registra a revisão
+  humana (confirmar ou descartar) com revisor, horário e auditoria.
+- **Vídeo:** os 70 clipes, com o vídeo anotado (esqueleto, objetos e avisos), os achados
+  de cada um e o resultado da validação; há filtro para os erros do detector.
+- **Dados clínicos:** gráfico dos sinais vitais do paciente de exemplo, com os avisos
+  marcados, e um replay que reapresenta a internação observação a observação.
+- **Áudio:** gravação, transcrição, sentimento, termos sinalizados e atributos acústicos.
+
+```powershell
+py -m pip install -r requirements-fase4.txt -r requirements-fase4-video-clinico.txt -r requirements-web.txt
+py -m uvicorn src.api.server:app --port 8000     # ou: python manage.py web
+```
+
+Abra `http://localhost:8000/fase4`. O painel lê as saídas já geradas: os vídeos anotados
+vêm de `output/video/` (rode `py -m src.video_analysis.run --crop right --annotate`) e o
+gráfico precisa do MIMIC-IV Demo baixado. Sem eles, mostra só os resultados versionados.
+As decisões de revisão ficam em `output/fase4_painel/revisoes.json`.
+
 ## Fase 4 — Vídeo e anomalias clínicas (Vini)
 
 ```powershell
@@ -390,8 +414,8 @@ As saídas ficam em `output/clinical/` e `output/video/` (fora do Git). Resultad
 execução de 16/11/2026:
 
 - **Vídeo:** limiares ajustados em 8 clipes e validados nos outros 62 do dataset, sem
-  reajuste: 22 de 26 quedas detectadas (84,6%) e 2 falsos alarmes em 36 atividades normais
-  (especificidade de 94,4%), a ≈ 39 quadros/s em CPU. Três das quatro quedas não detectadas
+  reajuste: 22 de 26 quedas detectadas (84,6%) e 3 falsos alarmes em 36 atividades normais
+  (especificidade de 91,7%), a ≈ 39 quadros/s em CPU. Três das quatro quedas não detectadas
   partem da posição sentada.
 - **Sinais vitais:** 19.805 observações de 100 pacientes, 16,2% anômalas, 1.871 eventos
   (3,7 por paciente-dia) no perfil de UTI.

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitoramento multimodal — Fase 4</title>
+<style>
+  :root{
+    --azul:#1F4E79; --azul-claro:#eaf2fa; --fundo:#f4f6f9; --borda:#d8dfe8;
+    --texto:#1d2b3a; --cinza:#66788c; --verde:#1e7d43; --verde-bg:#e5f5ea;
+    --ambar:#8a6100; --ambar-bg:#fdf3d7; --verm:#a12c22; --verm-bg:#fbe7e4;
+    --roxo:#5b3fa8; --roxo-bg:#efeafa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--fundo);color:var(--texto);min-height:100vh;display:flex;flex-direction:column}
+  header{background:var(--azul);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  header h1{font-size:17px;margin:0;font-weight:600}
+  header .sub{font-size:12px;opacity:.85}
+  .badge{font-size:11px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.16);display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:none}
+  .dot{width:8px;height:8px;border-radius:50%;background:#f5b942}
+  .dot.ok{background:#5ad07a}.dot.err{background:#ff7b6e}
+  nav{background:#fff;border-bottom:1px solid var(--borda);padding:0 20px;display:flex;gap:4px;flex-wrap:wrap}
+  nav button{border:none;background:none;padding:12px 16px;font:inherit;font-size:14px;color:var(--cinza);cursor:pointer;border-bottom:3px solid transparent}
+  nav button:hover{color:var(--azul)}
+  nav button.on{color:var(--azul);font-weight:600;border-bottom-color:var(--azul)}
+  main{flex:1;padding:20px;max-width:1280px;width:100%;margin:0 auto}
+  section{display:none}
+  section.on{display:block}
+  .card{background:#fff;border:1px solid var(--borda);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+  .card h2{font-size:15px;margin:0 0 10px}
+  .card h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--cinza);margin:16px 0 8px}
+  .card h3:first-child{margin-top:0}
+  .grid{display:grid;gap:16px}
+  .cols-2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .cols-side{grid-template-columns:330px minmax(0,1fr)}
+  @media (max-width:900px){.cols-2,.cols-side{grid-template-columns:minmax(0,1fr)}}
+  .chip{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;border:1px solid var(--borda);color:var(--cinza);background:var(--fundo);white-space:nowrap}
+  .chip.low{background:var(--fundo)}
+  .chip.medium{background:var(--ambar-bg);color:var(--ambar);border-color:#eeddad}
+  .chip.high{background:#fde9d9;color:#9a4a08;border-color:#f2c9a5;font-weight:600}
+  .chip.critical{background:var(--verm-bg);color:var(--verm);border-color:#efc4be;font-weight:700}
+  .chip.ok{background:var(--verde-bg);color:var(--verde);border-color:#bfe4cb}
+  .chip.audio{background:var(--azul-claro);color:var(--azul);border-color:#c9dbee}
+  .chip.video{background:var(--verde-bg);color:var(--verde);border-color:#bfe4cb}
+  .chip.clinical{background:var(--ambar-bg);color:var(--ambar);border-color:#eeddad}
+  .chip.rule{background:var(--roxo-bg);color:var(--roxo);border-color:#d6caf0;font-weight:600}
+  .muted{color:var(--cinza);font-size:12.5px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .big{font-size:26px;font-weight:700;line-height:1.1}
+  .item{padding:10px 0;border-top:1px dashed var(--borda);font-size:13.5px;line-height:1.5}
+  .item:first-of-type{border-top:none}
+  .mono{font-family:Consolas,monospace;font-size:11.5px;color:var(--cinza);word-break:break-all}
+  .alert-head{border-left:6px solid var(--cinza);padding-left:14px}
+  .alert-head.critical{border-color:var(--verm)}
+  .alert-head.high{border-color:#d9731a}
+  .alert-head.medium{border-color:#c79a14}
+  pre.summary{white-space:pre-wrap;font:inherit;font-size:13px;line-height:1.55;background:var(--fundo);border-radius:8px;padding:12px;margin:0}
+  label{font-size:12px;color:var(--cinza);display:block;margin:10px 0 4px}
+  input[type=text],textarea,select{width:100%;padding:9px 10px;border:1px solid var(--borda);border-radius:8px;font:inherit;font-size:13px;background:#fff}
+  textarea{min-height:60px;resize:vertical}
+  .btn{padding:9px 16px;border-radius:8px;border:1px solid var(--borda);background:#fff;font:inherit;font-size:13px;cursor:pointer}
+  .btn:hover{background:var(--fundo)}
+  .btn.primary{background:var(--azul);color:#fff;border-color:var(--azul);font-weight:600}
+  .btn.danger{background:#fff;color:var(--verm);border-color:#efc4be}
+  .btn.confirm{background:var(--verde);color:#fff;border-color:var(--verde);font-weight:600}
+  .btn:disabled{opacity:.5;cursor:default}
+  .stat{flex:1;min-width:120px;background:var(--fundo);border-radius:10px;padding:10px 12px}
+  .stat .n{font-size:20px;font-weight:700}
+  .stat .l{font-size:11.5px;color:var(--cinza)}
+  .cliplist{max-height:560px;overflow-y:auto;margin:0 -6px}
+  .clip{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px}
+  .clip:hover{background:var(--fundo)}
+  .clip.on{background:var(--azul-claro)}
+  .clip .err{color:var(--verm);font-weight:700}
+  video,img.frame{width:100%;border-radius:10px;background:#000;display:block}
+  audio{width:100%}
+  svg text{font-family:'Segoe UI',system-ui,sans-serif}
+  .feed{max-height:420px;overflow-y:auto}
+  .bar{height:10px;border-radius:999px;background:var(--fundo);overflow:hidden;display:flex}
+  .bar span{display:block;height:100%}
+  footer{font-size:11px;color:var(--cinza);text-align:center;padding:8px 16px;background:#fff;border-top:1px solid var(--borda)}
+  .empty{padding:24px;text-align:center;color:var(--cinza);font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏥 Monitoramento multimodal de pacientes</h1>
+  <span class="sub">Tech Challenge Fase 4 — áudio, vídeo e dados clínicos</span>
+  <span class="badge"><span class="dot" id="statusDot"></span><span id="statusTxt">conectando…</span></span>
+  <a class="badge" href="/" style="margin-left:auto">← Assistente da Fase 3</a>
+</header>
+<nav id="tabs">
+  <button data-tab="alerta" class="on">Alerta integrado</button>
+  <button data-tab="video">Vídeo</button>
+  <button data-tab="clinico">Dados clínicos</button>
+  <button data-tab="audio">Áudio</button>
+</nav>
+<main>
+  <section id="alerta" class="on"><div class="empty">Carregando o fluxo integrado…</div></section>
+  <section id="video"><div class="empty">Carregando os vídeos…</div></section>
+  <section id="clinico"><div class="empty">Carregando os dados clínicos (o primeiro acesso treina o modelo e leva alguns segundos)…</div></section>
+  <section id="audio"><div class="empty">Carregando o áudio…</div></section>
+</main>
+<footer>⚠️ Achados automatizados para avaliação profissional, com dados públicos desidentificados ou simulados. Não constituem diagnóstico nem indicação de conduta; a decisão é do profissional de saúde.</footer>
+
+<script>
+// ---------------------------------------------------------------- utilidades
+const PRIORITY = {low: 'baixa', medium: 'média', high: 'alta', critical: 'crítica'};
+const MODULE = {audio: 'áudio', video: 'vídeo', clinical: 'dados clínicos'};
+const KIND = {
+  fall_detected: 'Queda', bed_exit_attempt: 'Saída do leito', prolonged_immobility: 'Imobilidade prolongada',
+  agitation: 'Agitação', video_check: 'Sem desvio', vital_signs: 'Sinais vitais',
+  prescription_change: 'Prescrição', patient_transfer: 'Movimentação', clinical_check: 'Verificação clínica',
+  audio_check: 'Verificação de áudio', vocal_distress: 'Desconforto vocal', call_for_help: 'Pedido de ajuda',
+  respiratory_sound: 'Som respiratório', lab_result: 'Exame',
+};
+const REVIEW = {
+  pending_medical_review: 'pendente de revisão médica',
+  reviewed_confirmed: 'confirmado pelo revisor', reviewed_dismissed: 'descartado pelo revisor',
+};
+
+function el(tag, attrs, ...children){
+  const node = document.createElement(tag);
+  for (const [key, value] of Object.entries(attrs || {})){
+    if (value == null || value === false) continue;
+    if (key === 'class') node.className = value;
+    else if (key.startsWith('on')) node.addEventListener(key.slice(2), value);
+    else node.setAttribute(key, value === true ? '' : value);
+  }
+  for (const child of children.flat(Infinity)){
+    if (child == null || child === false) continue;
+    node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+  }
+  return node;
+}
+function svg(tag, attrs, ...children){
+  const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const [key, value] of Object.entries(attrs || {})) if (value != null) node.setAttribute(key, value);
+  for (const child of children.flat(Infinity)) if (child != null) node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+  return node;
+}
+const chip = (text, cls) => el('span', {class: 'chip ' + (cls || '')}, text);
+const priorityChip = (priority) => chip('prioridade ' + (PRIORITY[priority] || priority), priority);
+const when = (iso) => new Date(iso).toLocaleString('pt-BR', {dateStyle: 'short', timeStyle: 'medium'});
+const pct = (value) => (value * 100).toFixed(1).replace('.', ',') + '%';
+async function api(path, options){
+  const response = await fetch(path, options);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.detail || ('erro ' + response.status));
+  return data;
+}
+function show(id, ...children){ document.getElementById(id).replaceChildren(...children.flat(Infinity).filter((child) => child != null)); }
+function fail(id, error){ show(id, el('div', {class: 'card'}, el('div', {class: 'empty'}, 'Não foi possível carregar: ' + error.message))); }
+
+// ---------------------------------------------------------------- abas
+const loaded = {};
+const loaders = {alerta: loadAlerts, video: loadVideos, clinico: loadClinical, audio: loadAudio};
+document.querySelectorAll('#tabs button').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.tab)));
+function openTab(name){
+  document.querySelectorAll('#tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === name));
+  document.querySelectorAll('main section').forEach((s) => s.classList.toggle('on', s.id === name));
+  if (!loaded[name]){ loaded[name] = true; loaders[name]().catch((error) => { loaded[name] = false; fail(name, error); }); }
+}
+
+// ---------------------------------------------------------------- alerta integrado
+function eventItem(event){
+  return el('div', {class: 'item'},
+    el('div', {class: 'row'},
+      chip(MODULE[event.module] || event.module, event.module),
+      el('strong', {}, KIND[event.event_type] || event.event_type),
+      event.anomaly_detected ? priorityChip(event.priority) : chip('sem anomalia', 'ok'),
+      el('span', {class: 'muted'}, when(event.timestamp))),
+    el('div', {style: 'margin-top:4px'}, event.finding),
+    el('div', {class: 'mono'}, event.event_id + ' · ' + event.source.system + (event.source.model ? ' (' + event.source.model + ')' : '')));
+}
+
+function reviewBox(alert){
+  const review = alert.review;
+  if (review.status !== 'pending_medical_review'){
+    return el('div', {},
+      el('div', {class: 'row'}, chip(REVIEW[review.status], review.decision === 'confirmed' ? 'ok' : 'medium')),
+      el('p', {style: 'font-size:13.5px;margin:10px 0 4px'},
+        'Revisor: ', el('strong', {}, review.reviewer_name || review.reviewer_id), ' (' + review.reviewer_id + ') em ' + when(review.decided_at) + '.'),
+      review.notes ? el('p', {class: 'muted', style: 'margin:0 0 10px'}, 'Observação: ' + review.notes) : null,
+      el('button', {class: 'btn danger', onclick: async () => { await api('/api/fase4/revisao', {method: 'DELETE'}); await loadAlerts(); }},
+        'Apagar a decisão (refazer a demonstração)'));
+  }
+  const reviewer = el('input', {type: 'text', value: 'CRM-FICTICIO-0001'});
+  const name = el('input', {type: 'text', value: 'Revisor de demonstração'});
+  const notes = el('textarea', {placeholder: 'Opcional'});
+  const message = el('div', {class: 'muted', style: 'margin-top:8px'});
+  const send = (decision) => async () => {
+    message.textContent = 'Registrando…';
+    try{
+      await api('/api/fase4/revisao', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({alert_id: alert.alert_id, decision, reviewer_id: reviewer.value.trim(),
+          reviewer_name: name.value.trim() || null, notes: notes.value.trim() || null}),
+      });
+      await loadAlerts();
+    }catch(error){ message.textContent = 'Não registrado: ' + error.message; }
+  };
+  return el('div', {},
+    el('div', {class: 'row'}, chip(REVIEW[review.status], 'medium')),
+    el('label', {}, 'Identificação do revisor'), reviewer,
+    el('label', {}, 'Nome'), name,
+    el('label', {}, 'Observação'), notes,
+    el('div', {class: 'row', style: 'margin-top:12px'},
+      el('button', {class: 'btn confirm', onclick: send('confirmed')}, 'Confirmar o achado'),
+      el('button', {class: 'btn danger', onclick: send('dismissed')}, 'Descartar')),
+    message);
+}
+
+async function loadAlerts(){
+  const data = await api('/api/fase4/alertas');
+  const cards = [];
+  cards.push(el('div', {class: 'card'},
+    el('div', {class: 'row'},
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, data.intake.events_received), el('div', {class: 'l'}, 'eventos recebidos')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, data.intake.accepted), el('div', {class: 'l'}, 'aceitos pelo contrato ' + data.contract_version)),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, data.intake.rejected), el('div', {class: 'l'}, 'rejeitados')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, data.groups.filter((g) => g.alert).length), el('div', {class: 'l'}, 'alertas gerados')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, data.config.window_minutes + ' min'), el('div', {class: 'l'}, 'janela de consolidação')))));
+
+  for (const group of data.groups){
+    const alert = group.alert;
+    const head = el('div', {class: 'alert-head ' + (alert ? alert.priority : '')},
+      el('div', {class: 'row'},
+        el('span', {class: 'big'}, alert ? 'Alerta ' + (PRIORITY[alert.priority] || alert.priority) : 'Sem alerta'),
+        alert ? chip(REVIEW[alert.review.status], alert.review.status === 'pending_medical_review' ? 'medium' : 'ok') : null),
+      el('div', {class: 'muted', style: 'margin-top:4px'},
+        'Paciente ' + group.patient_id + ' · janela de ' + when(group.window_start) + ' a ' + when(group.window_end)
+        + (alert ? ' · ' + alert.alert_id : '')),
+      el('div', {class: 'row', style: 'margin-top:8px'},
+        group.sources_received.map((source) => chip(MODULE[source] + ' recebido', source)),
+        group.sources_missing.map((source) => chip(MODULE[source] + ' ausente'))));
+
+    const left = el('div', {class: 'card'}, head,
+      el('h3', {}, 'Eventos da janela'), group.events.map(eventItem));
+    const right = [];
+    if (alert){
+      right.push(el('div', {class: 'card'},
+        el('h3', {}, 'Por que esta prioridade'),
+        alert.priority_reasons.map((reason) => el('div', {class: 'item'},
+          el('div', {class: 'row'}, chip(reason.rule_id, 'rule'),
+            el('span', {class: 'muted'}, (reason.priority_before ? PRIORITY[reason.priority_before] + ' → ' : '') + PRIORITY[reason.priority_after])),
+          el('div', {}, reason.description))),
+        el('h3', {}, 'Revisão humana'), reviewBox(alert)));
+    }
+    right.push(el('div', {class: 'card'}, el('h3', {}, 'Resumo para a equipe (' + group.summary.method + ')'),
+      el('pre', {class: 'summary'}, group.summary.text)));
+    cards.push(el('div', {class: 'grid cols-2'}, left, el('div', {}, right)));
+  }
+  cards.push(el('div', {class: 'muted'}, 'Execução ' + data.run_id + ' em ' + when(data.generated_at) + ' · regras ' + data.rules_version
+    + ' · amostras de data/fase4_recebidos · auditoria em logs/audit-fase4-painel.jsonl'));
+  show('alerta', cards);
+}
+
+// ---------------------------------------------------------------- vídeo
+let videoData = null, videoFilter = 'todos', videoSelected = null;
+const isError = (video) => video.dataset_label && video.dataset_label !== video.predicted_label;
+const hasDeviation = (video) => video.events.some((event) => event.kind !== 'video_check');
+
+function videoDetail(video){
+  const media = video.video_url
+    ? el('video', {src: video.video_url, controls: true, autoplay: true, muted: true, loop: true, playsinline: true})
+    : video.keyframes.length ? el('img', {class: 'frame', src: video.keyframes[0], alt: 'Quadro anotado'})
+    : el('div', {class: 'empty'}, 'Vídeo anotado não disponível nesta máquina. Rode: py -m src.video_analysis.run --crop right --annotate');
+  const label = video.dataset_label === 'fall' ? 'queda' : 'atividade normal';
+  return el('div', {class: 'card'},
+    el('div', {class: 'row'}, el('h2', {style: 'margin:0'}, video.name),
+      chip(video.split === 'ajuste' ? 'conjunto de ajuste' : 'conjunto de validação'),
+      chip('rótulo do dataset: ' + label),
+      isError(video) ? chip('erro do detector', 'critical') : chip('resultado correto', 'ok')),
+    video.description ? el('div', {class: 'muted', style: 'margin:6px 0 10px'}, 'Conteúdo: ' + video.description) : el('div', {style: 'height:10px'}),
+    media,
+    el('h3', {}, 'Achados'),
+    video.events.map((event) => el('div', {class: 'item'},
+      el('div', {class: 'row'}, el('strong', {}, KIND[event.kind] || event.kind),
+        event.kind === 'video_check' ? chip('sem anomalia', 'ok') : priorityChip(event.priority),
+        event.start_s != null ? el('span', {class: 'muted'}, event.start_s.toFixed(1) + ' s a ' + event.end_s.toFixed(1) + ' s · confiança ' + event.confidence.toFixed(2)) : null),
+      event.detail ? el('div', {style: 'margin-top:4px'}, event.detail) : null)),
+    video.tracks ? [el('h3', {}, 'Postura por pessoa'),
+      video.tracks.map((track) => {
+        const share = track.posture_share;
+        return el('div', {class: 'item'},
+          el('div', {class: 'muted'}, 'Pessoa ' + track.track_id + ' · ' + track.start_s.toFixed(1) + ' s a ' + track.end_s.toFixed(1) + ' s'),
+          el('div', {class: 'bar', style: 'margin:6px 0'},
+            el('span', {style: 'width:' + share.upright * 100 + '%;background:#50c878', title: 'em pé'}),
+            el('span', {style: 'width:' + share.low * 100 + '%;background:#f0c020', title: 'abaixado'}),
+            el('span', {style: 'width:' + share.lying * 100 + '%;background:#e04a3c', title: 'deitado'})),
+          el('div', {class: 'muted'}, 'em pé ' + Math.round(share.upright * 100) + '% · abaixado ' + Math.round(share.low * 100) + '% · deitado ' + Math.round(share.lying * 100) + '%'));
+      })] : null,
+    video.objects ? [el('h3', {}, 'Objetos da cena (YOLOv8)'),
+      el('div', {class: 'row'}, video.objects.length ? video.objects.map((object) => chip(object.label + ' ' + object.confidence.toFixed(2))) : el('span', {class: 'muted'}, 'nenhum'))] : null,
+    video.models ? el('div', {class: 'muted', style: 'margin-top:12px'}, video.processed_frames + ' quadros a ' + Math.round(video.fps) + ' fps · pessoa visível em '
+      + Math.round(video.person_coverage * 100) + '% · ' + video.models.pose + ' + ' + video.models.objects) : null);
+}
+
+function renderVideos(){
+  const data = videoData;
+  const filters = {todos: () => true, quedas: (v) => v.dataset_label === 'fall', normais: (v) => v.dataset_label === 'adl',
+    desvios: hasDeviation, erros: isError};
+  const list = data.videos.filter(filters[videoFilter]);
+  if (!list.includes(videoSelected)) videoSelected = list[0] || null;
+  const evaluation = data.evaluation || {};
+  const validation = (evaluation.by_split || {}).validacao || evaluation;
+  const summary = el('div', {class: 'card'},
+    el('h2', {}, validation === evaluation ? 'Comparação com o rótulo do dataset' : 'Validação em ' + validation.videos + ' clipes fora do ajuste'),
+    validation.videos ? el('div', {class: 'row'},
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, validation.true_positive + ' de ' + (validation.true_positive + validation.false_negative)), el('div', {class: 'l'}, 'quedas detectadas')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, validation.false_positive + ' de ' + (validation.false_positive + validation.true_negative)), el('div', {class: 'l'}, 'falsos alarmes de queda')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, pct(validation.sensitivity)), el('div', {class: 'l'}, 'sensibilidade')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, pct(validation.specificity)), el('div', {class: 'l'}, 'especificidade'))) : null,
+    el('div', {class: 'muted', style: 'margin-top:10px'},
+      'UR Fall Detection Dataset · postura com YOLOv8-pose e objetos com YOLOv8. Limiares ajustados em 8 clipes e congelados antes da validação.'
+      + (data.source === 'versioned' ? ' Mostrando o resumo versionado: os vídeos não foram processados nesta máquina.' : '')));
+
+  const buttons = Object.keys(filters).map((name) => el('button', {class: 'btn' + (name === videoFilter ? ' primary' : ''),
+    onclick: () => { videoFilter = name; renderVideos(); }}, name + ' (' + data.videos.filter(filters[name]).length + ')'));
+  const items = list.map((video) => {
+    const main = video.events.find((event) => event.kind !== 'video_check') || video.events[0];
+    return el('div', {class: 'clip' + (video === videoSelected ? ' on' : ''), onclick: () => { videoSelected = video; renderVideos(); }},
+      el('span', {}, isError(video) ? el('span', {class: 'err'}, '✗ ') : null, video.clip),
+      main.kind === 'video_check' ? chip('sem desvio', 'ok') : chip(KIND[main.kind], main.priority));
+  });
+  show('video', summary, el('div', {class: 'grid cols-side'},
+    el('div', {class: 'card'}, el('div', {class: 'row', style: 'margin-bottom:10px'}, buttons),
+      el('div', {class: 'cliplist'}, items.length ? items : el('div', {class: 'empty'}, 'Nenhum clipe neste filtro.'))),
+    videoSelected ? videoDetail(videoSelected) : el('div', {class: 'card'}, el('div', {class: 'empty'}, 'Selecione um clipe.'))));
+}
+async function loadVideos(){
+  videoData = await api('/api/fase4/videos');
+  videoSelected = videoData.videos.find((video) => video.clip === 'fall-01-cam0') || videoData.videos[0];
+  renderVideos();
+}
+
+// ---------------------------------------------------------------- dados clínicos
+const SIGNALS = [
+  {key: 'hr', label: 'Frequência cardíaca (bpm)', low: 51, high: 90, color: '#c9504f'},
+  {key: 'sbp', label: 'Pressão sistólica (mmHg)', low: 111, high: 219, color: '#3b82c4'},
+  {key: 'spo2', label: 'Saturação de oxigênio (%)', low: 96, high: 100, color: '#3f9a57'},
+  {key: 'rr', label: 'Frequência respiratória (irpm)', low: 12, high: 20, color: '#7c5cc4'},
+];
+const PRIORITY_COLOR = {low: '#8795a8', medium: '#c79a14', high: '#d9731a', critical: '#a12c22'};
+let clinical = null, cursor = 0, timer = null;
+const asDate = (iso) => new Date(/[zZ]|[+-]\d\d:\d\d$/.test(iso) ? iso : iso + 'Z');
+
+function chart(points, upto){
+  const W = 900, H = 118, PAD_L = 44, PAD_R = 10, GAP = 14;
+  const t0 = asDate(points[0].t).getTime(), t1 = asDate(points[points.length - 1].t).getTime();
+  const x = (iso) => PAD_L + (asDate(iso).getTime() - t0) / Math.max(t1 - t0, 1) * (W - PAD_L - PAD_R);
+  const root = svg('svg', {viewBox: '0 0 ' + W + ' ' + ((H + GAP) * SIGNALS.length + 22), width: '100%', role: 'img',
+    'aria-label': 'Série de sinais vitais com os avisos emitidos'});
+  SIGNALS.forEach((signal, row) => {
+    const top = row * (H + GAP);
+    const values = points.map((point) => point[signal.key]).filter((value) => value != null);
+    if (!values.length) return;
+    const min = Math.min(...values, signal.low) - 2, max = Math.max(...values, Math.min(signal.high, Math.max(...values))) + 2;
+    const y = (value) => top + 16 + (1 - (value - min) / (max - min)) * (H - 22);
+    root.append(svg('rect', {x: PAD_L, y: top + 12, width: W - PAD_L - PAD_R, height: H - 14, fill: '#fafbfc', stroke: '#e3e8ee'}));
+    const bandTop = y(Math.min(signal.high, max)), bandBottom = y(Math.max(signal.low, min));
+    root.append(svg('rect', {x: PAD_L, y: bandTop, width: W - PAD_L - PAD_R, height: Math.max(bandBottom - bandTop, 0), fill: '#e5f5ea'}));
+    root.append(svg('text', {x: PAD_L, y: top + 8, 'font-size': 11, fill: '#52606d'}, signal.label));
+    root.append(svg('text', {x: PAD_L - 5, y: y(max) + 6, 'font-size': 10, fill: '#8795a8', 'text-anchor': 'end'}, Math.round(max)));
+    root.append(svg('text', {x: PAD_L - 5, y: y(min), 'font-size': 10, fill: '#8795a8', 'text-anchor': 'end'}, Math.round(min)));
+    const shown = points.slice(0, upto).filter((point) => point[signal.key] != null);
+    if (shown.length > 1) root.append(svg('polyline', {fill: 'none', stroke: signal.color, 'stroke-width': 1.6,
+      points: shown.map((point) => x(point.t).toFixed(1) + ',' + y(point[signal.key]).toFixed(1)).join(' ')}));
+    shown.filter((point) => point.emit).forEach((point) => root.append(
+      svg('circle', {cx: x(point.t), cy: y(point[signal.key]), r: point.priority === 'critical' ? 5 : 3.6,
+        fill: PRIORITY_COLOR[point.priority], stroke: '#fff', 'stroke-width': 1},
+        svg('title', {}, when(asDate(point.t)) + ' · prioridade ' + PRIORITY[point.priority] + ' · escore ' + point.score))));
+  });
+  const base = (H + GAP) * SIGNALS.length + 12;
+  root.append(svg('text', {x: PAD_L, y: base, 'font-size': 10, fill: '#8795a8'}, when(asDate(points[0].t))));
+  root.append(svg('text', {x: W - PAD_R, y: base, 'font-size': 10, fill: '#8795a8', 'text-anchor': 'end'}, when(asDate(points[points.length - 1].t))));
+  return root;
+}
+
+function renderClinical(){
+  const points = clinical.series.points;
+  const now = points.length ? asDate(points[Math.max(cursor - 1, 0)].t) : null;
+  const complete = !points.length || cursor >= points.length;
+  const events = clinical.events.filter((event) => complete || new Date(event.timestamp) <= now);
+  const counts = {};
+  events.forEach((event) => { counts[event.priority] = (counts[event.priority] || 0) + 1; });
+
+  const controls = points.length ? el('div', {class: 'row', style: 'margin:4px 0 10px'},
+    el('button', {class: 'btn primary', onclick: () => {
+      if (timer){ clearInterval(timer); timer = null; renderClinical(); return; }
+      if (cursor >= points.length) cursor = 1;
+      timer = setInterval(() => { cursor += 1; if (cursor >= points.length){ clearInterval(timer); timer = null; } renderClinical(); }, 140);
+      renderClinical();
+    }}, timer ? '⏸ Pausar' : '▶ Reproduzir em tempo real'),
+    el('button', {class: 'btn', onclick: () => { clearInterval(timer); timer = null; cursor = points.length; renderClinical(); }}, 'Mostrar tudo'),
+    el('span', {class: 'muted'}, complete ? points.length + ' observações' : 'observação ' + cursor + ' de ' + points.length + ' · ' + when(now))) : null;
+
+  const left = el('div', {class: 'card'},
+    el('h2', {}, 'Sinais vitais — paciente ' + clinical.patient_id),
+    el('div', {class: 'muted'}, 'MIMIC-IV Clinical Database Demo · perfil de limiares de UTI · a faixa verde é a referência; cada ponto marcado é um aviso emitido.'),
+    controls,
+    points.length ? chart(points, cursor) : el('div', {class: 'empty'},
+      'Série indisponível nesta máquina (' + (clinical.series.unavailable || 'sem dados') + '). Rode: py -m src.anomaly_detection.data_loader --download'));
+
+  const right = el('div', {class: 'card'},
+    el('h2', {}, 'Eventos emitidos' + (complete ? '' : ' até agora')),
+    el('div', {class: 'row', style: 'margin-bottom:8px'},
+      ['critical', 'high', 'medium', 'low'].filter((p) => counts[p]).map((p) => chip(counts[p] + ' ' + PRIORITY[p], p))),
+    el('div', {class: 'feed'},
+      events.length ? events.slice().reverse().map((event) => el('div', {class: 'item'},
+        el('div', {class: 'row'}, el('strong', {}, KIND[event.event_type] || event.event_type), priorityChip(event.priority),
+          el('span', {class: 'muted'}, when(event.timestamp))),
+        el('div', {style: 'margin-top:4px'}, event.finding))) : el('div', {class: 'empty'}, 'Nenhum evento ainda.')));
+  show('clinico', el('div', {class: 'grid cols-2'}, left, right));
+}
+async function loadClinical(){
+  clinical = await api('/api/fase4/clinico');
+  cursor = clinical.series.points.length;
+  renderClinical();
+}
+
+// ---------------------------------------------------------------- áudio
+async function loadAudio(){
+  const data = await api('/api/fase4/audio');
+  const sentiment = data.text_analysis.sentiment, scores = sentiment.confidence;
+  const terms = data.alerts.flatMap((alert) => alert.detected_terms || []);
+  const acoustic = data.acoustic;
+  const left = el('div', {class: 'card'},
+    el('h2', {}, 'Consulta simulada — ' + data.metadata.file_name),
+    data.audio_url ? el('audio', {src: data.audio_url, controls: true}) : el('div', {class: 'muted'}, 'Gravação não disponível.'),
+    el('h3', {}, 'Transcrição (Azure AI Speech)'),
+    el('pre', {class: 'summary'}, data.transcription.text),
+    el('h3', {}, 'Termos sinalizados para revisão'),
+    el('div', {class: 'row'}, terms.length ? terms.map((term) => chip(term, 'medium')) : el('span', {class: 'muted'}, 'nenhum')),
+    el('h3', {}, 'Evento publicado para a integração'),
+    data.event ? el('div', {class: 'item'},
+      el('div', {class: 'row'}, chip(MODULE.audio, 'audio'), el('strong', {}, KIND[data.event.event_type] || data.event.event_type),
+        data.event.anomaly_detected ? priorityChip(data.event.priority) : chip('sem anomalia', 'ok')),
+      el('div', {style: 'margin-top:4px'}, data.event.finding)) : el('span', {class: 'muted'}, 'não encontrado'),
+    el('div', {class: 'muted', style: 'margin-top:10px'}, 'A busca por palavras-chave não é um achado clínico validado; por isso o evento não eleva a prioridade do alerta.'));
+  const right = el('div', {class: 'card'},
+    el('h3', {}, 'Sentimento (Azure AI Language)'),
+    el('div', {class: 'row'}, el('span', {class: 'big'}, {negative: 'Negativo', positive: 'Positivo', neutral: 'Neutro', mixed: 'Misto'}[sentiment.label] || sentiment.label)),
+    el('div', {class: 'bar', style: 'margin:10px 0 6px'},
+      el('span', {style: 'width:' + scores.negative * 100 + '%;background:#e04a3c'}),
+      el('span', {style: 'width:' + scores.neutral * 100 + '%;background:#b8c2cc'}),
+      el('span', {style: 'width:' + scores.positive * 100 + '%;background:#50c878'})),
+    el('div', {class: 'muted'}, 'negativo ' + Math.round(scores.negative * 100) + '% · neutro ' + Math.round(scores.neutral * 100) + '% · positivo ' + Math.round(scores.positive * 100) + '%'),
+    el('h3', {}, 'Frases-chave'),
+    el('div', {class: 'row'}, data.text_analysis.key_phrases.map((phrase) => chip(phrase))),
+    el('h3', {}, 'Atributos acústicos (Librosa)'),
+    el('div', {class: 'row'},
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, acoustic.duration_seconds.toFixed(1) + ' s'), el('div', {class: 'l'}, 'duração')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, acoustic.rms_mean.toFixed(4)), el('div', {class: 'l'}, 'RMS médio')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, acoustic.zcr_mean.toFixed(3)), el('div', {class: 'l'}, 'ZCR médio')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, Math.round(acoustic.spectral_centroid_mean_hz) + ' Hz'), el('div', {class: 'l'}, 'centroide espectral')),
+      el('div', {class: 'stat'}, el('div', {class: 'n'}, acoustic.detected_event_count), el('div', {class: 'l'}, 'intervalos de atividade sonora'))),
+    el('div', {class: 'muted', style: 'margin-top:12px'}, 'Processado em ' + when(data.processed_at) + ' com os serviços Azure. O módulo não classifica alterações vocais.'));
+  show('audio', el('div', {class: 'grid cols-2'}, left, right));
+}
+
+// ---------------------------------------------------------------- início
+(async () => {
+  try{
+    const state = await api('/api/fase4/status');
+    document.getElementById('statusDot').className = 'dot ok';
+    document.getElementById('statusTxt').textContent = state.received_samples.length + ' amostras · vídeos '
+      + (state.video_annotated ? 'anotados' : state.video_processed ? 'processados' : 'não processados aqui');
+  }catch(error){
+    document.getElementById('statusDot').className = 'dot err';
+    document.getElementById('statusTxt').textContent = 'servidor indisponível';
+  }
+  openTab('alerta');
+})();
+</script>
+</body>
+</html>

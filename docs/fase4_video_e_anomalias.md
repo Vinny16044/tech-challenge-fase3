@@ -90,6 +90,10 @@ py -m src.video_analysis.run --crop right --from-cache  # reaplica as regras sem
 py -m src.fase4_samples
 py -m src.monitoring.workflow --input data/fase4_recebidos --summary-only
 
+# Painel web: alerta integrado, vídeos anotados, sinais vitais e áudio
+py -m pip install -r requirements-web.txt
+py -m uvicorn src.api.server:app --port 8000            # abra http://localhost:8000/fase4
+
 py -m pytest                                            # testes
 ```
 
@@ -200,28 +204,32 @@ independente de desempenho.
 | Conjunto | Vídeos | Quedas detectadas | Falsos alarmes de queda | Sensibilidade | Especificidade |
 |---|---|---|---|---|---|
 | Ajuste | 8 | 4 de 4 | 0 de 4 | 100% | 100% |
-| **Validação** | **62** | **22 de 26** | **2 de 36** | **84,6%** | **94,4%** |
-| Todos | 70 | 26 de 30 | 2 de 40 | 86,7% | 95,0% |
+| **Validação** | **62** | **22 de 26** | **3 de 36** | **84,6%** | **91,7%** |
+| Todos | 70 | 26 de 30 | 3 de 40 | 86,7% | 92,5% |
 
-Acurácia na validação: 90,3%. Foram processados 11.936 quadros em 306 s (≈ 39 quadros/s),
+Acurácia na validação: 88,7%. Foram processados 11.936 quadros em 306 s (≈ 39 quadros/s),
 acima dos 30 fps de gravação.
 
-Os seis erros da validação, um a um:
+Os sete erros da validação, um a um:
 
 | Clipe | Erro | Causa |
 |---|---|---|
 | `fall-08`, `fall-12` | queda não detectada | queda lenta a partir da cadeira: pico de 0,62 e 0,57 altura/s, abaixo do limite de 0,7 |
 | `fall-20` | queda não detectada | queda da cadeira com descida de 0,44 altura de corpo, logo abaixo do limite de 0,45; a pessoa termina meio sentada |
 | `fall-21` | queda não detectada | queda na direção da câmera: a pessoa sai do enquadramento, a pose se perde (43 de 55 quadros) e a postura deitada nunca é observada |
-| `adl-38`, `adl-39` | falso alarme | a pessoa deita no chão de propósito, rápido o bastante (pico de 0,79 e 0,71) para passar pela regra de queda; como fica parada, a prioridade sobe para `critical` |
+| `adl-30`, `adl-38`, `adl-39` | falso alarme | a pessoa deita no chão de propósito, rápido o bastante (pico de 0,79, 0,79 e 0,71) para passar pela regra de queda; em `adl-39` ela fica parada e a prioridade sobe para `critical` |
 
 - **Quedas a partir da posição sentada são o ponto fraco:** 3 das 4 quedas não detectadas.
   O conjunto de ajuste tinha uma só (`fall-22`).
 - **A margem é estreita:** entre as quedas detectadas na validação, o menor pico de
   velocidade foi 0,70 altura/s, exatamente o limite.
-- Além dos dois falsos alarmes de queda, `adl-32` gerou `prolonged_immobility`: a pessoa
+- Além dos três falsos alarmes de queda, `adl-32` gerou `prolonged_immobility`: a pessoa
   deita devagar no chão e fica parada. É o comportamento desejado da regra, mas num clipe
-  de atividade normal. Ao todo, 3 de 36 atividades normais geraram algum aviso.
+  de atividade normal. Ao todo, 4 de 36 atividades normais geraram algum aviso.
+- **Um clipe está no limite:** em `adl-30` a descida medida é de 0,47 altura de corpo,
+  contra o limite de 0,45, e o resultado muda com o arredondamento das coordenadas da
+  pose. Para o número ser reproduzível, a análise parte sempre das poses gravadas em
+  cache, tanto ao rodar os modelos quanto com `--from-cache`.
 - As atividades normais incluem os casos parecidos com queda: agachar, curvar-se, sentar
   e deitar na cama. Deitar na cama detectada pelo YOLOv8 não gera alarme.
 - Agitação e saída do leito não ocorrem nos clipes e foram verificadas só com poses
@@ -320,7 +328,7 @@ Resultado do fluxo (`RUN-recebidos-vini`, relatório em
 
 ## 8. Testes
 
-`py -m pytest` — 153 testes aprovados, 97 deles destes módulos:
+`py -m pytest` — 167 testes aprovados: 56 da integração, 97 destes módulos e 14 do painel web.
 
 | Arquivo | Cobre |
 |---|---|
@@ -328,6 +336,7 @@ Resultado do fluxo (`RUN-recebidos-vini`, relatório em
 | `tests/test_prescription_analysis.py` | os quatro detectores de prescrição e as movimentações entre unidades |
 | `tests/test_video_analysis.py` | postura, queda, leito, imobilidade, agitação, rastreador, objetos, relatório |
 | `tests/test_vini_outputs.py` | contrato 1.1, saídas versionadas e fluxo de integração |
+| `tests/test_painel_fase4.py` | rotas do painel, revisão humana, entrega de mídia |
 
 Os testes de vídeo usam poses sintéticas e não precisam dos vídeos nem dos modelos. Sem
 `numpy`, `pandas` ou `scikit-learn` instalados, os testes que dependem deles são pulados.
@@ -335,7 +344,7 @@ Os testes de vídeo usam poses sintéticas e não precisam dos vídeos nem dos m
 ## 9. Limitações
 
 - **Vídeo:** na validação, 4 de 26 quedas não foram detectadas, 3 delas a partir da
-  posição sentada, e deitar no chão de propósito gerou 2 falsos alarmes. Uma câmera, uma
+  posição sentada, e deitar no chão de propósito gerou 3 falsos alarmes. Uma câmera, uma
   cena por clipe, boa iluminação, ambiente doméstico. Oclusão, várias pessoas próximas e
   câmera em movimento não foram testadas. Queda na direção da câmera pode tirar a pessoa
   do enquadramento. Se a cama não for detectada, deitar rápido pode virar falso alarme.

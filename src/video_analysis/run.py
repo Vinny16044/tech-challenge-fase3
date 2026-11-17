@@ -27,6 +27,7 @@ from src.video_analysis.preprocessing import RAW_DIR, ROOT, iter_frames
 from src.video_analysis.report import KIND_LABELS, evaluate, render_markdown, to_events, video_report
 
 OUTPUT_DIR = ROOT / "output" / "video"
+ANNOTATED_NAME = "anotado.webm"
 
 # BGR
 _POSTURE_COLORS = {UPRIGHT: (80, 200, 80), LOW: (0, 200, 255), LYING: (60, 60, 230)}
@@ -124,9 +125,10 @@ def render_outputs(
                 keyframes[index] = name
         if annotate:
             if writer is None:
-                fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+                # WebM/VP8: toca direto no navegador (painel da Fase 4) em qualquer sistema.
+                fourcc = cv2.VideoWriter_fourcc(*"VP80")
                 size = (drawn.shape[1], drawn.shape[0])
-                writer = cv2.VideoWriter(str(out_dir / "anotado.mp4"), fourcc, extraction.video.fps / extraction.stride, size)
+                writer = cv2.VideoWriter(str(out_dir / ANNOTATED_NAME), fourcc, extraction.video.fps / extraction.stride, size)
             writer.write(drawn)
     if writer is not None:
         writer.release()
@@ -166,7 +168,10 @@ def main() -> None:
             pose = pose or PoseEstimator(resolve_weights(POSE_MODEL))
             detector = detector or ObjectDetector(resolve_weights(OBJECT_MODEL))
             extraction = extract(path, pose=pose, detector=detector, stride=args.stride, crop=args.crop)
-            extraction.save(cache)
+            # A análise parte sempre do que foi gravado no cache (coordenadas
+            # arredondadas), para que rodar os modelos ou usar --from-cache dê o
+            # mesmo resultado, inclusive em clipes no limite dos limiares.
+            extraction = Extraction.load(extraction.save(cache))
         elapsed = time.time() - started
 
         analysis = analyze_observations(extraction.observations, config)
@@ -182,6 +187,7 @@ def main() -> None:
         )
         report = video_report(extraction, analysis)
         report["keyframes"] = sorted(keyframes.values())
+        report["annotated_video"] = ANNOTATED_NAME if (out_dir / ANNOTATED_NAME).exists() else None
         report["extraction_seconds"] = round(elapsed, 2)
         save_json({**report, "contract_events": events}, out_dir / "analysis.json")
         reports.append(report)
